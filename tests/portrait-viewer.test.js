@@ -14,20 +14,20 @@ test("portrait viewer derives its stage from the current game state", () => {
   assert.equal(portraitViewerModel({ portrait: 3 }).stage, 2);
 });
 
-test("portrait viewer exposes no future stage controls and handles missing assets", () => {
-  assert.equal(portraitAssetForStage(3), null);
+test("portrait viewer maps the approved Stage 3 asset and handles missing stages", () => {
+  assert.equal(portraitAssetForStage(3), "assets/portraits/portrait-dorian-stage-3.webp");
   assert.equal(portraitAssetForStage(99), null);
   assert.equal(portraitStageText(99), "Untouched surface");
   assert.equal(portraitViewerModel({ portrait: 3 }).asset, "assets/portraits/portrait-dorian-stage-2.webp");
 });
 
-test("logical Stage 3 uses the safe fallback until artwork exists", () => {
+test("logical Stage 3 uses the approved runtime artwork", () => {
   assert.deepEqual(portraitViewerModel({
     portrait: 0,
     storyFacts: { portraitStageUnlock: "stage-3" }
   }), {
     stage: 3,
     stageText: "The first visible change",
-    asset: null
+    asset: "assets/portraits/portrait-dorian-stage-3.webp"
   });
 });

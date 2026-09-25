@@ -23,7 +23,7 @@ js/story-data.js exportuje objekt STORY_DATA:
 - teacherNotes obsahují cíle a odlišení předlohy od herního rozšíření;
 - žádná data nespouštějí JavaScript.
 
-Chapter II je od Milestone 2C playable. Obsahuje přesně devět schválených scén `c2-*`; Chapter III ani její unlock flow v tomto milníku neexistují.
+Chapter II je od Milestone 2C playable. Chapter III je playable od Milestone 3C a obsahuje přesně devět schválených scén `c3-*`; její Stage 3 portrait, Dorian's house a secret-room P0 visuals jsou nyní integrovány deklarativně podle kontextu scény.
 
 ## Stav hráče a migrace
 
@@ -85,7 +85,7 @@ game-engine.js poskytuje:
 - stabilní `portraitStageForValue` s prahy 0, 1 a 2–3;
 - logický Stage 3 z `storyFacts.portraitStageUnlock`, bez požadavku na numeric Portrait threshold.
 
-Chapter II je dostupná pouze po `completedChapters["chapter-1"] === true`; přímý vstup do jejích scén je stejným pravidlem blokovaný. Chapter III metadata už existují, ale `available: false` a `firstScene: null` ji drží ve stavu „In preparation“. Budoucí handoff bude vyžadovat `completedChapters["chapter-2"] === true` a vyřešené `sibylRelationship`, `sibylOutcome` a `c2FinalResponse`. Chapter II ending se nyní nepřesměrovává do neexistující scény.
+Chapter II je dostupná pouze po `completedChapters["chapter-1"] === true`; Chapter III stejným mechanismem vyžaduje dokončenou Chapter II a vyřešené `sibylRelationship`, `sibylOutcome` a `c2FinalResponse`. `canStartChapter` i `meetsRequirements` podporují přesné allow-listed story-fact požadavky. Chapter II ending nabízí bezpečný přechod do Chapter III a její ending už nepřesměrovává do neexistující Chapter IV.
 
 ## Persistent story facts
 
@@ -149,7 +149,7 @@ Chapter II používá warning pouze pro větev `dead-canonical`; jeho podmínka 
 
 ## Chapter-aware UI
 
-Domovská obrazovka vykresluje story map z STORY_DATA.chapters. Po dokončení Chapter I se v ending summary objeví handoff do Chapter II; na začátku Chapter II je tato kapitola playable. Teacher mode čte aktivní kapitolu a pro Chapter II zobrazuje všech devět scén, čtyři rozhodnutí, výukové cíle, slovní zásobu, diskusi a rozlišení kanonu od alternativ.
+Domovská obrazovka vykresluje story map z STORY_DATA.chapters. Po dokončení Chapter I se v ending summary objeví handoff do Chapter II; po splnění Chapter II a jejích story facts se objeví handoff do Chapter III. Teacher mode čte aktivní kapitolu a pro Chapter III zobrazuje všech devět scén, čtyři rozhodnutí, výukové cíle, slovní zásobu, porozumění, diskusi, kontinuitu Chapter II a rozlišení kanonu od alternativ.
 
 ## Portrét
 
@@ -159,9 +159,9 @@ Portrétní systém zůstává nezměněn:
 - Portrait 1 → stage 1;
 - Portrait 2–3 → stage 2.
 
-Pokud `storyFacts.portraitStageUnlock === "stage-3"`, `portraitStage(state)` vrátí logický Stage 3 nezávisle na numeric Portrait. `STORY_DATA.assets.portraitStages` zatím obsahuje pouze Stage 0–2, takže viewer a panel bezpečně použijí existující CSS fallback bez odkazu na neexistující soubor. Numeric Portrait zůstává samostatnou pressure/context hodnotou a sám Stage 3 neodemkne.
+Pokud `storyFacts.portraitStageUnlock === "stage-3"`, `portraitStage(state)` vrátí logický Stage 3 nezávisle na numeric Portrait. `STORY_DATA.assets.portraitStages[3]` nyní ukazuje na schválený Stage 3 WebP; při chybějícím nebo poškozeném souboru viewer a panel bezpečně použijí CSS fallback. Numeric Portrait zůstává samostatnou pressure/context hodnotou a sám Stage 3 neodemkne.
 
-Chapter II nemá nový obrazový soubor ani nový threshold. StoryFacts mohou být použity v pozdější Chapter III, ale samotný Portrait nikdy neurčuje SibylOutcome.
+Chapter II nemá nový obrazový soubor ani nový threshold. Chapter III používá house location v domácích a Basilových scénách a secret-room location ve scénách staré školní místnosti a jejího bezprostředního aftermath; samotný Portrait nikdy neurčuje SibylOutcome.
 
 ## Přidání další kapitoly
 
@@ -171,4 +171,4 @@ Chapter II nemá nový obrazový soubor ani nový threshold. StoryFacts mohou b�
 4. Propojte nextScene nebo deklarativní podmínky.
 5. Přidejte teacherNotes, glossary a obsahová upozornění podle potřeby.
 6. Přidejte migrační a branch-consistency testy.
-7. Teprve po schválení implementujte vlastní příběhové scény.
+7. Ověřte handoff, save/restore a všechny deklarované branch kombinace.

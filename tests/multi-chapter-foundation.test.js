@@ -124,7 +124,7 @@ test("chapter completion is independent for each chapter", () => {
   assert.equal(reopened.completedChapters["chapter-1"], true);
 });
 
-test("Chapter II exposes exactly the approved nine-scene route and Chapter III remains unavailable", () => {
+test("Chapter II exposes exactly the approved nine-scene route and Chapter III is available after its handoff", () => {
   const chapterTwo = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-2");
   const chapterThree = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-3");
   const chapterTwoScenes = Object.entries(STORY_DATA.scenes).filter(([, scene]) => scene.chapterId === "chapter-2");
@@ -141,28 +141,14 @@ test("Chapter II exposes exactly the approved nine-scene route and Chapter III r
     "c2-backstage-choice",
     "c2-the-morning-after"
   ]);
-  assert.deepEqual(chapterThree, {
-    id: "chapter-3",
-    number: "III",
-    title: "The Changing Portrait",
-    subtitle: "A secret room, a visible consequence, and a new influence.",
-    status: "in-preparation",
-    available: false,
-    firstScene: null,
-    requiresCompletedChapters: ["chapter-2"],
-    requiresStoryFacts: ["sibylRelationship", "sibylOutcome", "c2FinalResponse"],
-    teacherNotes: {
-      literaryBasis: "The approved Chapter III blueprint follows Wilde's 1891 Chapters IX to XI.",
-      adaptation: "Only the technical foundation exists. Chapter III scenes and final B1 prose are not implemented.",
-      goals: [],
-      vocabulary: [],
-      discussion: [],
-      scenes: [],
-      decisions: [],
-      canonAndAlternatives: "The three Sibyl outcomes will remain short conditional variants around one shared spine when Chapter III is implemented."
-    }
-  });
-  assert.equal(Object.keys(STORY_DATA.scenes).some((sceneId) => sceneId.startsWith("c3-")), false);
+  assert.equal(chapterThree.status, "playable");
+  assert.equal(chapterThree.available, true);
+  assert.equal(chapterThree.firstScene, "c3-morning-quiet");
+  assert.deepEqual(chapterThree.requiresCompletedChapters, ["chapter-2"]);
+  assert.deepEqual(chapterThree.requiresStoryFacts, ["sibylRelationship", "sibylOutcome", "c2FinalResponse"]);
+  assert.equal(chapterThree.teacherNotes.scenes.length, 9);
+  assert.equal(chapterThree.teacherNotes.decisions.length, 4);
+  assert.equal(Object.keys(STORY_DATA.scenes).filter((sceneId) => sceneId.startsWith("c3-")).length, 9);
   assert.equal(canStartChapter(createInitialState(), "chapter-3"), false);
   assert.equal(canEnterScene(createInitialState(), "c2-theatre-lights"), false);
   assert.equal(startNewGame("chapter-2"), null);
@@ -181,7 +167,7 @@ test("future Chapter III handoff requires Chapter II completion and resolved fac
 
   assert.equal(chapterRequirementsMet(incomplete, chapterThree), false);
   assert.equal(chapterRequirementsMet(complete, chapterThree), true);
-  assert.equal(canStartChapter(complete, "chapter-3"), false, "metadata keeps Chapter III unavailable");
+  assert.equal(canStartChapter(complete, "chapter-3"), true);
 });
 
 test("storyFacts use the approved allow-list and reject arbitrary values", () => {
@@ -327,4 +313,5 @@ test("portrait thresholds remain unchanged", () => {
   assert.equal(STORY_DATA.assets.portraitStages[0], "assets/portraits/portrait-dorian-stage-0.webp");
   assert.equal(STORY_DATA.assets.portraitStages[1], "assets/portraits/portrait-dorian-stage-1.webp");
   assert.equal(STORY_DATA.assets.portraitStages[2], "assets/portraits/portrait-dorian-stage-2.webp");
+  assert.equal(STORY_DATA.assets.portraitStages[3], "assets/portraits/portrait-dorian-stage-3.webp");
 });

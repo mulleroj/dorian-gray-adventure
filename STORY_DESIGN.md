@@ -59,7 +59,7 @@ Schválený resolver používá profily `role-first`, `person-first` a `mixed`. 
 
 ## Schválený základ pro více kapitol
 
-Milestone 2B připravil technický základ; Milestone 2C na něj navázal plně hratelnou Chapter II. Chapter III narrative blueprint je schválený a Milestone 3B přidal pouze technický foundation: metadata kapitoly, bezpečný story-fact contract, budoucí handoff gate a logický Stage 3 bez artworku. Chapter III zůstává nehratelná.
+Milestone 2B připravil technický základ; Milestone 2C na něj navázal plně hratelnou Chapter II. Schválený Chapter III narrative blueprint byl v Milestone 3C převeden do přesně devítiscénového hratelného oblouku. Milestone 3H doplnil schválený Stage 3 runtime artwork a kontextové Chapter III location visuals bez změny story struktury nebo unlock logiky.
 
 Stav hry od verze 2 rozlišuje:
 
@@ -74,14 +74,30 @@ Schválené hodnoty použité v Chapter II jsou:
 - sibylOutcome: dead-canonical, alive-estranged, alive-together;
 - c2FinalResponse: cruel, listen, delay.
 
-Technické Chapter III facts jsou allow-listed a zatím se v žádné scéně nenastavují:
+Chapter III používá následující allow-listed facts:
 
 - portraitLocation: null nebo locked-schoolroom;
 - basilSuspicion: null, uneasy, suspects nebo clear;
 - portraitStageUnlock: null nebo stage-3;
 - yellowBookResponse: null, accepted, questioned nebo escape.
 
-`portraitHidden` a `secretRoomEstablished` se odvozují z `portraitLocation`. Sibyl contact se neukládá; odvozuje se z existujícího `sibylOutcome`. Stage 3 se odemkne až při budoucím schváleném locked-schoolroom eventu, ne z numeric Portrait threshold.
+`portraitHidden` a `secretRoomEstablished` se odvozují z `portraitLocation`; nejsou to save keys. Sibyl contact se neukládá; odvozuje se z existujícího `sibylOutcome`. Locked-schoolroom choice nastavuje `portraitLocation` a `portraitStageUnlock` atomicky, ne z numeric Portrait threshold.
+
+## Implementovaná Chapter III — The Changing Portrait
+
+Chapter III začíná po dokončení Chapter II a vyřešení tří jejích continuity facts. Obsahuje přesně devět scén:
+
+1. **Morning Without an Answer** — tiché ráno po výsledku Sibylina oblouku.
+2. **Basil at Breakfast** — Basilova starost a první rozhodnutí o upřímnosti.
+3. **What Basil Wants to Know** — důvěra, vina a návaznost na předchozí Basilovy postoje.
+4. **The Portrait Behind the Screen** — Basil žádá o obraz; změněnou tvář neuvidí.
+5. **The Face That Answers** — před odemčením Stage 3 se vrací pouze existující varování Stage 2.
+6. **The Room With a Key** — obraz je přesunut do locked schoolroom; tím se atomicky odemkne logický Stage 3.
+7. **Rules Around the Secret** — první deklarativní popis nové Stage 3 a pravidla tajemství.
+8. **The Book That Was Waiting** — Henryho žlutá kniha a čtvrté rozhodnutí.
+9. **A Book for the Next Life** — uzavření Chapter III bez otevření Chapter IV.
+
+Všechna čtyři rozhodnutí mají tři schválené odpovědi. Basil nikdy nevidí změněnou tvář a hra nezapisuje `portraitWitness`, `portraitHidden`, `secretRoomEstablished` ani `sibylContact`.
 
 Sibylin osud se vypočítá při vstupu do poslední scény Chapter II. Žádná budoucí kapitola nesmí znovu zobrazit živou Sibyl po výsledku dead-canonical, ani automaticky zaměnit alive-estranged za smrt nebo alive-together za harmonický vztah.
 

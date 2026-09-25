@@ -34,14 +34,14 @@ Katalog eviduje schválené runtime assety i reference-only podklady. Chybějíc
 | `location-victorian-london-rain.webp` | londýnské mezihry | 3:2 · 2400 × 1600 | II–VI |
 | `location-theatre-stage.webp` | Sibylino divadlo | 3:2 · 1536 × 1024 | II |
 | `location-theatre-backstage.webp` | zákulisí stejného divadla | 3:2 · 1536 × 1024 | II |
-| `location-dorians-house.webp` | soukromý interiér | 3:2 · 2400 × 1600 | III–VI |
-| `location-secret-room.webp` | místnost s portrétem | 3:2 · 2400 × 1600 | III–VI |
+| `location-dorians-house.webp` | schválený soukromý interiér | 3:2 · 1536 × 1024 | III–VI |
+| `location-secret-room.webp` | schválená stará školní místnost | 3:2 · 1536 × 1024 | III–VI |
 
 ### Varianty portrétu
 
 | Soubor | Účel | Poměr / rozlišení | Kapitola |
 | --- | --- | --- | --- |
-| `portrait-dorian-stage-3.webp` | první jasně znepokojivá změna | 4:5 · 1600 × 2000 | III |
+| `portrait-dorian-stage-3.webp` | první jasně znepokojivá změna | 4:5 · 1122 × 1402 | III |
 | `portrait-dorian-stage-4.webp` | výrazná stopa života | 4:5 · 1600 × 2000 | IV |
 | `portrait-dorian-stage-5.webp` | těsně před konfrontací | 4:5 · 1600 × 2000 | V |
 | `portrait-dorian-stage-final.webp` | poslední stav | 4:5 · 1600 × 2000 | VI |
@@ -65,13 +65,14 @@ Portréty se přidají do `STORY_DATA.assets.portraitStages`:
 portraitStages: {
   0: "assets/portraits/portrait-dorian-stage-0.webp",
   1: "assets/portraits/portrait-dorian-stage-1.webp",
-  2: "assets/portraits/portrait-dorian-stage-2.webp"
+  2: "assets/portraits/portrait-dorian-stage-2.webp",
+  3: "assets/portraits/portrait-dorian-stage-3.webp"
 }
 ```
 
 Engine pracuje pouze s číselnou hodnotou `portrait`. UI rozhoduje, zda zobrazí cestu k obrázku, nebo CSS fallback. Formát souboru proto není součástí herních pravidel.
 
-Milestone 3B přidává pouze logickou podporu Stage 3 přes `storyFacts.portraitStageUnlock`. Soubor `portrait-dorian-stage-3.webp` zatím není runtime mapping a nesmí být odkazován před pozdějším asset milestone. Pokud logický Stage 3 existuje bez artworku, viewer i stavový panel použijí bezpečný CSS fallback; současné Stage 0–2 cesty zůstávají beze změny.
+Milestone 3B přidal logickou podporu Stage 3 přes `storyFacts.portraitStageUnlock`; Milestone 3C ji používá po locked-schoolroom eventu. Milestone 3H přidal schválený Stage 3 WebP a dvě Chapter III location WebP. Pokud některý runtime asset chybí nebo selže, viewer, stavový panel i scene image zachovají bezpečný CSS fallback; současné Stage 0–2 cesty zůstávají beze změny. Chapter III nyní používá house asset v domácích scénách a secret-room asset pouze ve školní místnosti a bezprostředním locked-room aftermath.
 
 ## Kontrolní pravidla před přidáním obrázku
 

@@ -139,16 +139,18 @@ test("Chapter II save and restore preserves the resolved ending and Chapter I hi
   assert.equal(loadState().choices.filter((choice) => choice.sceneId.startsWith("c2-")).length, 4);
 });
 
-test("Chapter II has teacher material and Chapter III remains unavailable", () => {
+test("Chapter II has teacher material and Chapter III is now playable", () => {
   const chapterTwo = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-2");
   const chapterThree = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-3");
   assert.equal(chapterTwo.status, "playable");
   assert.equal(chapterTwo.teacherNotes.scenes.length, 9);
   assert.equal(chapterTwo.teacherNotes.decisions.length, 4);
-  assert.equal(chapterThree.status, "in-preparation");
-  assert.equal(chapterThree.available, false);
-  assert.equal(chapterThree.firstScene, null);
-  assert.equal(Object.keys(STORY_DATA.scenes).some((sceneId) => sceneId.startsWith("c3-")), false);
+  assert.equal(chapterThree.status, "playable");
+  assert.equal(chapterThree.available, true);
+  assert.equal(chapterThree.firstScene, "c3-morning-quiet");
+  assert.equal(chapterThree.teacherNotes.scenes.length, 9);
+  assert.equal(chapterThree.teacherNotes.decisions.length, 4);
+  assert.equal(Object.keys(STORY_DATA.scenes).filter((sceneId) => sceneId.startsWith("c3-")).length, 9);
 });
 
 test("Chapter II approved visual assets map only to compatible scenes", () => {

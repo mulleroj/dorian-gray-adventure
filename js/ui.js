@@ -2,6 +2,7 @@ import { STORY_DATA } from "./story-data.js";
 import { loadState } from "./game-state.js";
 import {
   canEnterScene,
+  canStartChapter,
   chapterForScene,
   choose,
   continueFromScene,
@@ -93,9 +94,11 @@ function statePanel() {
 function sceneVisualMarkup(scene) {
   const visual = scene.visual;
   if (!visual) return "";
-  const chapterTwoAssets = STORY_DATA.assets?.chapterTwo;
-  const location = visual.location ? chapterTwoAssets?.locations?.[visual.location] : null;
-  const character = visual.character ? chapterTwoAssets?.characters?.[visual.character] : null;
+  const chapterAssets = scene.chapterId === "chapter-3"
+    ? STORY_DATA.assets?.chapterThree
+    : STORY_DATA.assets?.chapterTwo;
+  const location = visual.location ? chapterAssets?.locations?.[visual.location] : null;
+  const character = visual.character ? chapterAssets?.characters?.[visual.character] : null;
   if (!location && !character) return "";
   const figures = [];
   if (location) {
@@ -105,19 +108,21 @@ function sceneVisualMarkup(scene) {
     figures.push(`<figure class="scene-visual-frame scene-visual-frame-character" data-scene-visual-frame data-renderer="image"><img data-scene-image="true" src="${escapeHtml(character.src)}" alt="${escapeHtml(character.alt)}" loading="lazy" decoding="async" /></figure>`);
   }
   const layout = location && character ? "scene-visual-composite" : location ? "scene-visual-location" : "scene-visual-character";
-  return `<div class="scene-visual ${layout}" aria-label="Chapter II scene illustration">${figures.join("")}</div>`;
+  const chapterLabel = scene.chapterId === "chapter-3" ? "Chapter III" : "Chapter II";
+  return `<div class="scene-visual ${layout}" aria-label="${chapterLabel} scene illustration">${figures.join("")}</div>`;
 }
 
 function chapterListMarkup(activeChapterId = state?.activeChapterId) {
   const chapters = STORY_DATA.chapters.map((chapter) => {
     const completed = state?.completedChapters?.[chapter.id] === true;
     const active = activeChapterId === chapter.id;
+    const canStart = Boolean(state && canStartChapter(state, chapter.id));
     const status = completed
       ? "Completed"
       : active
         ? "In progress"
         : chapter.available === true
-          ? chapter.requiresCompletedChapters?.length ? "Locked" : "Available"
+          ? canStart ? "Available" : "Locked"
           : "In preparation";
     return `<li class="${active ? "is-active" : ""}"><span>Chapter ${escapeHtml(chapter.number)}</span><strong>${escapeHtml(chapter.title)}</strong><small>${status}</small></li>`;
   }).join("");
@@ -191,8 +196,7 @@ function summaryBlock() {
 }
 
 function canStartChapterForUi(chapterId) {
-  const chapter = getChapter(chapterId);
-  return Boolean(chapter && chapter.available === true && (chapter.requiresCompletedChapters ?? []).every((requiredId) => state.completedChapters?.[requiredId] === true));
+  return Boolean(state && canStartChapter(state, chapterId));
 }
 
 function render() {
@@ -236,9 +240,11 @@ function teacherMarkup() {
   }
   const sceneList = notes.scenes?.length ? `<div><h3>Scene sequence</h3><ol>${notes.scenes.map((item) => `<li><strong>${escapeHtml(item.title)}</strong><br /><span>${escapeHtml(item.focus)}</span></li>`).join("")}</ol></div>` : "";
   const decisions = notes.decisions?.length ? `<div><h3>Decision map</h3><ul>${notes.decisions.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")}</ul></div>` : "";
+  const comprehension = notes.comprehension?.length ? `<div><h3>Comprehension</h3><ul>${notes.comprehension.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")}</ul></div>` : "";
   const distinction = notes.canonAndAlternatives ? `<p class="source-note"><span>Canon and alternatives</span> ${escapeHtml(notes.canonAndAlternatives)}</p>` : "";
+  const continuity = notes.continuity ? `<p class="source-note"><span>Chapter II continuity</span> ${escapeHtml(notes.continuity)}</p>` : "";
   const warning = notes.contentWarning ? `<p class="source-note"><span>Content guidance</span> ${escapeHtml(notes.contentWarning)}</p>` : "";
-  return `<p class="eyebrow">Teacher mode · Chapter ${escapeHtml(activeChapter.number)}</p><h2 id="teacher-title">${escapeHtml(activeChapter.title)}</h2><p class="modal-intro">${escapeHtml(notes.literaryBasis)}</p><div class="teacher-grid"><div><h3>Learning goals</h3><ul>${notes.goals.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")}</ul></div><div><h3>Target vocabulary</h3><div class="tag-list">${notes.vocabulary.map((item) => "<span>" + escapeHtml(item) + "</span>").join("")}</div></div><div><h3>Discussion</h3><ul>${notes.discussion.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")}</ul></div>${sceneList}${decisions}</div>${distinction}${warning}<p class="source-note"><span>Adaptation note</span> ${escapeHtml(notes.adaptation)}</p>`;
+  return `<p class="eyebrow">Teacher mode · Chapter ${escapeHtml(activeChapter.number)}</p><h2 id="teacher-title">${escapeHtml(activeChapter.title)}</h2><p class="modal-intro">${escapeHtml(notes.literaryBasis)}</p><div class="teacher-grid"><div><h3>Learning goals</h3><ul>${notes.goals.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")}</ul></div><div><h3>Target vocabulary</h3><div class="tag-list">${notes.vocabulary.map((item) => "<span>" + escapeHtml(item) + "</span>").join("")}</div></div><div><h3>Discussion</h3><ul>${notes.discussion.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")}</ul></div>${comprehension}${sceneList}${decisions}</div>${distinction}${continuity}${warning}<p class="source-note"><span>Adaptation note</span> ${escapeHtml(notes.adaptation)}</p>`;
 }
 
 function openDialog(dialog) {

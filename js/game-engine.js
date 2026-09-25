@@ -70,6 +70,13 @@ export function meetsRequirements(state = {}, requirements = {}) {
   if (requirements.minReputation !== undefined && state.reputation < requirements.minReputation) return false;
   if (requirements.minConscience !== undefined && state.conscience < requirements.minConscience) return false;
   if (requirements.minPortrait !== undefined && state.portrait < requirements.minPortrait) return false;
+  if (requirements.resolvedStoryFacts && !storyFactsAreResolved(state, requirements.resolvedStoryFacts)) return false;
+  if (requirements.storyFacts !== undefined) {
+    if (requirements.storyFacts === null || typeof requirements.storyFacts !== "object" || Array.isArray(requirements.storyFacts)) return false;
+    for (const [key, value] of Object.entries(requirements.storyFacts)) {
+      if (!Object.prototype.hasOwnProperty.call(STORY_FACT_KEYS, key) || state.storyFacts?.[key] !== value) return false;
+    }
+  }
   return true;
 }
 
