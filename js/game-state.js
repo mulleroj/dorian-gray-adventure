@@ -8,7 +8,7 @@ export const STORY_FACT_KEYS = Object.freeze({
   c2FinalResponse: ["cruel", "listen", "delay"],
   portraitLocation: ["locked-schoolroom"],
   basilSuspicion: ["uneasy", "suspects", "clear"],
-  portraitStageUnlock: ["stage-3"],
+  portraitStageUnlock: ["stage-3", "stage-4"],
   yellowBookResponse: ["accepted", "questioned", "escape"]
 });
 

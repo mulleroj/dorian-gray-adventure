@@ -31,3 +31,22 @@ test("logical Stage 3 uses the approved runtime artwork", () => {
     asset: "assets/portraits/portrait-dorian-stage-3.webp"
   });
 });
+
+test("logical Stage 4 is supported before its runtime artwork exists", () => {
+  assert.deepEqual(portraitViewerModel({
+    portrait: 0,
+    storyFacts: { portraitStageUnlock: "stage-4" }
+  }), {
+    stage: 4,
+    stageText: "The established damage",
+    asset: null
+  });
+});
+
+test("portrait viewer preserves an already-resolved logical stage for fallback rendering", () => {
+  assert.deepEqual(portraitViewerModel({ stage: 4 }), {
+    stage: 4,
+    stageText: "The established damage",
+    asset: null
+  });
+});

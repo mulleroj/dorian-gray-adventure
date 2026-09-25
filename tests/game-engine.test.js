@@ -88,6 +88,8 @@ test("portrait image stages use stable numeric thresholds", () => {
   assert.equal(portraitStage({ portrait: 1, flags: {} }), 1);
   assert.equal(portraitStage({ portrait: 2, flags: {} }), 2);
   assert.equal(portraitStage({ portrait: 0, storyFacts: { portraitStageUnlock: "stage-3" } }), 3);
+  assert.equal(portraitStage({ portrait: 0, storyFacts: { portraitStageUnlock: "stage-4" } }), 4);
+  assert.equal(portraitStage({ portrait: 3, storyFacts: { portraitStageUnlock: "stage-4" } }), 4);
   assert.equal(portraitStage({ portrait: 3, storyFacts: {} }), 2);
   assert.deepEqual(Object.keys(STORY_DATA.assets.portraitStages), ["0", "1", "2", "3"]);
   assert.equal(STORY_DATA.assets.portraitStages[0], "assets/portraits/portrait-dorian-stage-0.webp");

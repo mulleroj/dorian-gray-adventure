@@ -74,6 +74,8 @@ Engine pracuje pouze s číselnou hodnotou `portrait`. UI rozhoduje, zda zobraz�
 
 Milestone 3B přidal logickou podporu Stage 3 přes `storyFacts.portraitStageUnlock`; Milestone 3C ji používá po locked-schoolroom eventu. Milestone 3H přidal schválený Stage 3 WebP a dvě Chapter III location WebP. Pokud některý runtime asset chybí nebo selže, viewer, stavový panel i scene image zachovají bezpečný CSS fallback; současné Stage 0–2 cesty zůstávají beze změny. Chapter III nyní používá house asset v domácích scénách a secret-room asset pouze ve školní místnosti a bezprostředním locked-room aftermath.
 
+Milestone 4B přidává pouze logickou podporu hodnoty `portraitStageUnlock = "stage-4"`; Stage 4 WebP zatím není runtime assetem a jeho chybějící cesta proto záměrně používá existující CSS fallback. Chapter IV metadata jsou vedena jako `available: false` bez scén a bez `firstScene`; žádný Chapter IV obraz ani scene asset není tímto základem aktivován.
+
 ## Kontrolní pravidla před přidáním obrázku
 
 - ověřit stejnou identitu, kompozici a světelný směr u všech portrétů;

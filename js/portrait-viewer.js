@@ -5,7 +5,8 @@ const STAGE_TEXT = [
   "Untouched surface",
   "A troubling detail",
   "The painted warning",
-  "The first visible change"
+  "The first visible change",
+  "The established damage"
 ];
 
 export function portraitStageText(stage) {
@@ -18,7 +19,7 @@ export function portraitAssetForStage(stage) {
 }
 
 export function portraitViewerModel(state = {}) {
-  const stage = portraitStage(state);
+  const stage = Number.isInteger(state.stage) ? state.stage : portraitStage(state);
   return {
     stage,
     stageText: portraitStageText(stage),

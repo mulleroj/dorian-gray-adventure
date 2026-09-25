@@ -83,7 +83,7 @@ game-engine.js poskytuje:
 - chapterRequirementsMet pro dokončené kapitoly a vyřešené story facts;
 - getChapterStart, isChapterAvailable, isChapterComplete a nextChapterAfter;
 - stabilní `portraitStageForValue` s prahy 0, 1 a 2–3;
-- logický Stage 3 z `storyFacts.portraitStageUnlock`, bez požadavku na numeric Portrait threshold.
+- logický Stage 3 nebo Stage 4 z `storyFacts.portraitStageUnlock`, bez požadavku na numeric Portrait threshold.
 
 Chapter II je dostupná pouze po `completedChapters["chapter-1"] === true`; Chapter III stejným mechanismem vyžaduje dokončenou Chapter II a vyřešené `sibylRelationship`, `sibylOutcome` a `c2FinalResponse`. `canStartChapter` i `meetsRequirements` podporují přesné allow-listed story-fact požadavky. Chapter II ending nabízí bezpečný přechod do Chapter III a její ending už nepřesměrovává do neexistující Chapter IV.
 
@@ -98,7 +98,7 @@ storyFacts: {
   c2FinalResponse: "cruel" | "listen" | "delay" | null,
   portraitLocation: "locked-schoolroom" | null,
   basilSuspicion: "uneasy" | "suspects" | "clear" | null,
-  portraitStageUnlock: "stage-3" | null,
+  portraitStageUnlock: "stage-3" | "stage-4" | null,
   yellowBookResponse: "accepted" | "questioned" | "escape" | null
 }
 ~~~
@@ -159,13 +159,13 @@ Portrétní systém zůstává nezměněn:
 - Portrait 1 → stage 1;
 - Portrait 2–3 → stage 2.
 
-Pokud `storyFacts.portraitStageUnlock === "stage-3"`, `portraitStage(state)` vrátí logický Stage 3 nezávisle na numeric Portrait. `STORY_DATA.assets.portraitStages[3]` nyní ukazuje na schválený Stage 3 WebP; při chybějícím nebo poškozeném souboru viewer a panel bezpečně použijí CSS fallback. Numeric Portrait zůstává samostatnou pressure/context hodnotou a sám Stage 3 neodemkne.
+Pokud `storyFacts.portraitStageUnlock === "stage-4"`, `portraitStage(state)` vrátí logický Stage 4; při `"stage-3"` vrátí Stage 3, v obou případech nezávisle na numeric Portrait. Stage 4 zatím nemá runtime asset, takže viewer a panel bezpečně použijí CSS fallback. `STORY_DATA.assets.portraitStages[3]` stále ukazuje na schválený Stage 3 WebP. Numeric Portrait zůstává samostatnou pressure/context hodnotou a sám Stage 3 ani Stage 4 neodemkne.
 
 Chapter II nemá nový obrazový soubor ani nový threshold. Chapter III používá house location v domácích a Basilových scénách a secret-room location ve scénách staré školní místnosti a jejího bezprostředního aftermath; samotný Portrait nikdy neurčuje SibylOutcome.
 
 ## Přidání další kapitoly
 
-1. Přidejte metadata kapitoly s unikátním id, available a firstScene.
+1. Přidejte metadata kapitoly s unikátním id a `available`; plánovaná kapitola může bezpečně vynechat `firstScene`, dokud nemá runtime scény.
 2. Nastavte requiresCompletedChapters.
 3. Přidejte scény s chapterId a unikátními ID.
 4. Propojte nextScene nebo deklarativní podmínky.

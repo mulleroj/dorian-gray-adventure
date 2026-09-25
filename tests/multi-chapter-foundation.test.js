@@ -154,6 +154,32 @@ test("Chapter II exposes exactly the approved nine-scene route and Chapter III i
   assert.equal(startNewGame("chapter-2"), null);
 });
 
+test("Chapter IV metadata is unavailable and cannot be started before its scenes exist", () => {
+  const chapterFour = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-4");
+  const completeChapterThree = {
+    completedChapters: { "chapter-1": true, "chapter-2": true, "chapter-3": true },
+    storyFacts: {
+      portraitLocation: "locked-schoolroom",
+      portraitStageUnlock: "stage-3",
+      yellowBookResponse: "questioned",
+      basilSuspicion: "clear",
+      sibylOutcome: "alive-estranged"
+    }
+  };
+
+  assert.equal(chapterFour.status, "in-preparation");
+  assert.equal(chapterFour.available, false);
+  assert.equal(Object.prototype.hasOwnProperty.call(chapterFour, "firstScene"), false);
+  assert.deepEqual(chapterFour.requiresCompletedChapters, ["chapter-3"]);
+  assert.deepEqual(chapterFour.requiresStoryFacts, ["portraitLocation", "portraitStageUnlock", "yellowBookResponse", "basilSuspicion", "sibylOutcome"]);
+  assert.equal(Object.values(STORY_DATA.scenes).filter((scene) => scene.chapterId === "chapter-4").length, 0);
+  assert.equal(chapterRequirementsMet(completeChapterThree, chapterFour), true);
+  assert.equal(isChapterAvailable("chapter-4"), false);
+  assert.equal(canStartChapter(completeChapterThree, "chapter-4"), false);
+  assert.deepEqual(continueToChapter(completeChapterThree, "chapter-4"), { ok: false, reason: "chapter-unavailable" });
+  assert.equal(startNewGame("chapter-4"), null);
+});
+
 test("future Chapter III handoff requires Chapter II completion and resolved facts", () => {
   const chapterThree = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-3");
   const incomplete = {
@@ -221,7 +247,7 @@ test("Chapter III story facts accept only the approved finite values", () => {
     storyFacts: {
       portraitLocation: "visible",
       basilSuspicion: "certain",
-      portraitStageUnlock: "stage-4",
+      portraitStageUnlock: "stage-5",
       yellowBookResponse: "ignored"
     }
   });
@@ -229,6 +255,13 @@ test("Chapter III story facts accept only the approved finite values", () => {
   assert.equal(invalid.storyFacts.basilSuspicion, null);
   assert.equal(invalid.storyFacts.portraitStageUnlock, null);
   assert.equal(invalid.storyFacts.yellowBookResponse, null);
+
+  const stageFour = normaliseState({
+    version: 2,
+    sceneId: "c3-the-book-on-the-table",
+    storyFacts: { portraitStageUnlock: "stage-4" }
+  });
+  assert.equal(stageFour.storyFacts.portraitStageUnlock, "stage-4");
 });
 
 test("conditional narrative is declarative, state-aware and side-effect free", () => {

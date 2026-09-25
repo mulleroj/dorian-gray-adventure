@@ -273,12 +273,12 @@ function restoreDialogFocus(dialog) {
 }
 
 function portraitViewerFallback() {
-  const portrait = portraitViewerModel({ portrait: portraitViewerState.stage });
+  const portrait = portraitViewerModel({ stage: portraitViewerState.stage });
   return `<div class="portrait-viewer-fallback" role="img" aria-label="A CSS placeholder portrait: ${escapeHtml(portrait.stageText)}">${portraitPlaceholderMarkup(portrait.stage)}</div>`;
 }
 
 function portraitViewerImage() {
-  const portrait = portraitViewerModel({ portrait: portraitViewerState.stage });
+  const portrait = portraitViewerModel({ stage: portraitViewerState.stage });
   const { stageText, asset } = portrait;
   if (!asset || portraitViewerState.imageFailed) return portraitViewerFallback();
   return `<img class="portrait-viewer-image" data-portrait-viewer-image="true" src="${escapeHtml(asset)}" alt="Dorian's portrait: ${escapeHtml(stageText)}" />`;

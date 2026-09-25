@@ -175,6 +175,16 @@ export const STORY_DATA = {
         ],
         canonAndAlternatives: "Basil's visit, the screened portrait, the old schoolroom, and the yellow-bound book follow the canonical Chapters IX to XI. Player replies, partial disclosure, and living Sibyl outcomes are clearly marked interactive extensions; alive-estranged and alive-together are not Wilde's original plot."
       }
+    },
+    {
+      id: "chapter-4",
+      number: "IV",
+      title: "A Life of Pleasure",
+      subtitle: "Repeated choices become a way of life.",
+      status: "in-preparation",
+      available: false,
+      requiresCompletedChapters: ["chapter-3"],
+      requiresStoryFacts: ["portraitLocation", "portraitStageUnlock", "yellowBookResponse", "basilSuspicion", "sibylOutcome"]
     }
   ],
   glossary: {
