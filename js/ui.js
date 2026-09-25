@@ -94,9 +94,9 @@ function statePanel() {
 function sceneVisualMarkup(scene) {
   const visual = scene.visual;
   if (!visual) return "";
-  const chapterAssets = scene.chapterId === "chapter-3"
-    ? STORY_DATA.assets?.chapterThree
-    : STORY_DATA.assets?.chapterTwo;
+  const chapterAssets = scene.chapterId === "chapter-2"
+    ? STORY_DATA.assets?.chapterTwo
+    : STORY_DATA.assets?.chapterThree;
   const location = visual.location ? chapterAssets?.locations?.[visual.location] : null;
   const character = visual.character ? chapterAssets?.characters?.[visual.character] : null;
   if (!location && !character) return "";
@@ -108,7 +108,11 @@ function sceneVisualMarkup(scene) {
     figures.push(`<figure class="scene-visual-frame scene-visual-frame-character" data-scene-visual-frame data-renderer="image"><img data-scene-image="true" src="${escapeHtml(character.src)}" alt="${escapeHtml(character.alt)}" loading="lazy" decoding="async" /></figure>`);
   }
   const layout = location && character ? "scene-visual-composite" : location ? "scene-visual-location" : "scene-visual-character";
-  const chapterLabel = scene.chapterId === "chapter-3" ? "Chapter III" : "Chapter II";
+  const chapterLabel = scene.chapterId === "chapter-2"
+    ? "Chapter II"
+    : scene.chapterId === "chapter-3"
+      ? "Chapter III"
+      : "Chapter IV";
   return `<div class="scene-visual ${layout}" aria-label="${chapterLabel} scene illustration">${figures.join("")}</div>`;
 }
 

@@ -1,4 +1,5 @@
 import { STORY_FACT_KEYS } from "./game-state.js";
+import { chapterFourBehaviourProfile } from "./chapter-four-behaviour.js";
 
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -29,6 +30,9 @@ export function matchesNarrativeCondition(state = {}, condition = {}) {
   if (condition.minReputation !== undefined) checks.push(state.reputation >= condition.minReputation);
   if (condition.minConscience !== undefined) checks.push(state.conscience >= condition.minConscience);
   if (condition.minPortrait !== undefined) checks.push(state.portrait >= condition.minPortrait);
+  if (typeof condition.behaviourProfile === "string") {
+    checks.push(chapterFourBehaviourProfile(state) === condition.behaviourProfile);
+  }
   if (Array.isArray(condition.all)) checks.push(condition.all.every((item) => matchesNarrativeCondition(state, item)));
   if (Array.isArray(condition.any)) checks.push(condition.any.some((item) => matchesNarrativeCondition(state, item)));
   if (condition.not) checks.push(!matchesNarrativeCondition(state, condition.not));

@@ -70,6 +70,8 @@ export function meetsRequirements(state = {}, requirements = {}) {
   if (requirements.minReputation !== undefined && state.reputation < requirements.minReputation) return false;
   if (requirements.minConscience !== undefined && state.conscience < requirements.minConscience) return false;
   if (requirements.minPortrait !== undefined && state.portrait < requirements.minPortrait) return false;
+  if (Array.isArray(requirements.requiredChoiceScenes)
+    && !requirements.requiredChoiceScenes.every((sceneId) => choiceWasMadeInScene(state, sceneId))) return false;
   if (requirements.resolvedStoryFacts && !storyFactsAreResolved(state, requirements.resolvedStoryFacts)) return false;
   if (requirements.storyFacts !== undefined) {
     if (requirements.storyFacts === null || typeof requirements.storyFacts !== "object" || Array.isArray(requirements.storyFacts)) return false;
@@ -107,7 +109,11 @@ export function applyEffects(state, effects = {}) {
 }
 
 function choiceWasMade(state, sceneId, choiceId) {
-  return state.choices?.some((choice) => choice.sceneId === sceneId && choice.choiceId === choiceId) === true;
+  return state.choices?.some((choice) => choice?.sceneId === sceneId && choice?.choiceId === choiceId) === true;
+}
+
+function choiceWasMadeInScene(state, sceneId) {
+  return state.choices?.some((choice) => choice?.sceneId === sceneId) === true;
 }
 
 export function resolveChapterTwoOutcome(state) {
@@ -160,6 +166,7 @@ export function enterScene(state, sceneId) {
     completedChapters,
     chapterComplete: isEnding
   };
+  if (scene.effects) nextState = applyEffects(nextState, scene.effects);
   if (sceneId === "c2-the-morning-after") nextState = resolveChapterTwoOutcome(nextState);
   return saveState(nextState);
 }

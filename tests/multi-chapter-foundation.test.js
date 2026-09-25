@@ -154,9 +154,18 @@ test("Chapter II exposes exactly the approved nine-scene route and Chapter III i
   assert.equal(startNewGame("chapter-2"), null);
 });
 
-test("Chapter IV metadata is unavailable and cannot be started before its scenes exist", () => {
+test("Chapter IV metadata is playable after a valid Chapter III handoff", () => {
   const chapterFour = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-4");
   const completeChapterThree = {
+    version: 2,
+    sceneId: "c3-the-book-on-the-table",
+    activeChapterId: "chapter-3",
+    reputation: 0,
+    conscience: 0,
+    portrait: 1,
+    flags: {},
+    choices: [],
+    visitedScenes: [],
     completedChapters: { "chapter-1": true, "chapter-2": true, "chapter-3": true },
     storyFacts: {
       portraitLocation: "locked-schoolroom",
@@ -167,16 +176,21 @@ test("Chapter IV metadata is unavailable and cannot be started before its scenes
     }
   };
 
-  assert.equal(chapterFour.status, "in-preparation");
-  assert.equal(chapterFour.available, false);
-  assert.equal(Object.prototype.hasOwnProperty.call(chapterFour, "firstScene"), false);
+  assert.equal(chapterFour.title, "A Life of Pleasure");
+  assert.equal(chapterFour.status, "playable");
+  assert.equal(chapterFour.available, true);
+  assert.equal(chapterFour.firstScene, "c4-years-begin");
   assert.deepEqual(chapterFour.requiresCompletedChapters, ["chapter-3"]);
   assert.deepEqual(chapterFour.requiresStoryFacts, ["portraitLocation", "portraitStageUnlock", "yellowBookResponse", "basilSuspicion", "sibylOutcome"]);
-  assert.equal(Object.values(STORY_DATA.scenes).filter((scene) => scene.chapterId === "chapter-4").length, 0);
+  assert.equal(Object.values(STORY_DATA.scenes).filter((scene) => scene.chapterId === "chapter-4").length, 9);
   assert.equal(chapterRequirementsMet(completeChapterThree, chapterFour), true);
-  assert.equal(isChapterAvailable("chapter-4"), false);
-  assert.equal(canStartChapter(completeChapterThree, "chapter-4"), false);
-  assert.deepEqual(continueToChapter(completeChapterThree, "chapter-4"), { ok: false, reason: "chapter-unavailable" });
+  assert.equal(isChapterAvailable("chapter-4"), true);
+  assert.equal(canStartChapter(createInitialState(), "chapter-4"), false);
+  assert.equal(canStartChapter(completeChapterThree, "chapter-4"), true);
+  const chapterFourStart = continueToChapter(completeChapterThree, "chapter-4");
+  assert.equal(chapterFourStart.ok, true);
+  assert.equal(chapterFourStart.state.sceneId, "c4-years-begin");
+  assert.equal(chapterFourStart.state.activeChapterId, "chapter-4");
   assert.equal(startNewGame("chapter-4"), null);
 });
 
@@ -347,4 +361,5 @@ test("portrait thresholds remain unchanged", () => {
   assert.equal(STORY_DATA.assets.portraitStages[1], "assets/portraits/portrait-dorian-stage-1.webp");
   assert.equal(STORY_DATA.assets.portraitStages[2], "assets/portraits/portrait-dorian-stage-2.webp");
   assert.equal(STORY_DATA.assets.portraitStages[3], "assets/portraits/portrait-dorian-stage-3.webp");
+  assert.equal(STORY_DATA.assets.portraitStages[4], "assets/portraits/portrait-dorian-stage-4.webp");
 });

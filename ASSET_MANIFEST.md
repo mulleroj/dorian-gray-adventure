@@ -42,7 +42,7 @@ Katalog eviduje schválené runtime assety i reference-only podklady. Chybějíc
 | Soubor | Účel | Poměr / rozlišení | Kapitola |
 | --- | --- | --- | --- |
 | `portrait-dorian-stage-3.webp` | první jasně znepokojivá změna | 4:5 · 1122 × 1402 | III |
-| `portrait-dorian-stage-4.webp` | výrazná stopa života | 4:5 · 1600 × 2000 | IV |
+| `portrait-dorian-stage-4.webp` | výrazná stopa života | 4:5 · 1122 × 1402 | IV |
 | `portrait-dorian-stage-5.webp` | těsně před konfrontací | 4:5 · 1600 × 2000 | V |
 | `portrait-dorian-stage-final.webp` | poslední stav | 4:5 · 1600 × 2000 | VI |
 
@@ -66,7 +66,8 @@ portraitStages: {
   0: "assets/portraits/portrait-dorian-stage-0.webp",
   1: "assets/portraits/portrait-dorian-stage-1.webp",
   2: "assets/portraits/portrait-dorian-stage-2.webp",
-  3: "assets/portraits/portrait-dorian-stage-3.webp"
+  3: "assets/portraits/portrait-dorian-stage-3.webp",
+  4: "assets/portraits/portrait-dorian-stage-4.webp"
 }
 ```
 
@@ -74,7 +75,7 @@ Engine pracuje pouze s číselnou hodnotou `portrait`. UI rozhoduje, zda zobraz�
 
 Milestone 3B přidal logickou podporu Stage 3 přes `storyFacts.portraitStageUnlock`; Milestone 3C ji používá po locked-schoolroom eventu. Milestone 3H přidal schválený Stage 3 WebP a dvě Chapter III location WebP. Pokud některý runtime asset chybí nebo selže, viewer, stavový panel i scene image zachovají bezpečný CSS fallback; současné Stage 0–2 cesty zůstávají beze změny. Chapter III nyní používá house asset v domácích scénách a secret-room asset pouze ve školní místnosti a bezprostředním locked-room aftermath.
 
-Milestone 4B přidává pouze logickou podporu hodnoty `portraitStageUnlock = "stage-4"`; Stage 4 WebP zatím není runtime assetem a jeho chybějící cesta proto záměrně používá existující CSS fallback. Chapter IV metadata jsou vedena jako `available: false` bez scén a bez `firstScene`; žádný Chapter IV obraz ani scene asset není tímto základem aktivován.
+Milestone 4B přidal logickou podporu hodnoty `portraitStageUnlock = "stage-4"`; Milestone 4C ji používá v universal `c4-face-in-mirror` eventu a Milestone 4E přidává schválený Stage 4 WebP do runtime mapování. Pokud některý runtime asset chybí nebo selže, viewer, stavový panel i scene image zachovají bezpečný CSS fallback. Chapter IV znovu používá schválené `location-dorians-house.webp` a `location-secret-room.webp`; nový salon asset ani jiný Chapter IV asset nebyl přidán.
 
 ## Kontrolní pravidla před přidáním obrázku
 

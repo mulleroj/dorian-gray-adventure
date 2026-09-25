@@ -78,7 +78,7 @@ Chapter III používá následující allow-listed facts:
 
 - portraitLocation: null nebo locked-schoolroom;
 - basilSuspicion: null, uneasy, suspects nebo clear;
-- portraitStageUnlock: null nebo stage-3;
+- portraitStageUnlock: null, stage-3 nebo stage-4;
 - yellowBookResponse: null, accepted, questioned nebo escape.
 
 `portraitHidden` a `secretRoomEstablished` se odvozují z `portraitLocation`; nejsou to save keys. Sibyl contact se neukládá; odvozuje se z existujícího `sibylOutcome`. Locked-schoolroom choice nastavuje `portraitLocation` a `portraitStageUnlock` atomicky, ne z numeric Portrait threshold.
@@ -102,6 +102,28 @@ Všechna čtyři rozhodnutí mají tři schválené odpovědi. Basil nikdy nevid
 Sibylin osud se vypočítá při vstupu do poslední scény Chapter II. Žádná budoucí kapitola nesmí znovu zobrazit živou Sibyl po výsledku dead-canonical, ani automaticky zaměnit alive-estranged za smrt nebo alive-together za harmonický vztah.
 
 Příběhové varianty budou deklarativní a krátké. Nesmějí spouštět kód ani měnit stav. Citlivý obsah bude předem označen věcným warningem s možností pokračovat, přeskočit označený popis nebo hraní přerušit bez změny postupu.
+
+## Implementovaná Chapter IV — A Life of Pleasure
+
+Chapter IV je přesně devítiscénový shared-spine oblouk mezi Chapter III a budoucí Basilovou konfrontací. Dlouhé období je v textu označeno několika explicitními časovými skoky: několik měsíců, další roky, období po Dorianových dvacátých pátých narozeninách, další sezóna a pozdější roky. Hra nehraje každý rok jako samostatnou scénu.
+
+Scény jsou:
+
+1. **The Years Begin** — žlutá kniha a klíč se stávají návyky.
+2. **The Book Becomes a Habit** — několikaletý vliv knihy a rozdíl mezi veřejnou tváří a soukromým důkazem.
+3. **A House Open to the World** — sdílení večera, kontrolovaná performance nebo charm jako shield.
+4. **Whispers at the Edge of the Room** — pozorování, nejisté rumours a sociální distance.
+5. **A Pleasure for Forgetting** — jeden reprezentativní způsob, jak Dorian používá beauty.
+6. **The Locked Room, Again** — opakovaný návrat k portrétu ve Stage 3.
+7. **The Face in the Mirror** — universal Stage 4 event po čtyřech rozhodnutích a letech opakování.
+8. **An Invitation Withheld** — akumulovaná společenská distance a krátká interpretace derived behaviour profilu.
+9. **The Door Before the Next Chapter** — Basilův oznámený zájem před konfrontací, bez zahájení Chapter V.
+
+Čtyři Chapter IV decisions používají přesně rezervovaná IDs z `js/chapter-four-behaviour.js`. Profile `self-examining`, `divided` nebo `pleasure-as-escape` se odvozuje pouze z choice history; není to save fact ani morální štítek. Stage 4 se odemyká výhradně explicitním `portraitStageUnlock = "stage-4"` při scéně 7, nezávisle na Reputation, Conscience, numeric Portrait nebo profilu.
+
+Sibyl zůstává v jedné ze tří schválených kontinuit: dead-canonical znamená memory, grief a responsibility; alive-estranged znamená živou nezávislou osobu, která na Doriana nečeká; alive-together znamená pokračující, časem proměněný vztah s hranicemi. Chapter IV nepřidává nové Sibyl, Basil ani behavioural facts a neobsahuje nový player-facing content warning.
+
+Teacher mode Chapter IV vychází z Wildeovy Chapter XI. Dlouhé časové zkrácení, čtyři decisions, živé Sibyl routes, derived behaviour profile a Stage 4 event jsou interaktivní adaptace. Chapter XII zůstává literární i herní hranicí pro budoucí Chapter V.
 
 ## Budoucí výukové vrstvy
 

@@ -32,14 +32,14 @@ test("logical Stage 3 uses the approved runtime artwork", () => {
   });
 });
 
-test("logical Stage 4 is supported before its runtime artwork exists", () => {
+test("logical Stage 4 maps to the approved runtime artwork", () => {
   assert.deepEqual(portraitViewerModel({
     portrait: 0,
     storyFacts: { portraitStageUnlock: "stage-4" }
   }), {
     stage: 4,
     stageText: "The established damage",
-    asset: null
+    asset: "assets/portraits/portrait-dorian-stage-4.webp"
   });
 });
 
@@ -47,6 +47,6 @@ test("portrait viewer preserves an already-resolved logical stage for fallback r
   assert.deepEqual(portraitViewerModel({ stage: 4 }), {
     stage: 4,
     stageText: "The established damage",
-    asset: null
+    asset: "assets/portraits/portrait-dorian-stage-4.webp"
   });
 });

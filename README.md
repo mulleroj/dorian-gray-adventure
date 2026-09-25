@@ -30,9 +30,11 @@ Implementováno:
 - samostatné dokončení kapitol a chapter-aware story map;
 - allow-listed persistent story facts pro budoucí pokračování;
 - plně hratelná Chapter III — *The Changing Portrait* s devíti scénami, čtyřmi rozhodnutími, locked-schoolroom unlockem a závěrem u žluté knihy;
+- plně hratelná Chapter IV — *A Life of Pleasure* s devíti shared-spine scénami, čtyřmi rozhodnutími, dlouhodobým časovým skokem, derived behaviour profilem a universal Stage 4 eventem;
+- Chapter IV Teacher mode s vazbou na Wildeovu Chapter XI a Chapter XII jako hranici budoucí Chapter V;
 - schválený Chapter III narrative blueprint, jeho přesný story-fact contract a integrovaný Stage 3 artwork;
 - integrované schválené Chapter III P0 visuals pro Dorianův dům a starou školní místnost;
-- deklarativní podmíněné texty a znovupoužitelný content-warning mechanismus.
+- deklarativní podmíněné texty, derived `behaviourProfile` podmínky a znovupoužitelný content-warning mechanismus.
 
 Text, pravidla, scény i grafické stavy jsou uloženy lokálně v projektu. Aplikace za běhu nepoužívá AI API, účet, databázi ani osobní údaje.
 
@@ -67,8 +69,8 @@ node --check js/ui.js
 node --test tests/*.test.js
 ```
 
-Regresní testy ověřují všech osm kombinací Chapter I, všech 288 kombinací Chapter I + II, všech 23 328 kombinací Chapter I + II + III, tři výsledky Sibylina příběhu, migraci v1 → v2, samostatné dokončení kapitol, storyFacts, podmíněné texty, content warnings, gated scény, validitu přechodů, slovníček, portrétní prahy, Stage 3 runtime mapping, Chapter III location mapping, fallback safety a poškozené nebo nekompatibilní save soubory.
+Regresní testy ověřují všech osm kombinací Chapter I, všech 288 kombinací Chapter I + II, všech 23 328 kombinací Chapter I + II + III, tři výsledky Sibylina příběhu, migraci v1 → v2, samostatné dokončení kapitol, storyFacts, podmíněné texty, content warnings, gated scény, validitu přechodů, slovníček, portrétní prahy, Stage 3 a Stage 4 runtime mapping, Chapter III location mapping, fallback safety a poškozené nebo nekompatibilní save soubory.
 
 ## Stav vizuální integrace
 
-Chapter III story implementation je hotová a schválené P0 visual assets jsou nyní integrovány do runtime. Stage 3 final runtime art, Dorian's house a secret-room location existují jako lokální WebP assety s fallback safety. Chapter IV stále není implementovaná. Runtime nadále zůstává statický a bez AI API.
+Chapter III a Chapter IV story implementation jsou hotové a schválené P0 visual assets jsou integrovány do runtime. Stage 3 a Stage 4 final runtime art, Dorian's house a secret-room location existují jako lokální WebP assety s fallback safety. Chapter IV používá skutečný Stage 4 WebP; Chapter V zůstává neimplementovaná. Runtime nadále zůstává statický a bez AI API.

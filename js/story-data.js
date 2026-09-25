@@ -6,7 +6,8 @@ export const STORY_DATA = {
       0: "assets/portraits/portrait-dorian-stage-0.webp",
       1: "assets/portraits/portrait-dorian-stage-1.webp",
       2: "assets/portraits/portrait-dorian-stage-2.webp",
-      3: "assets/portraits/portrait-dorian-stage-3.webp"
+      3: "assets/portraits/portrait-dorian-stage-3.webp",
+      4: "assets/portraits/portrait-dorian-stage-4.webp"
     },
     chapterTwo: {
       characters: {
@@ -181,10 +182,60 @@ export const STORY_DATA = {
       number: "IV",
       title: "A Life of Pleasure",
       subtitle: "Repeated choices become a way of life.",
-      status: "in-preparation",
-      available: false,
+      status: "playable",
+      available: true,
+      firstScene: "c4-years-begin",
       requiresCompletedChapters: ["chapter-3"],
-      requiresStoryFacts: ["portraitLocation", "portraitStageUnlock", "yellowBookResponse", "basilSuspicion", "sibylOutcome"]
+      requiresStoryFacts: ["portraitLocation", "portraitStageUnlock", "yellowBookResponse", "basilSuspicion", "sibylOutcome"],
+      teacherNotes: {
+        literaryBasis: "The chapter is grounded in Wilde's 1891 Chapter XI, while Chapter XII remains the boundary for the future Basil confrontation in Chapter V.",
+        adaptation: "The long time compression, four player decisions, living Sibyl routes, derived behaviour profile, and universal Stage 4 event are interactive adaptations. They are not presented as Wilde's original wording or plot.",
+        continuity: "Yellow-book response, Sibyl outcome, Basil suspicion, and the derived behaviour profile change short conditional prose inside one shared spine. No new persistent facts or parallel routes are created.",
+        goals: [
+          "Describe habits and influence over a long period of time.",
+          "Distinguish rumours and observations from evidence.",
+          "Compare public appearance with private consequence.",
+          "Discuss how reputation can differ from character.",
+          "Explain how repeated choices can become a pattern without becoming a simple moral score."
+        ],
+        vocabulary: ["rumour", "habit", "influence", "reputation", "appearance", "evidence", "invitation", "avoid", "compare", "unchanged", "private", "public", "consequence", "behaviour", "distance"],
+        discussion: [
+          "Is pleasure a problem, or is escape the problem?",
+          "When does a habit become part of identity?",
+          "Can rumours harm someone even when they are unproven?",
+          "Is public reputation the same as character?",
+          "Why does Dorian keep looking at the portrait?",
+          "Is a charming public image evidence of innocence?"
+        ],
+        comprehension: [
+          "Why does Dorian keep returning to the locked room?",
+          "What do people observe, and what do they only guess?",
+          "Why does his young face make some people doubt rumours?",
+          "Why is Stage 4 a result of a pattern rather than one choice?",
+          "How does the yellow book change from an idea into a habit?",
+          "How does Dorian's public life protect him and isolate him at the same time?",
+          "What does Basil know, and what does he still not know?",
+          "How does the ending prepare the next chapter without beginning the confrontation?"
+        ],
+        scenes: [
+          { title: "The Years Begin", focus: "Show the yellow book and the locked-room key becoming habits after a few months." },
+          { title: "The Book Becomes a Habit", focus: "Compress several years of reading, returning, and separating public appearance from private evidence." },
+          { title: "A House Open to the World", focus: "Use a social evening to show why Dorian's unchanged beauty still protects his public image." },
+          { title: "Whispers at the Edge of the Room", focus: "Introduce uncertain rumours and social distance without turning reputation into proof." },
+          { title: "A Pleasure for Forgetting", focus: "Reduce the aesthetic catalogue to one decision about how beauty is used." },
+          { title: "The Locked Room, Again", focus: "Make the repeated return to the Stage 3 portrait a private ritual before the universal event." },
+          { title: "The Face in the Mirror", focus: "Apply the shared Stage 4 milestone after years, choices, concealment, and repeated returns." },
+          { title: "An Invitation Withheld", focus: "Show accumulated social distance and interpret it through the derived behaviour profile." },
+          { title: "The Door Before the Next Chapter", focus: "End with Basil's announced concern and pressure before, but not during, the Chapter V confrontation." }
+        ],
+        decisions: [
+          "Decision I: share the evening, shape the evening, or use charm as a shield.",
+          "Decision II: ask what was seen, calmly deflect, or joke about the rumour.",
+          "Decision III: share the music, control the memory, or use beauty as a shield.",
+          "Decision IV: name the change, control the comparison, or cover the portrait and return."
+        ],
+        canonAndAlternatives: "Wilde's Chapter XI supplies the long-term yellow-book influence, unchanged appearance, aesthetic life, rumours, and social pressure. The compressed time span, four decisions, living Sibyl continuities, derived behaviour profile, and Stage 4 event are interactive additions; Chapter XII remains future Chapter V material."
+      }
     }
   ],
   glossary: {
@@ -250,6 +301,26 @@ export const STORY_DATA = {
     dishonesty: "the act of hiding the truth or deceiving someone",
     book: "a set of written pages held together in a cover",
     fascination: "a strong interest in something",
+    habit: "something you do often and almost without thinking",
+    rumour: "a story that people repeat without knowing if it is true",
+    appearance: "the way someone or something looks",
+    invitation: "a request to come to an event or place",
+    observe: "to watch carefully and notice details",
+    avoid: "to stay away from something difficult or unwanted",
+    compare: "to look at two things and notice how they are alike or different",
+    unchanged: "remaining the same and not altered",
+    season: "one part of the year, such as spring or winter",
+    beauty: "the quality of being pleasing to look at or experience",
+    memory: "something you remember from the past",
+    ritual: "an action repeated in the same way over time",
+    recognisable: "easy to know because it is familiar",
+    human: "belonging to or showing the qualities of people",
+    history: "events that happened in the past",
+    message: "information sent from one person to another",
+    concern: "a feeling of worry about something",
+    boundary: "a limit that shows what is private or allowed",
+    distance: "a feeling of being separate or not close to someone",
+    behaviour: "the way a person acts",
     question: "a sentence or request that asks for information",
     future: "the time that will come after now",
     room: "a space inside a building",
@@ -981,6 +1052,307 @@ export const STORY_DATA = {
       terms: ["book", "key", "influence", "private", "portrait", "future", "consequence"],
       nextScene: null,
       sourceNote: "The yellow-book hook follows Chapter X's immediate sequence; the contrast between public beauty, the locked room, and long-term influence is supported by Chapters X–XI. The Chapter IV handoff is original game architecture."
+    },
+    "c4-years-begin": {
+      chapterId: "chapter-4",
+      kind: "opening",
+      eyebrow: "Chapter IV · A Life of Pleasure",
+      title: "The Years Begin",
+      location: "Dorian's house, a few months later",
+      visual: { location: "dorianHouse" },
+      paragraphs: [
+        "A few months later, the yellow-bound book is no longer a novelty. It lies near your chair, open at different pages, as if it has learned the shape of the room.",
+        "The key to the locked schoolroom is still yours. The portrait remains private upstairs. You still look young, and the house still receives the face that other people remember.",
+        "You have not made one great decision about the book or the key. You have simply returned to both of them often enough for them to become part of your days."
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "yellowBookResponse", value: "accepted" } }, text: "The book's ideas still feel elegant and attractive. They turn experience into a language that sounds almost like wisdom." },
+        { when: { storyFact: { key: "yellowBookResponse", value: "questioned" } }, text: "You still argue with the book in the margins of your thoughts, but you keep returning to its language." },
+        { when: { storyFact: { key: "yellowBookResponse", value: "escape" } }, text: "You use the book deliberately when a difficult thought comes too close. Its pages give you somewhere else to look." },
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl remains part of memory, grief, and responsibility. You do not repeat the method of her death; you carry the fact of the loss." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl is alive and independent. She is no longer waiting for you, and her life has learned to continue at a distance." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains part of your life, but years have changed the relationship. Closeness now includes distance, boundaries, and questions you avoid." }
+      ],
+      terms: ["book", "key", "portrait", "private", "habit", "influence", "grief", "responsibility", "distant", "boundary"],
+      nextScene: "c4-the-book-as-habit",
+      sourceNote: "Wilde's Chapter XI supplies the long-term book influence and unchanged appearance; the compressed opening and Sibyl continuities are interactive adaptations."
+    },
+    "c4-the-book-as-habit": {
+      chapterId: "chapter-4",
+      kind: "narrative",
+      eyebrow: "A long influence",
+      title: "The Book Becomes a Habit",
+      location: "Rooms that change around you",
+      visual: { location: "dorianHouse" },
+      paragraphs: [
+        "Over the next few years, the book appears in different rooms and beside different evenings. Sometimes you read it with attention. Sometimes you open it only to postpone another thought.",
+        "You kept returning to its pages. You used to think that an idea was powerful because it was beautiful. You had begun to notice that a beautiful idea could also become an excuse.",
+        "Although your public face remains young and calm, the locked schoolroom keeps another kind of evidence upstairs. The distance between what people see and what you know becomes easier to maintain, and harder to explain."
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "yellowBookResponse", value: "accepted" } }, text: "The book's influence feels like a philosophy you can carry into any room." },
+        { when: { storyFact: { key: "yellowBookResponse", value: "questioned" } }, text: "Questioning the book has not stopped its influence. An argument can remain a habit even after the answer is uncertain." },
+        { when: { storyFact: { key: "yellowBookResponse", value: "escape" } }, text: "When the private evidence becomes difficult, the book offers a familiar way to look away." }
+      ],
+      terms: ["influence", "habit", "appearance", "unchanged", "evidence", "public", "private", "avoid", "consequence", "question"],
+      nextScene: "c4-house-open",
+      sourceNote: "The repeated reading and long time compression adapt Wilde's Chapter XI into a short B1-friendly narrative transition."
+    },
+    "c4-house-open": {
+      chapterId: "chapter-4",
+      kind: "choice",
+      eyebrow: "Decision I · The public face",
+      title: "A House Open to the World",
+      location: "Dorian's house, a refined evening",
+      visual: { location: "dorianHouse" },
+      paragraphs: [
+        "Your house is open again. Music moves through the rooms, glasses catch the light, and conversation gathers around the face that has not changed since Basil painted it.",
+        "People enjoy your company because you make an evening feel complete. Your beauty protects the public story: a young man can be admired, forgiven, or simply believed more easily than a tired one.",
+        "The pleasure is real, but it does not explain what happens upstairs. You decide how much of the evening will belong to other people and how much will be arranged around your control."
+      ],
+      terms: ["appearance", "reputation", "public", "private", "influence", "consequence"],
+      prompt: "How do you use the evening?",
+      decisionLabel: "Decision I · Welcome, perform, or protect yourself",
+      choices: [
+        {
+          id: "share-the-evening",
+          label: "Invite people into a shared experience.",
+          description: "You let the music, conversation, and attention move between people instead of keeping the room under your control.",
+          nextScene: "c4-whispers",
+          effects: { reputation: 1, conscience: 1, portrait: 0 },
+          reflection: "You treated pleasure as something that could connect people, not only protect your image."
+        },
+        {
+          id: "shape-the-evening",
+          label: "Shape every detail as a performance.",
+          description: "You arrange the rooms, the conversation, and your own expression until the evening seems effortless.",
+          nextScene: "c4-whispers",
+          effects: { reputation: 1, conscience: 0, portrait: 1 },
+          reflection: "You made the evening beautiful by turning every detail into a controlled presentation."
+        },
+        {
+          id: "charm-as-shield",
+          label: "Use charm to keep difficult questions away.",
+          description: "You answer curiosity with wit and warmth, making it pleasant for everyone to look somewhere else.",
+          nextScene: "c4-whispers",
+          effects: { reputation: 1, conscience: -1, portrait: 1 },
+          reflection: "You used charm as a shield, and the room accepted the protection."
+        }
+      ],
+      sourceNote: "Dorian's social life and aesthetic reputation adapt Wilde's Chapter XI; the three ways of using the evening are original interactive choices."
+    },
+    "c4-whispers": {
+      chapterId: "chapter-4",
+      kind: "choice",
+      eyebrow: "Decision II · What people say",
+      title: "Whispers at the Edge of the Room",
+      location: "Dorian's house, after his twenty-fifth year",
+      visual: { location: "dorianHouse" },
+      paragraphs: [
+        "After his twenty-fifth year, the room begins to change around you. A conversation stops when you approach. Someone leaves early. An invitation is mentioned, then not explained.",
+        "You hear a story that may be false, but the uncertainty is already changing the room. People have observed a pattern of absences and distance. They have not proved what the pattern means.",
+        "Your young face makes some people doubt the rumour. It does not make the rumour impossible, and Reputation is not the same as truth."
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "basilSuspicion", value: "uneasy" } }, text: "Basil once sensed that something was wrong. The memory is an unease, not a knowledge of the secret." },
+        { when: { storyFact: { key: "basilSuspicion", value: "suspects" } }, text: "Basil believed you were deliberately hiding something serious. He still did not know what the secret was." },
+        { when: { storyFact: { key: "basilSuspicion", value: "clear" } }, text: "Basil clearly understood that you were concealing a serious secret, but he had not seen the portrait and did not know its truth." }
+      ],
+      terms: ["rumour", "reputation", "evidence", "appearance", "public", "distance", "invitation", "observe", "truth", "suspicion"],
+      prompt: "How do you answer a story that may be false, but is already changing the room?",
+      decisionLabel: "Decision II · Observe, manage, or perform",
+      choices: [
+        {
+          id: "ask-what-was-seen",
+          label: "Ask what was actually seen.",
+          description: "You separate observations from guesses before answering the story.",
+          nextScene: "c4-chosen-pleasure",
+          effects: { reputation: -1, conscience: 1, portrait: 0 },
+          reflection: "You asked for evidence and refused to treat a rumour as a fact."
+        },
+        {
+          id: "calmly-deflect",
+          label: "Calmly deflect the question.",
+          description: "You manage the social situation without accepting or resolving what the rumour means.",
+          nextScene: "c4-chosen-pleasure",
+          effects: { reputation: 1, conscience: 0, portrait: 1 },
+          reflection: "You kept control of the room without deciding whether the story was true."
+        },
+        {
+          id: "joke-about-rumour",
+          label: "Make a joke about the rumour.",
+          description: "You turn uncertainty into a performance and give the room an easier story to repeat.",
+          nextScene: "c4-chosen-pleasure",
+          effects: { reputation: 1, conscience: -1, portrait: 1 },
+          reflection: "You made the rumour entertaining, which made its uncertainty easier to ignore."
+        }
+      ],
+      sourceNote: "The uncertain social rumours and distance adapt Wilde's Chapter XI without inventing a detailed crime; the three responses are original interactive choices."
+    },
+    "c4-chosen-pleasure": {
+      chapterId: "chapter-4",
+      kind: "choice",
+      eyebrow: "Decision III · A later season",
+      title: "A Pleasure for Forgetting",
+      location: "A later evening in Dorian's house",
+      visual: { location: "dorianHouse" },
+      paragraphs: [
+        "Another season passed. You choose one room instead of a catalogue of rooms, one experience instead of every beautiful object that could be collected.",
+        "The question is not whether music, perfume, jewels, or cloth are good or bad. The question is how you use beauty when an inward question refuses to leave.",
+        "The house offers many ways to arrange memory. You choose the use that will shape this evening."
+      ],
+      terms: ["season", "beauty", "memory", "private", "public", "question", "influence"],
+      prompt: "What do you do with beauty?",
+      decisionLabel: "Decision III · Share, control, or shield",
+      choices: [
+        {
+          id: "share-the-music",
+          label: "Share the music.",
+          description: "You let another person experience the music with you instead of using it to disappear into your own thoughts.",
+          nextScene: "c4-locked-room-again",
+          effects: { reputation: 0, conscience: 1, portrait: 0 },
+          reflection: "You allowed beauty to become an experience shared with another person."
+        },
+        {
+          id: "control-the-memory",
+          label: "Control the memory.",
+          description: "You arrange perfume, objects, and the room until an uncertain memory feels like an experiment you can manage.",
+          nextScene: "c4-locked-room-again",
+          effects: { reputation: 0, conscience: 0, portrait: 1 },
+          reflection: "You turned memory into something arranged, measured, and apparently under your control."
+        },
+        {
+          id: "beauty-as-shield",
+          label: "Make beauty a shield.",
+          description: "You choose jewellery and textiles that make the room impossible to question and your own question easier to avoid.",
+          nextScene: "c4-locked-room-again",
+          effects: { reputation: 1, conscience: -1, portrait: 1 },
+          reflection: "You used visible beauty to protect yourself from an inward question."
+        }
+      ],
+      sourceNote: "The selected music, perfume, objects, jewellery, and textiles compress Wilde's Chapter XI catalogue into one interactive question about use rather than moral value."
+    },
+    "c4-locked-room-again": {
+      chapterId: "chapter-4",
+      kind: "choice",
+      requires: { storyFacts: { portraitLocation: "locked-schoolroom" } },
+      eyebrow: "Decision IV · The private ritual",
+      title: "The Locked Room, Again",
+      location: "The old schoolroom, after many years",
+      visual: { location: "secretRoom" },
+      paragraphs: [
+        "You return to the old schoolroom after another period of company and music. This is not your first return. You have come many times over the years, always with the key and always with a reason to leave again.",
+        "The portrait is still at its logical Stage 3. Your living face remains young; the painted face keeps the evidence you do not show downstairs.",
+        "The ritual has become familiar: unlock the door, look at the canvas, decide how much of the comparison you can bear, and choose what to do next."
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Memory brings grief and responsibility into the room, but you do not turn Sibyl's death into another performance." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl's independent life is another reminder that your private rituals do not control other people's boundaries." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl's continuing presence makes the locked room harder to call harmless. Closeness makes the hidden evidence more costly." }
+      ],
+      terms: ["private", "portrait", "unchanged", "evidence", "ritual", "compare", "responsibility", "grief", "boundary"],
+      prompt: "How do you meet the portrait?",
+      decisionLabel: "Decision IV · Name, control, or cover",
+      choices: [
+        {
+          id: "name-the-change",
+          label: "Name one visible change.",
+          description: "You look directly and say what is different, without pretending that naming it solves anything.",
+          nextScene: "c4-face-in-mirror",
+          effects: { reputation: 0, conscience: 1, portrait: 1 },
+          reflection: "You looked directly at the evidence and named one change."
+        },
+        {
+          id: "control-the-comparison",
+          label: "Control the comparison.",
+          description: "You compare the portrait and your living face as an experiment you believe you can manage.",
+          nextScene: "c4-face-in-mirror",
+          effects: { reputation: 0, conscience: 0, portrait: 1 },
+          reflection: "You treated the living face and painted face as an experiment under your control."
+        },
+        {
+          id: "cover-and-return",
+          label: "Cover it and return downstairs.",
+          description: "You cover the evidence, lock the door, and preserve the public self for another evening.",
+          nextScene: "c4-face-in-mirror",
+          effects: { reputation: 1, conscience: -1, portrait: 1 },
+          reflection: "You covered the evidence and returned to public life before the question could follow you."
+        }
+      ],
+      sourceNote: "The repeated locked-room ritual and the Stage 3 portrait continue the approved Chapter IV blueprint; the three responses are original interactive choices."
+    },
+    "c4-face-in-mirror": {
+      chapterId: "chapter-4",
+      kind: "narrative",
+      requires: {
+        storyFacts: { portraitLocation: "locked-schoolroom" },
+        requiredChoiceScenes: ["c4-house-open", "c4-whispers", "c4-chosen-pleasure", "c4-locked-room-again"]
+      },
+      eyebrow: "The shared consequence",
+      title: "The Face in the Mirror",
+      location: "The old schoolroom",
+      visual: { location: "secretRoom" },
+      effects: { storyFacts: { portraitStageUnlock: "stage-4" } },
+      paragraphs: [
+        "The change does not belong to one click, one evening, or one sentence. It belongs to repeated years, repeated choices, repeated concealment, and repeated returns to this room.",
+        "The portrait has reached a harder stage. The eyes and mouth are more watchful. A restrained fatigue touches the face, and some of its harmony has been lost.",
+        "The change is still human and recognisably Dorian. It is not grotesque and it is not final. Your living face remains young while the painting keeps the history that your appearance refuses to show.",
+        "The Stage 4 image is present as a logical change before its final artwork exists. The room holds the evidence, and the key remains in your hand."
+      ],
+      conditionalText: [
+        { when: { behaviourProfile: "self-examining" }, text: "You have looked for specifics and shared some experiences, but attention does not erase consequence." },
+        { when: { behaviourProfile: "divided" }, text: "Public control and private examination have coexisted for years. Neither side has cancelled the other." },
+        { when: { behaviourProfile: "pleasure-as-escape" }, text: "Beauty, wit, and concealment have repeatedly helped you avoid difficult questions. Avoidance has still left a record." }
+      ],
+      terms: ["consequence", "portrait", "evidence", "unchanged", "recognisable", "human", "private", "history", "key"],
+      nextScene: "c4-later-invitation",
+      sourceNote: "This universal Stage 4 event is original game architecture. It represents accumulated time and behaviour, not a single choice; final Stage 4 artwork remains pending."
+    },
+    "c4-later-invitation": {
+      chapterId: "chapter-4",
+      kind: "narrative",
+      eyebrow: "Years later",
+      title: "An Invitation Withheld",
+      location: "Dorian's house, years later",
+      visual: { location: "dorianHouse" },
+      paragraphs: [
+        "Years later, an invitation fails to arrive. At another dinner, a conversation becomes formal and someone excuses himself before the evening is finished.",
+        "Not everybody rejects you. Charm still works, and some people prefer the beauty of the public story to the uncertainty of the private one. But a name has disappeared from one circle, and a place at one table is no longer offered.",
+        "The reaction is not a legal judgement or proof of a crime. It is the social distance that can grow around a pattern people do not know how to explain."
+      ],
+      conditionalText: [
+        { when: { behaviourProfile: "self-examining" }, text: "You have repeatedly looked for specifics or shared experience, but that attention does not erase the consequences gathering around you." },
+        { when: { behaviourProfile: "divided" }, text: "Public control and private examination remain divided inside the same polished evening." },
+        { when: { behaviourProfile: "pleasure-as-escape" }, text: "Beauty, wit, and concealment have repeatedly been used to avoid difficult questions, and distance has begun to answer for them." }
+      ],
+      terms: ["invitation", "distance", "reputation", "appearance", "public", "private", "consequence", "evidence", "rumour"],
+      nextScene: "c4-threshold",
+      sourceNote: "The withheld invitation and social distance adapt Wilde's Chapter XI; the derived profile changes interpretation, not the shared event or a legal verdict."
+    },
+    "c4-threshold": {
+      chapterId: "chapter-4",
+      kind: "ending",
+      eyebrow: "End of Chapter IV",
+      title: "The Door Before the Next Chapter",
+      location: "Dorian's house, before another difficult conversation",
+      visual: { location: "dorianHouse" },
+      paragraphs: [
+        "Years have passed. You still look young, and people still read that face before they read the distance around it.",
+        "Upstairs, the Stage 4 portrait remains in the locked schoolroom. It is harder around the eyes and mouth, watchful and tired in a way the living face is not.",
+        "Basil has heard enough to want to speak with you. He has sent a message and announced his concern, but he has not seen the portrait, entered the secret room, or witnessed the truth behind the locked door.",
+        "You understand that a difficult conversation may be approaching. The door before it is still closed."
+      ],
+      conditionalText: [
+        { when: { behaviourProfile: "self-examining" }, text: "You have tried to look closely at what happened. Looking closely has not made the approaching conversation unnecessary." },
+        { when: { behaviourProfile: "divided" }, text: "You have lived between public control and private examination. Basil's message reaches both sides of that life." },
+        { when: { behaviourProfile: "pleasure-as-escape" }, text: "You have often used beauty and wit to return to public life. This time, the unanswered question is waiting at the door." },
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl remains part of memory, grief, and responsibility; her story is not reopened here." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl remains alive with an independent life beyond your choices; distance is not a promise that she will return." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains part of your changing life, with boundaries and ordinary questions that cannot be replaced by a perfect romance." }
+      ],
+      terms: ["unchanged", "portrait", "private", "public", "consequence", "message", "concern", "distance", "responsibility", "boundary"],
+      nextScene: null,
+      sourceNote: "Chapter IV ends before Wilde's Chapter XII confrontation. Basil's announced concern is a threshold for future Chapter V, not the confrontation itself."
     }
   }
 };

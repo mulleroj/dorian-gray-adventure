@@ -385,8 +385,8 @@ test("all 23,328 Chapter I plus Chapter II plus Chapter III paths preserve conti
   }
   assert.equal(combinations, 8 * 36 * 81);
   const chapterFour = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-4");
-  assert.equal(chapterFour.available, false);
-  assert.equal(chapterFour.status, "in-preparation");
-  assert.equal(Object.prototype.hasOwnProperty.call(chapterFour, "firstScene"), false);
-  assert.equal(Object.values(STORY_DATA.scenes).filter((scene) => scene.chapterId === "chapter-4").length, 0);
+  assert.equal(chapterFour.available, true);
+  assert.equal(chapterFour.status, "playable");
+  assert.equal(chapterFour.firstScene, "c4-years-begin");
+  assert.equal(Object.values(STORY_DATA.scenes).filter((scene) => scene.chapterId === "chapter-4").length, 9);
 });
