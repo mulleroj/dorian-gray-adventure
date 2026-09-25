@@ -848,18 +848,18 @@ Risk: Chapter VI assumes Basil is alive, dead, or unaware without checking.
 
 Recommendation: require `basilOutcome` and Stage 5, preserve the four Chapter V choices for interpretation, and keep Chapter VI unavailable until its own blueprint and implementation are approved.
 
-## 20. Owner approval questions
+## 20. Approved implementation contract
 
-The blueprint resolves all other design choices. The owner should approve only these genuinely consequential boundaries before implementation:
+The following boundaries are approved and are implementation requirements, not open owner questions:
 
-1. **Survival alternatives:** Are both `alive-separated` and `alive-helping` allowed as clearly labelled non-canonical alternatives?
-2. **Outcome vocabulary:** Is the exact finite model `dead-canonical | alive-separated | alive-helping` acceptable for Chapter VI?
-3. **Universal reveal:** Is Basil seeing the portrait in every valid Chapter V route approved?
-4. **Stage 5 timing:** Is universal unlock at `c5-basil-sees` preferred over unlock at the confrontation ending?
-5. **Shared artwork:** Is one route-independent Stage 5 asset sufficient?
-6. **Warning model:** Is a warning only on the canonical ending, with continue/skip/pause and no warning for the rest of the chapter, approved?
-7. **Ending boundary:** Is the Chapter V ending limited to immediate consequence and Chapter VI handoff, with all Chapter XIV procedural aftermath excluded?
-8. **P0 asset set:** Is `portrait-dorian-stage-5.webp` the only required new asset, with Basil art and fog art deferred?
+1. `basilOutcome` uses exactly `null`, `dead-canonical`, `alive-separated`, or `alive-helping`.
+2. Basil sees the changed portrait on the universal shared spine at `c5-basil-sees`; no valid Chapter V route bypasses that witness event.
+3. Stage 5 unlocks universally at `c5-basil-sees`. Basil's gaze witnesses already-accumulated damage and does not cause the portrait transformation.
+4. One route-independent Stage 5 portrait asset is required; Basil art, fog art, and other new Chapter V artwork are deferred.
+5. The content warning appears only on the canonical `dead-canonical` ending, with the existing continue/skip/pause semantics.
+6. Chapter V ends at immediate consequence and the Chapter VI handoff; Chapter XIV disposal, investigation, forensic, servant-deception, and other procedural aftermath are excluded.
+7. Existing location assets may be reused cautiously only where their scene meaning remains compatible.
+8. `basilOutcome` is the only new persistent Chapter V story fact. Do not add `portraitWitness`, `basilKilled`, `basilAlive`, `basilRelationship`, `murderCount`, `threatLevel`, or `violenceMeter`.
 
 ## 21. Verification and scope stop
 
