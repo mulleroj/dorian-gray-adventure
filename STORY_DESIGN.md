@@ -59,7 +59,7 @@ Schválený resolver používá profily `role-first`, `person-first` a `mixed`. 
 
 ## Schválený základ pro více kapitol
 
-Milestone 2B připravil technický základ; Milestone 2C na něj navázal plně hratelnou Chapter II. Chapter III zůstává mimo rozsah.
+Milestone 2B připravil technický základ; Milestone 2C na něj navázal plně hratelnou Chapter II. Chapter III narrative blueprint je schválený a Milestone 3B přidal pouze technický foundation: metadata kapitoly, bezpečný story-fact contract, budoucí handoff gate a logický Stage 3 bez artworku. Chapter III zůstává nehratelná.
 
 Stav hry od verze 2 rozlišuje:
 
@@ -73,6 +73,15 @@ Schválené hodnoty použité v Chapter II jsou:
 - sibylRelationship: role-first, mixed, person-first;
 - sibylOutcome: dead-canonical, alive-estranged, alive-together;
 - c2FinalResponse: cruel, listen, delay.
+
+Technické Chapter III facts jsou allow-listed a zatím se v žádné scéně nenastavují:
+
+- portraitLocation: null nebo locked-schoolroom;
+- basilSuspicion: null, uneasy, suspects nebo clear;
+- portraitStageUnlock: null nebo stage-3;
+- yellowBookResponse: null, accepted, questioned nebo escape.
+
+`portraitHidden` a `secretRoomEstablished` se odvozují z `portraitLocation`. Sibyl contact se neukládá; odvozuje se z existujícího `sibylOutcome`. Stage 3 se odemkne až při budoucím schváleném locked-schoolroom eventu, ne z numeric Portrait threshold.
 
 Sibylin osud se vypočítá při vstupu do poslední scény Chapter II. Žádná budoucí kapitola nesmí znovu zobrazit živou Sibyl po výsledku dead-canonical, ani automaticky zaměnit alive-estranged za smrt nebo alive-together za harmonický vztah.
 

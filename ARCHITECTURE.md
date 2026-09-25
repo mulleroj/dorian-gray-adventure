@@ -41,7 +41,11 @@ Aktuální stav má verzi 2:
   storyFacts: {
     sibylRelationship: null,
     sibylOutcome: null,
-    c2FinalResponse: null
+    c2FinalResponse: null,
+    portraitLocation: null,
+    basilSuspicion: null,
+    portraitStageUnlock: null,
+    yellowBookResponse: null
   },
   choices: [],
   visitedScenes: [],
@@ -69,27 +73,33 @@ chapterComplete je stav aktuální scény, zatímco completedChapters je persist
 game-engine.js poskytuje:
 
 - kontrolu vstupních podmínek scén a dostupnosti kapitoly;
-- applyEffects pro existující Reputation, Conscience, Portrait a boolean flags;
+- applyEffects pro existující Reputation, Conscience, Portrait, boolean flags a allow-listed story facts;
 - zpracování choice history;
 - vstup do scény s aktualizací activeChapterId;
 - samostatné označení dokončené kapitoly;
 - startNewGame pro obecný chapterId;
 - continueToChapter jako mechanismus handoffu po dokončení předchozí kapitoly;
 - resolveChapterTwoOutcome, který při vstupu do poslední scény zapíše schválený vztah a výsledek do storyFacts;
+- chapterRequirementsMet pro dokončené kapitoly a vyřešené story facts;
 - getChapterStart, isChapterAvailable, isChapterComplete a nextChapterAfter;
-- stabilní portraitStageForValue s prahy 0, 1 a 2–3.
+- stabilní `portraitStageForValue` s prahy 0, 1 a 2–3;
+- logický Stage 3 z `storyFacts.portraitStageUnlock`, bez požadavku na numeric Portrait threshold.
 
-Chapter II je dostupná pouze po `completedChapters["chapter-1"] === true`; přímý vstup do jejích scén je stejným pravidlem blokovaný. Po dokončení Chapter II už engine žádný další chapter handoff nenabízí.
+Chapter II je dostupná pouze po `completedChapters["chapter-1"] === true`; přímý vstup do jejích scén je stejným pravidlem blokovaný. Chapter III metadata už existují, ale `available: false` a `firstScene: null` ji drží ve stavu „In preparation“. Budoucí handoff bude vyžadovat `completedChapters["chapter-2"] === true` a vyřešené `sibylRelationship`, `sibylOutcome` a `c2FinalResponse`. Chapter II ending se nyní nepřesměrovává do neexistující scény.
 
 ## Persistent story facts
 
-storyFacts jsou oddělená od číselných hodnot osobnosti. V Milestone 2B jsou připravené allow-listy:
+storyFacts jsou oddělená od číselných hodnot osobnosti. Aktuální allow-listy jsou:
 
 ~~~js
 storyFacts: {
   sibylRelationship: "role-first" | "mixed" | "person-first" | null,
   sibylOutcome: "dead-canonical" | "alive-estranged" | "alive-together" | null,
-  c2FinalResponse: "cruel" | "listen" | "delay" | null
+  c2FinalResponse: "cruel" | "listen" | "delay" | null,
+  portraitLocation: "locked-schoolroom" | null,
+  basilSuspicion: "uneasy" | "suspects" | "clear" | null,
+  portraitStageUnlock: "stage-3" | null,
+  yellowBookResponse: "accepted" | "questioned" | "escape" | null
 }
 ~~~
 
@@ -148,6 +158,8 @@ Portrétní systém zůstává nezměněn:
 - Portrait 0 → stage 0;
 - Portrait 1 → stage 1;
 - Portrait 2–3 → stage 2.
+
+Pokud `storyFacts.portraitStageUnlock === "stage-3"`, `portraitStage(state)` vrátí logický Stage 3 nezávisle na numeric Portrait. `STORY_DATA.assets.portraitStages` zatím obsahuje pouze Stage 0–2, takže viewer a panel bezpečně použijí existující CSS fallback bez odkazu na neexistující soubor. Numeric Portrait zůstává samostatnou pressure/context hodnotou a sám Stage 3 neodemkne.
 
 Chapter II nemá nový obrazový soubor ani nový threshold. StoryFacts mohou být použity v pozdější Chapter III, ale samotný Portrait nikdy neurčuje SibylOutcome.
 

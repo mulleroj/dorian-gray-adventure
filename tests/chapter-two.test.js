@@ -139,12 +139,15 @@ test("Chapter II save and restore preserves the resolved ending and Chapter I hi
   assert.equal(loadState().choices.filter((choice) => choice.sceneId.startsWith("c2-")).length, 4);
 });
 
-test("Chapter II has teacher material and no Chapter III unlock", () => {
+test("Chapter II has teacher material and Chapter III remains unavailable", () => {
   const chapterTwo = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-2");
+  const chapterThree = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-3");
   assert.equal(chapterTwo.status, "playable");
   assert.equal(chapterTwo.teacherNotes.scenes.length, 9);
   assert.equal(chapterTwo.teacherNotes.decisions.length, 4);
-  assert.equal(STORY_DATA.chapters.some((chapter) => chapter.id === "chapter-3"), false);
+  assert.equal(chapterThree.status, "in-preparation");
+  assert.equal(chapterThree.available, false);
+  assert.equal(chapterThree.firstScene, null);
   assert.equal(Object.keys(STORY_DATA.scenes).some((sceneId) => sceneId.startsWith("c3-")), false);
 });
 

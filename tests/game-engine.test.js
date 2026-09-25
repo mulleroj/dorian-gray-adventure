@@ -12,12 +12,27 @@ const { STORY_DATA } = await import("../js/story-data.js");
 const { createInitialState, loadState, saveState } = await import("../js/game-state.js");
 const {
   canEnterScene,
+  applyEffects,
   choose,
   continueFromScene,
   getScene,
   portraitStage,
   portraitStageForValue
 } = await import("../js/game-engine.js");
+
+test("approved Chapter III room event can atomically set location and Stage 3 unlock", () => {
+  const initialState = createInitialState();
+  const nextState = applyEffects(initialState, {
+    storyFacts: {
+      portraitLocation: "locked-schoolroom",
+      portraitStageUnlock: "stage-3"
+    }
+  });
+
+  assert.equal(nextState.storyFacts.portraitLocation, "locked-schoolroom");
+  assert.equal(nextState.storyFacts.portraitStageUnlock, "stage-3");
+  assert.equal(portraitStage(nextState), 3);
+});
 
 function moveToFirstDecision() {
   let state = createInitialState();
@@ -72,6 +87,8 @@ test("portrait image stages use stable numeric thresholds", () => {
   assert.equal(portraitStageForValue(3), 2);
   assert.equal(portraitStage({ portrait: 1, flags: {} }), 1);
   assert.equal(portraitStage({ portrait: 2, flags: {} }), 2);
+  assert.equal(portraitStage({ portrait: 0, storyFacts: { portraitStageUnlock: "stage-3" } }), 3);
+  assert.equal(portraitStage({ portrait: 3, storyFacts: {} }), 2);
   assert.deepEqual(Object.keys(STORY_DATA.assets.portraitStages), ["0", "1", "2"]);
   assert.equal(STORY_DATA.assets.portraitStages[0], "assets/portraits/portrait-dorian-stage-0.webp");
   assert.equal(STORY_DATA.assets.portraitStages[1], "assets/portraits/portrait-dorian-stage-1.webp");

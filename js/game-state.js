@@ -5,13 +5,21 @@ const CURRENT_VERSION = 2;
 export const STORY_FACT_KEYS = Object.freeze({
   sibylRelationship: ["role-first", "mixed", "person-first"],
   sibylOutcome: ["dead-canonical", "alive-estranged", "alive-together"],
-  c2FinalResponse: ["cruel", "listen", "delay"]
+  c2FinalResponse: ["cruel", "listen", "delay"],
+  portraitLocation: ["locked-schoolroom"],
+  basilSuspicion: ["uneasy", "suspects", "clear"],
+  portraitStageUnlock: ["stage-3"],
+  yellowBookResponse: ["accepted", "questioned", "escape"]
 });
 
 export const STORY_FACT_DEFAULTS = Object.freeze({
   sibylRelationship: null,
   sibylOutcome: null,
-  c2FinalResponse: null
+  c2FinalResponse: null,
+  portraitLocation: null,
+  basilSuspicion: null,
+  portraitStageUnlock: null,
+  yellowBookResponse: null
 });
 
 function isPlainObject(value) {

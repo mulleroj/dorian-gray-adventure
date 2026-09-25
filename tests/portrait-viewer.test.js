@@ -20,3 +20,14 @@ test("portrait viewer exposes no future stage controls and handles missing asset
   assert.equal(portraitStageText(99), "Untouched surface");
   assert.equal(portraitViewerModel({ portrait: 3 }).asset, "assets/portraits/portrait-dorian-stage-2.webp");
 });
+
+test("logical Stage 3 uses the safe fallback until artwork exists", () => {
+  assert.deepEqual(portraitViewerModel({
+    portrait: 0,
+    storyFacts: { portraitStageUnlock: "stage-3" }
+  }), {
+    stage: 3,
+    stageText: "The first visible change",
+    asset: null
+  });
+});

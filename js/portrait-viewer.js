@@ -1,7 +1,12 @@
 import { STORY_DATA } from "./story-data.js";
 import { portraitStage } from "./game-engine.js";
 
-const STAGE_TEXT = ["Untouched surface", "A troubling detail", "The painted warning"];
+const STAGE_TEXT = [
+  "Untouched surface",
+  "A troubling detail",
+  "The painted warning",
+  "The first visible change"
+];
 
 export function portraitStageText(stage) {
   return STAGE_TEXT[stage] ?? STAGE_TEXT[0];

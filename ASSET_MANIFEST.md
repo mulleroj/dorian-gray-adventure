@@ -71,6 +71,8 @@ portraitStages: {
 
 Engine pracuje pouze s číselnou hodnotou `portrait`. UI rozhoduje, zda zobrazí cestu k obrázku, nebo CSS fallback. Formát souboru proto není součástí herních pravidel.
 
+Milestone 3B přidává pouze logickou podporu Stage 3 přes `storyFacts.portraitStageUnlock`. Soubor `portrait-dorian-stage-3.webp` zatím není runtime mapping a nesmí být odkazován před pozdějším asset milestone. Pokud logický Stage 3 existuje bez artworku, viewer i stavový panel použijí bezpečný CSS fallback; současné Stage 0–2 cesty zůstávají beze změny.
+
 ## Kontrolní pravidla před přidáním obrázku
 
 - ověřit stejnou identitu, kompozici a světelný směr u všech portrétů;

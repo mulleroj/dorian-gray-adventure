@@ -29,6 +29,7 @@ Implementováno:
 - multi-chapter save foundation s migrací v1 → v2;
 - samostatné dokončení kapitol a chapter-aware story map;
 - allow-listed persistent story facts pro budoucí pokračování;
+- technický základ Chapter III: metadata připravené kapitoly, bezpečný handoff gate, Chapter III facts a logický Stage 3 fallback bez artworku;
 - deklarativní podmíněné texty a znovupoužitelný content-warning mechanismus.
 
 Text, pravidla, scény i grafické stavy jsou uloženy lokálně v projektu. Aplikace za běhu nepoužívá AI API, účet, databázi ani osobní údaje.
@@ -64,8 +65,8 @@ node --check js/ui.js
 node --test tests/*.test.js
 ```
 
-Regresní testy ověřují všech osm kombinací Chapter I, všech 288 kombinací Chapter I + II, tři výsledky Sibylina příběhu, migraci v1 → v2, samostatné dokončení kapitol, storyFacts, podmíněné texty, content warnings, gated scény, validitu přechodů, slovníček, portrétní prahy a poškozené nebo nekompatibilní save soubory. Chapter III není součástí tohoto milníku ani unlock flow.
+Regresní testy ověřují všech osm kombinací Chapter I, všech 288 kombinací Chapter I + II, tři výsledky Sibylina příběhu, migraci v1 → v2, samostatné dokončení kapitol, storyFacts, podmíněné texty, content warnings, gated scény, validitu přechodů, slovníček, portrétní prahy, logický Stage 3 fallback a poškozené nebo nekompatibilní save soubory. Chapter III má pouze schválená metadata a technický základ; její story scenes, artwork a unlock flow nejsou aktivní.
 
 ## Další milník
 
-Navazujícím milníkem je návrh a schválení Chapter III. Tento release končí po uzavření celého oblouku Sibyl v Chapter II.
+Chapter III narrative blueprint je schválený a její technický foundation je připravený. Kapitola zůstává ve stavu „In preparation“: story scenes, Stage 3 artwork a Chapter IV nejsou implementované. Runtime nadále nepoužívá AI API.

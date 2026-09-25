@@ -32,6 +32,20 @@ export function isChapterComplete(state = {}, chapterId = state.activeChapterId)
   return state.completedChapters?.[chapterId] === true;
 }
 
+function storyFactsAreResolved(state = {}, requiredFacts = []) {
+  return requiredFacts.every((key) => (
+    Object.prototype.hasOwnProperty.call(STORY_FACT_KEYS, key)
+    && state.storyFacts?.[key] !== null
+    && state.storyFacts?.[key] !== undefined
+  ));
+}
+
+export function chapterRequirementsMet(state = {}, chapter = null) {
+  if (!chapter) return false;
+  return (chapter.requiresCompletedChapters ?? []).every((requiredId) => isChapterComplete(state, requiredId))
+    && storyFactsAreResolved(state, chapter.requiresStoryFacts ?? []);
+}
+
 export function nextChapterAfter(chapterId) {
   const index = STORY_DATA.chapters.findIndex((chapter) => chapter.id === chapterId);
   return index >= 0 ? STORY_DATA.chapters[index + 1] ?? null : null;
@@ -40,7 +54,7 @@ export function nextChapterAfter(chapterId) {
 export function canStartChapter(state = {}, chapterId) {
   const chapter = getChapter(chapterId);
   if (!chapter || !isChapterAvailable(chapterId) || isChapterComplete(state, chapterId)) return false;
-  return (chapter.requiresCompletedChapters ?? []).every((requiredId) => isChapterComplete(state, requiredId));
+  return chapterRequirementsMet(state, chapter);
 }
 
 export function continueToChapter(state, chapterId) {
@@ -62,8 +76,7 @@ export function meetsRequirements(state = {}, requirements = {}) {
 export function canEnterScene(state, sceneId) {
   const scene = sceneFor(sceneId);
   const chapter = chapterForScene(scene);
-  const chapterRequirementsMet = (chapter?.requiresCompletedChapters ?? []).every((requiredId) => isChapterComplete(state, requiredId));
-  return Boolean(scene && chapter?.available === true && chapterRequirementsMet && meetsRequirements(state, scene.requires));
+  return Boolean(scene && chapter?.available === true && chapterRequirementsMet(state, chapter) && meetsRequirements(state, scene.requires));
 }
 
 function clamp(value, min = -3, max = 3) {
@@ -189,5 +202,6 @@ export function portraitStageForValue(portraitValue = 0) {
 }
 
 export function portraitStage(state = {}) {
+  if (state.storyFacts?.portraitStageUnlock === "stage-3") return 3;
   return portraitStageForValue(state.portrait);
 }

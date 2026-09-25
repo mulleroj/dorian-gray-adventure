@@ -18,6 +18,7 @@ const {
 const {
   canEnterScene,
   canStartChapter,
+  chapterRequirementsMet,
   continueFromScene,
   continueToChapter,
   enterScene,
@@ -82,7 +83,11 @@ test("all eight Chapter I v1 saves migrate without losing state", () => {
     assert.deepEqual(migrated.storyFacts, {
       sibylRelationship: null,
       sibylOutcome: null,
-      c2FinalResponse: null
+      c2FinalResponse: null,
+      portraitLocation: null,
+      basilSuspicion: null,
+      portraitStageUnlock: null,
+      yellowBookResponse: null
     });
   }
 });
@@ -119,8 +124,9 @@ test("chapter completion is independent for each chapter", () => {
   assert.equal(reopened.completedChapters["chapter-1"], true);
 });
 
-test("Chapter II exposes exactly the approved nine-scene route and no Chapter III", () => {
+test("Chapter II exposes exactly the approved nine-scene route and Chapter III remains unavailable", () => {
   const chapterTwo = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-2");
+  const chapterThree = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-3");
   const chapterTwoScenes = Object.entries(STORY_DATA.scenes).filter(([, scene]) => scene.chapterId === "chapter-2");
   assert.equal(chapterTwo.available, true);
   assert.equal(chapterTwo.firstScene, "c2-theatre-lights");
@@ -135,9 +141,47 @@ test("Chapter II exposes exactly the approved nine-scene route and no Chapter II
     "c2-backstage-choice",
     "c2-the-morning-after"
   ]);
+  assert.deepEqual(chapterThree, {
+    id: "chapter-3",
+    number: "III",
+    title: "The Changing Portrait",
+    subtitle: "A secret room, a visible consequence, and a new influence.",
+    status: "in-preparation",
+    available: false,
+    firstScene: null,
+    requiresCompletedChapters: ["chapter-2"],
+    requiresStoryFacts: ["sibylRelationship", "sibylOutcome", "c2FinalResponse"],
+    teacherNotes: {
+      literaryBasis: "The approved Chapter III blueprint follows Wilde's 1891 Chapters IX to XI.",
+      adaptation: "Only the technical foundation exists. Chapter III scenes and final B1 prose are not implemented.",
+      goals: [],
+      vocabulary: [],
+      discussion: [],
+      scenes: [],
+      decisions: [],
+      canonAndAlternatives: "The three Sibyl outcomes will remain short conditional variants around one shared spine when Chapter III is implemented."
+    }
+  });
   assert.equal(Object.keys(STORY_DATA.scenes).some((sceneId) => sceneId.startsWith("c3-")), false);
+  assert.equal(canStartChapter(createInitialState(), "chapter-3"), false);
   assert.equal(canEnterScene(createInitialState(), "c2-theatre-lights"), false);
   assert.equal(startNewGame("chapter-2"), null);
+});
+
+test("future Chapter III handoff requires Chapter II completion and resolved facts", () => {
+  const chapterThree = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-3");
+  const incomplete = {
+    completedChapters: { "chapter-2": true },
+    storyFacts: { sibylRelationship: "person-first", sibylOutcome: "alive-together", c2FinalResponse: null }
+  };
+  const complete = {
+    completedChapters: { "chapter-2": true },
+    storyFacts: { sibylRelationship: "person-first", sibylOutcome: "alive-together", c2FinalResponse: "listen" }
+  };
+
+  assert.equal(chapterRequirementsMet(incomplete, chapterThree), false);
+  assert.equal(chapterRequirementsMet(complete, chapterThree), true);
+  assert.equal(canStartChapter(complete, "chapter-3"), false, "metadata keeps Chapter III unavailable");
 });
 
 test("storyFacts use the approved allow-list and reject arbitrary values", () => {
@@ -155,9 +199,50 @@ test("storyFacts use the approved allow-list and reject arbitrary values", () =>
   assert.deepEqual(state.storyFacts, {
     sibylRelationship: "person-first",
     sibylOutcome: null,
-    c2FinalResponse: "listen"
+    c2FinalResponse: "listen",
+    portraitLocation: null,
+    basilSuspicion: null,
+    portraitStageUnlock: null,
+    yellowBookResponse: null
   });
   assert.equal(globalThis.__storyFactProbe, undefined);
+});
+
+test("Chapter III story facts accept only the approved finite values", () => {
+  const valid = normaliseState({
+    version: 2,
+    sceneId: "c2-the-morning-after",
+    storyFacts: {
+      portraitLocation: "locked-schoolroom",
+      basilSuspicion: "clear",
+      portraitStageUnlock: "stage-3",
+      yellowBookResponse: "accepted"
+    }
+  });
+  assert.deepEqual(valid.storyFacts, {
+    sibylRelationship: null,
+    sibylOutcome: null,
+    c2FinalResponse: null,
+    portraitLocation: "locked-schoolroom",
+    basilSuspicion: "clear",
+    portraitStageUnlock: "stage-3",
+    yellowBookResponse: "accepted"
+  });
+
+  const invalid = normaliseState({
+    version: 2,
+    sceneId: "c2-the-morning-after",
+    storyFacts: {
+      portraitLocation: "visible",
+      basilSuspicion: "certain",
+      portraitStageUnlock: "stage-4",
+      yellowBookResponse: "ignored"
+    }
+  });
+  assert.equal(invalid.storyFacts.portraitLocation, null);
+  assert.equal(invalid.storyFacts.basilSuspicion, null);
+  assert.equal(invalid.storyFacts.portraitStageUnlock, null);
+  assert.equal(invalid.storyFacts.yellowBookResponse, null);
 });
 
 test("conditional narrative is declarative, state-aware and side-effect free", () => {
@@ -182,6 +267,33 @@ test("conditional narrative is declarative, state-aware and side-effect free", (
   assert.deepEqual(resolveSceneParagraphs(scene, state), ["Base paragraph.", "Henry's voice returns."]);
   assert.equal(matchesNarrativeCondition(state, { code: "globalThis.__narrativeProbe = true" }), false);
   assert.equal(globalThis.__narrativeProbe, undefined);
+});
+
+test("future Chapter III story-fact conditions support the approved contract", () => {
+  const state = {
+    storyFacts: {
+      portraitLocation: "locked-schoolroom",
+      basilSuspicion: "clear",
+      portraitStageUnlock: "stage-3",
+      yellowBookResponse: "questioned",
+      sibylOutcome: "alive-together"
+    }
+  };
+
+  assert.equal(matchesNarrativeCondition(state, { storyFact: { key: "portraitLocation", value: "locked-schoolroom" } }), true);
+  assert.equal(matchesNarrativeCondition(state, { storyFact: { key: "basilSuspicion", value: "clear" } }), true);
+  assert.equal(matchesNarrativeCondition(state, { storyFact: { key: "portraitStageUnlock", value: "stage-3" } }), true);
+  assert.equal(matchesNarrativeCondition(state, {
+    all: [
+      { storyFact: { key: "portraitLocation", value: "locked-schoolroom" } },
+      { any: [
+        { storyFact: { key: "yellowBookResponse", value: "accepted" } },
+        { storyFact: { key: "yellowBookResponse", value: "questioned" } }
+      ] },
+      { storyFact: { key: "sibylOutcome", value: "alive-together" } }
+    ]
+  }), true);
+  assert.equal(matchesNarrativeCondition(state, { not: { storyFact: { key: "portraitStageUnlock", value: null } } }), true);
 });
 
 test("content warnings support continue, skip and pause without changing game state", () => {

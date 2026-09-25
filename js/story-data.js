@@ -99,6 +99,27 @@ export const STORY_DATA = {
         canonAndAlternatives: "Role-first admiration plus a cruel public response resolves to dead-canonical. The other routes resolve to alive-estranged or alive-together; neither alternative is presented as Wilde's original plot.",
         contentWarning: "Only the canonical aftermath shows a factual, non-graphic death consequence. The warning appears after the route is resolved and offers continue, skip sensitive description, or pause without changing the save."
       }
+    },
+    {
+      id: "chapter-3",
+      number: "III",
+      title: "The Changing Portrait",
+      subtitle: "A secret room, a visible consequence, and a new influence.",
+      status: "in-preparation",
+      available: false,
+      firstScene: null,
+      requiresCompletedChapters: ["chapter-2"],
+      requiresStoryFacts: ["sibylRelationship", "sibylOutcome", "c2FinalResponse"],
+      teacherNotes: {
+        literaryBasis: "The approved Chapter III blueprint follows Wilde's 1891 Chapters IX to XI.",
+        adaptation: "Only the technical foundation exists. Chapter III scenes and final B1 prose are not implemented.",
+        goals: [],
+        vocabulary: [],
+        discussion: [],
+        scenes: [],
+        decisions: [],
+        canonAndAlternatives: "The three Sibyl outcomes will remain short conditional variants around one shared spine when Chapter III is implemented."
+      }
     }
   ],
   glossary: {
