@@ -8,6 +8,7 @@ Projekt je statická webová aplikace bez frameworku, backendu, databáze a exte
 story-data.js
    -> game-engine.js -> ui.js -> index.html
    -> narrative-resolver.js
+   -> chapter-five-outcome.js (future Chapter V resolver, not runtime-integrated)
 game-state.js -> localStorage
 ~~~
 
@@ -24,7 +25,7 @@ js/story-data.js exportuje objekt STORY_DATA:
 - teacherNotes obsahují cíle a odlišení předlohy od herního rozšíření;
 - žádná data nespouštějí JavaScript.
 
-Chapter II je od Milestone 2C playable. Chapter III je playable od Milestone 3C a obsahuje přesně devět schválených scén `c3-*`; Chapter IV je playable od Milestone 4C a obsahuje přesně devět shared-spine scén `c4-*` a čtyři rozhodovací body. Stage 3 portrait, Dorian's house a secret-room P0 visuals jsou integrovány deklarativně podle kontextu scény; Chapter IV znovu používá existující house a secret-room assets.
+Chapter II je od Milestone 2C playable. Chapter III je playable od Milestone 3C a obsahuje přesně devět schválených scén `c3-*`; Chapter IV je playable od Milestone 4C a obsahuje přesně devět shared-spine scén `c4-*` a čtyři rozhodovací body. Chapter V má od Milestone 5B pouze metadata `in-preparation`, je `available: false` a nemá runtime scenes ani choices. Stage 3 portrait, Dorian's house a secret-room P0 visuals jsou integrovány deklarativně podle kontextu scény; Chapter IV znovu používá existující house a secret-room assets.
 
 ## Stav hráče a migrace
 
@@ -46,7 +47,8 @@ Aktuální stav má verzi 2:
     portraitLocation: null,
     basilSuspicion: null,
     portraitStageUnlock: null,
-    yellowBookResponse: null
+    yellowBookResponse: null,
+    basilOutcome: null
   },
   choices: [],
   visitedScenes: [],
@@ -86,9 +88,9 @@ game-engine.js poskytuje:
 - chapterRequirementsMet pro dokončené kapitoly a vyřešené story facts;
 - getChapterStart, isChapterAvailable, isChapterComplete a nextChapterAfter;
 - stabilní `portraitStageForValue` s prahy 0, 1 a 2–3;
-- logický Stage 3 nebo Stage 4 z `storyFacts.portraitStageUnlock`, bez požadavku na numeric Portrait threshold.
+- logický Stage 3, Stage 4 nebo připravený Stage 5 z `storyFacts.portraitStageUnlock`, bez požadavku na numeric Portrait threshold.
 
-Chapter II je dostupná pouze po `completedChapters["chapter-1"] === true`; Chapter III stejným mechanismem vyžaduje dokončenou Chapter II a vyřešené `sibylRelationship`, `sibylOutcome` a `c2FinalResponse`. `canStartChapter` i `meetsRequirements` podporují přesné allow-listed story-fact požadavky. Chapter II ending nabízí bezpečný přechod do Chapter III a její ending už nepřesměrovává do neexistující Chapter IV. Chapter IV vyžaduje dokončenou Chapter III a všech pět schválených handoff facts. Její Stage 4 event je universal entry effect po čtyřech Chapter IV decisions; není řízen numeric hodnotami ani derived profilem. Chapter IV ending ponechává `activeChapterId = "chapter-4"` a nepřidává Chapter V metadata.
+Chapter II je dostupná pouze po `completedChapters["chapter-1"] === true`; Chapter III stejným mechanismem vyžaduje dokončenou Chapter II a vyřešené `sibylRelationship`, `sibylOutcome` a `c2FinalResponse`. `canStartChapter` i `meetsRequirements` podporují přesné allow-listed story-fact požadavky. Chapter II ending nabízí bezpečný přechod do Chapter III a její ending už nepřesměrovává do neexistující Chapter IV. Chapter IV vyžaduje dokončenou Chapter III a všech pět schválených handoff facts. Její Stage 4 event je universal entry effect po čtyřech Chapter IV decisions; není řízen numeric hodnotami ani derived profilem. Chapter IV ending ponechává `activeChapterId = "chapter-4"`. Chapter V má připravený requirement contract pro dokončenou Chapter IV, `portraitLocation`, Stage 4, `basilSuspicion`, `sibylOutcome` a `yellowBookResponse`, ale protože nemá `firstScene` a je `available: false`, nelze ji spustit.
 
 ## Persistent story facts
 
@@ -101,8 +103,9 @@ storyFacts: {
   c2FinalResponse: "cruel" | "listen" | "delay" | null,
   portraitLocation: "locked-schoolroom" | null,
   basilSuspicion: "uneasy" | "suspects" | "clear" | null,
-  portraitStageUnlock: "stage-3" | "stage-4" | null,
-  yellowBookResponse: "accepted" | "questioned" | "escape" | null
+  portraitStageUnlock: "stage-3" | "stage-4" | "stage-5" | null,
+  yellowBookResponse: "accepted" | "questioned" | "escape" | null,
+  basilOutcome: "dead-canonical" | "alive-separated" | "alive-helping" | null
 }
 ~~~
 
@@ -164,9 +167,22 @@ Portrétní systém zůstává nezměněn:
 - Portrait 1 → stage 1;
 - Portrait 2–3 → stage 2.
 
-Pokud `storyFacts.portraitStageUnlock === "stage-4"`, `portraitStage(state)` vrátí logický Stage 4; při `"stage-3"` vrátí Stage 3, v obou případech nezávisle na numeric Portrait. Stage 4 nyní používá schválený `portrait-dorian-stage-4.webp`; při chybějícím nebo vadném obrazu viewer, stavový panel i scene image bezpečně použijí CSS fallback. Numeric Portrait zůstává samostatnou pressure/context hodnotou a sám Stage 3 ani Stage 4 neodemkne.
+Pokud `storyFacts.portraitStageUnlock` obsahuje `"stage-3"`, `"stage-4"` nebo připravené `"stage-5"`, `portraitStage(state)` vrátí odpovídající logický Stage nezávisle na numeric Portrait. Stage 4 používá schválený `portrait-dorian-stage-4.webp`; Stage 5 zatím nemá asset mapping a viewer, stavový panel i scene image proto bezpečně použijí CSS fallback. Numeric Portrait zůstává samostatnou pressure/context hodnotou a sám Stage 3, Stage 4 ani Stage 5 neodemkne.
 
-Chapter II nemá nový obrazový soubor ani nový threshold. Chapter III a Chapter IV používají house asset v domácích scénách a secret-room asset ve scénách staré školní místnosti; samotný Portrait nikdy neurčuje SibylOutcome. Chapter IV Stage 4 je skutečný runtime WebP s bezpečným fallbackem.
+Chapter II nemá nový obrazový soubor ani nový threshold. Chapter III a Chapter IV používají house asset v domácích scénách a secret-room asset ve scénách staré školní místnosti; samotný Portrait nikdy neurčuje SibylOutcome. Chapter IV Stage 4 je skutečný runtime WebP s bezpečným fallbackem. Milestone 5B pouze připravuje logickou hodnotu Stage 5; její artwork a witness event patří do budoucí implementace.
+
+## Technická foundation Chapter V
+
+Chapter V (`The Confrontation`) je v `STORY_DATA.chapters` vedená jako `status: "in-preparation"` a `available: false`, bez `firstScene`, scén nebo voleb. Budoucí entry contract vyžaduje:
+
+- `completedChapters["chapter-4"] === true`;
+- `portraitLocation === "locked-schoolroom"`;
+- `portraitStageUnlock === "stage-4"`;
+- vyřešené allow-listed hodnoty `basilSuspicion`, `sibylOutcome` a `yellowBookResponse`.
+
+Save v2 nyní bezpečně normalizuje `basilOutcome` jako `null` nebo jednu z hodnot `dead-canonical`, `alive-separated`, `alive-helping`. Staré saves zůstávají kompatibilní. Tato foundation nepřidává Chapter V runtime obsah, nespouští Chapter V a nevytváří Stage 5 asset.
+
+`js/chapter-five-outcome.js` je pure single source of truth pro 12 budoucích Chapter V choice IDs. Čte pouze relevantní choice history, používá nejnovější validní záznam pro každé ze čtyř rozhodnutí, při neúplném nebo nevalidním stavu vrací `null` a nikdy nezapisuje `basilOutcome`. Resolver je připravený pro budoucí integraci, ale v Milestone 5B.1 není napojený na žádnou runtime scénu.
 
 ## Přidání další kapitoly
 

@@ -87,7 +87,8 @@ test("all eight Chapter I v1 saves migrate without losing state", () => {
       portraitLocation: null,
       basilSuspicion: null,
       portraitStageUnlock: null,
-      yellowBookResponse: null
+      yellowBookResponse: null,
+      basilOutcome: null
     });
   }
 });
@@ -229,7 +230,8 @@ test("storyFacts use the approved allow-list and reject arbitrary values", () =>
     portraitLocation: null,
     basilSuspicion: null,
     portraitStageUnlock: null,
-    yellowBookResponse: null
+    yellowBookResponse: null,
+    basilOutcome: null
   });
   assert.equal(globalThis.__storyFactProbe, undefined);
 });
@@ -252,7 +254,8 @@ test("Chapter III story facts accept only the approved finite values", () => {
     portraitLocation: "locked-schoolroom",
     basilSuspicion: "clear",
     portraitStageUnlock: "stage-3",
-    yellowBookResponse: "accepted"
+    yellowBookResponse: "accepted",
+    basilOutcome: null
   });
 
   const invalid = normaliseState({
@@ -261,7 +264,7 @@ test("Chapter III story facts accept only the approved finite values", () => {
     storyFacts: {
       portraitLocation: "visible",
       basilSuspicion: "certain",
-      portraitStageUnlock: "stage-5",
+      portraitStageUnlock: "stage-6",
       yellowBookResponse: "ignored"
     }
   });

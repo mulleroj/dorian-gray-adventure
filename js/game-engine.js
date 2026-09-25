@@ -216,6 +216,7 @@ export function portraitStageForValue(portraitValue = 0) {
 }
 
 export function portraitStage(state = {}) {
+  if (state.storyFacts?.portraitStageUnlock === "stage-5") return 5;
   if (state.storyFacts?.portraitStageUnlock === "stage-4") return 4;
   if (state.storyFacts?.portraitStageUnlock === "stage-3") return 3;
   return portraitStageForValue(state.portrait);

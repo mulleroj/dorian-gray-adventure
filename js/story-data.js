@@ -236,6 +236,16 @@ export const STORY_DATA = {
         ],
         canonAndAlternatives: "Wilde's Chapter XI supplies the long-term yellow-book influence, unchanged appearance, aesthetic life, rumours, and social pressure. The compressed time span, four decisions, living Sibyl continuities, derived behaviour profile, and Stage 4 event are interactive additions; Chapter XII remains future Chapter V material."
       }
+    },
+    {
+      id: "chapter-5",
+      number: "V",
+      title: "The Confrontation",
+      subtitle: "A private truth becomes a witnessed truth.",
+      status: "in-preparation",
+      available: false,
+      requiresCompletedChapters: ["chapter-4"],
+      requiresStoryFacts: ["portraitLocation", "portraitStageUnlock", "basilSuspicion", "sibylOutcome", "yellowBookResponse"]
     }
   ],
   glossary: {

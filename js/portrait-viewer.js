@@ -6,7 +6,8 @@ const STAGE_TEXT = [
   "A troubling detail",
   "The painted warning",
   "The first visible change",
-  "The established damage"
+  "The established damage",
+  "The witnessed damage"
 ];
 
 export function portraitStageText(stage) {
