@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The Picture of Dorian Gray: The Portrait's Secret — a branching English reading adventure." />
+  <title>The Portrait's Secret</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="#home" aria-label="The Portrait's Secret home">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span><strong>The Portrait's Secret</strong><small>A Dorian Gray adventure</small></span>
+        </a>
+        <nav class="top-actions" aria-label="Application tools">
+          <button class="text-button" id="teacher-mode-button" type="button">Teacher mode</button>
+          <button class="icon-button" id="settings-button" type="button" aria-label="Open settings">⚙</button>
+        </nav>
+      </header>
+
+      <main id="app" tabindex="-1"></main>
+
+<footer class="site-footer">
+  <span id="footer-chapter">Chapter I · The Beautiful Young Man</span>
+  <span>Offline story engine · B1 English</span>
+</footer>
+    </div>
+
+    <dialog id="settings-dialog" class="modal" aria-labelledby="settings-title">
+      <div class="modal-card">
+        <button class="modal-close" type="button" data-close-dialog="settings-dialog" aria-label="Close settings">×</button>
+        <p class="eyebrow">Settings</p>
+        <h2 id="settings-title">A quiet reading room</h2>
+        <label class="toggle-row"><span>Reduce motion</span><input id="reduce-motion-toggle" type="checkbox" /></label>
+        <p class="muted">Your setting stays on this device only.</p>
+      </div>
+    </dialog>
+
+    <dialog id="teacher-dialog" class="modal" aria-labelledby="teacher-title">
+      <div class="modal-card modal-card-wide">
+        <button class="modal-close" type="button" data-close-dialog="teacher-dialog" aria-label="Close teacher mode">×</button>
+        <div id="teacher-content"></div>
+      </div>
+    </dialog>
+
+    <dialog id="portrait-dialog" class="modal portrait-modal" aria-labelledby="portrait-title" aria-describedby="portrait-description">
+      <div class="modal-card portrait-modal-card">
+        <button class="modal-close" type="button" data-close-dialog="portrait-dialog" aria-label="Close portrait viewer">×</button>
+        <p class="eyebrow">A closer look</p>
+        <h2 id="portrait-title">Examine the Portrait</h2>
+        <p id="portrait-description" class="modal-intro">Study the portrait as it appears now. The image will not alter your choices or your progress.</p>
+        <div class="portrait-viewer-controls" role="group" aria-label="Portrait view">
+          <button class="portrait-view-button is-active" type="button" data-portrait-mode="full" aria-pressed="true">Full Portrait</button>
+          <button class="portrait-view-button" type="button" data-portrait-mode="face" aria-pressed="false">Examine the Face</button>
+        </div>
+        <div id="portrait-viewer-stage" class="portrait-viewer-stage mode-full" aria-live="polite"></div>
+        <p id="portrait-viewer-caption" class="portrait-viewer-caption">The complete 4:5 portrait, held in its original proportions.</p>
+      </div>
+    </dialog>
+
+    <script type="module" src="js/ui.js"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Editor and IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Dependencies, build output, and coverage
+node_modules/
+.npm/
+.cache/
+dist/
+build/
+coverage/
+
+# Local server output
+*.log
+*.pid
+server.log
+
+# Environment and local credentials
+.env
+.env.*
+!.env.example
+
+# Temporary and audit workspaces
+.tmp-*/
+tmp/
+temp/
+portrait-integrity-audit*.png
+
+# Non-runtime image-generation candidates and duplicates
+assets/portraits/portrait-dorian-stage-1-candidate.png
+assets/portraits/portrait-dorian-stage-1-remediation-candidate.png
+assets/portraits/portrait-dorian-stage-2-candidate.png
+assets/portraits/character-sibyl-vane-stage-candidate.png
+assets/portraits/character-sibyl-vane-offstage-candidate.png
+assets/portraits/location-theatre-stage-candidate.png
+assets/portraits/location-theatre-backstage-candidate.png
+assets/locations/location-theatre-stage-candidate.png
+assets/locations/location-theatre-backstage-candidate.png
