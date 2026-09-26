@@ -14,6 +14,7 @@ const forbiddenPlayerFacingTerms = [
   /basilOutcome/i,
   /sibylOutcome/i,
   /interactive ending/i,
+  /not described/i,
   /canonical route/i,
   /choice id/i,
   /\bdecision[ \t]+[ivx]+\b/i,
@@ -98,6 +99,29 @@ test("all Chapter II, V and VI ending prose stays player-facing", () => {
       const text = playerFacingSceneText(scene, stateForFacts({ [factKey]: value }));
       assertNoForbiddenTerms(text, `${chapter} ${sceneId} (${value})`);
     }
+  }
+});
+
+test("Must-fix story wording contains no player-facing metatext", () => {
+  const chapterFour = resolveSceneParagraphs(STORY_DATA.scenes["c4-face-in-mirror"], stateForFacts()).join(" ");
+  const chapterFive = resolveSceneParagraphs(STORY_DATA.scenes["c5-basil-sees"], stateForFacts({ basilOutcome: "alive-helping" })).join(" ");
+  const chapterSix = resolveSceneParagraphs(STORY_DATA.scenes["c6-what-remains"], stateForFacts({ chapterSixOutcome: "portrait-destroyed" })).join(" ");
+
+  assert.doesNotMatch(chapterFour, /one click|trigger|milestone/i);
+  assert.doesNotMatch(chapterFive, /does not transform because he looked|trigger|milestone/i);
+  assert.doesNotMatch(chapterSix, /not described|irreversible consequence/i);
+  assert.match(chapterFive, /Basil's gaze only reveals what the portrait has been carrying/i);
+  assert.match(chapterSix, /Dorian is dead\./);
+});
+
+test("THE END is the final story paragraph for every Chapter VI ending", () => {
+  for (const chapterSixOutcome of ["truth-faced", "secret-kept", "portrait-destroyed"]) {
+    const text = resolveSceneParagraphs(
+      STORY_DATA.scenes["c6-what-remains"],
+      stateForFacts({ chapterSixOutcome })
+    );
+    assert.equal(text.at(-1), "THE END", chapterSixOutcome);
+    assert.equal(text.slice(0, -1).includes("THE END"), false, chapterSixOutcome);
   }
 });
 

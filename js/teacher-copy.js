@@ -1,0 +1,23 @@
+export function teacherFacingText(value) {
+  return String(value)
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/\bportrait-destroyed\b/g, "Dorian destroys the portrait")
+    .replace(/\btruth-faced\b/g, "Dorian faces the truth")
+    .replace(/\bsecret-kept\b/g, "Dorian keeps the secret")
+    .replace(/\bdead-canonical\b/g, "the canonical death ending")
+    .replace(/\balive-estranged\b/g, "Dorian and Sibyl live apart")
+    .replace(/\balive-together\b/g, "Dorian and Sibyl remain together")
+    .replace(/\balive-separated\b/g, "Basil survives and keeps his distance")
+    .replace(/\balive-helping\b/g, "Basil survives and offers limited help")
+    .replace(/universal Stage [456](?: milestone| event)?/gi, "shared portrait change")
+    .replace(/\bStage [456]\b/gi, "the portrait's changing appearance")
+    .replace(/derived Chapter IV behaviour profile/gi, "pattern of choices in Chapter IV")
+    .replace(/derived behaviour profile/gi, "pattern of choices")
+    .replace(/finite outcome resolver/gi, "three possible endings")
+    .replace(/outcome resolver/gi, "ending rule")
+    .replace(/\bresolver\b/gi, "ending rule")
+    .replace(/\bshared spine\b/gi, "common story sequence")
+    .replace(/\buniversal reveal\b/gi, "shared reveal")
+    .replace(/\bmilestone\b/gi, "change")
+    .replace(/not implemented/gi, "not included");
+}

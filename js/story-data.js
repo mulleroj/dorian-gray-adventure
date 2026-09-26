@@ -375,7 +375,7 @@ export const STORY_DATA = {
           "Decision III: face what the portrait shows, call it a curse, or deny that it can judge.",
           "Decision IV: stop hiding the truth, cover the portrait again, or destroy the portrait."
         ],
-        canonAndAlternatives: "Wilde's Chapters XIX and XX supply Dorian's claim of change, Henry's doubt, the worsening portrait, the attempt to destroy it, the death consequence, and the restored young image. `portrait-destroyed` follows that final movement in restrained B1 adaptation; `truth-faced` and `secret-kept` are interactive alternatives and are not presented as Wilde's original plot.",
+        canonAndAlternatives: "Wilde's Chapters XIX and XX supply Dorian's claim of change, Henry's doubt, the worsening portrait, the attempt to destroy it, the death consequence, and the restored young image. The ending in which Dorian destroys the portrait follows that final movement in restrained B1 adaptation; the endings in which Dorian faces the truth or keeps the secret are interactive alternatives and are not presented as Wilde's original plot.",
         contentWarning: "The death consequence is stated factually and without graphic detail; continue, skip the marked transition, or pause without changing your progress."
       }
     }
@@ -1508,7 +1508,7 @@ export const STORY_DATA = {
       visual: { location: "secretRoom" },
       effects: { storyFacts: { portraitStageUnlock: "stage-4" } },
       paragraphs: [
-        "The change does not belong to one click, one evening, or one sentence. It belongs to repeated years, repeated choices, repeated concealment, and repeated returns to this room.",
+        "The change has grown through repeated years, repeated choices, repeated concealment, and repeated returns to this room.",
         "The portrait has reached a harder stage. The eyes and mouth are more watchful. A restrained fatigue touches the face, and some of its harmony has been lost.",
         "The change is still human and recognisably Dorian. It is not grotesque and it is not final. Your living face remains young while the painting keeps the history that your appearance refuses to show.",
         "The image has changed, though the room holds the evidence and the key remains in your hand."
@@ -1723,7 +1723,7 @@ export const STORY_DATA = {
       paragraphs: [
         "You remove the cover. Basil sees the changed portrait. He recognises Dorian, and he recognises his own painting beneath the damage that the years have gathered.",
         "Disbelief gives way to horror, grief, fear, and concern. Basil does not become all-knowing. He sees the portrait and understands the truth it carries, but he does not know every hidden detail of your life.",
-        "You give him only a short account: a wish, a portrait, and years hidden behind a young face. You do not explain every supernatural rule. The damage was already there; Basil's gaze witnesses it. The portrait does not transform because he looked at it.",
+        "You give him only a short account: a wish, a portrait, and years hidden behind a young face. You do not explain every supernatural rule. The damage was already there; Basil's gaze only reveals what the portrait has been carrying.",
         "The damage marks what has been revealed to another person. It does not claim that Basil caused the change."
       ],
       terms: ["cover", "reveal", "portrait", "recognise", "witness", "damage", "grief", "fear", "concern", "truth", "hidden", "supernatural"],
@@ -1838,14 +1838,14 @@ export const STORY_DATA = {
       location: "Dorian's house, after the confrontation",
       paragraphs: [
         "The door closes. The house is quiet again, but the secret is no longer private. Basil has seen the portrait, and the consequences of the conversation remain unresolved.",
-        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "The conversation reaches a breaking point. The moment is not described.", sensitive: true },
+        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "The conversation reaches a breaking point, and the room falls silent.", sensitive: true },
         { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "Basil is dead. The room gives you no easy answer." },
         { when: { storyFact: { key: "basilOutcome", value: "alive-separated" } }, text: "Basil survives and leaves. The trust between you is severely damaged, and the distance between you is now a boundary he has chosen." },
         { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil survives and leaves willing to offer limited human support. He does not forgive everything, solve you, or accept responsibility for your choices." },
         "The next consequences lie beyond this room. Tonight offers no easy closing."
       ],
       conditionalText: [
-        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's loss remains part of memory and responsibility; it is not described again." },
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's loss remains part of memory and responsibility; the past cannot be returned to." },
         { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl remains alive and independent. Her life does not become a promise that distance will disappear." },
         { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains part of your changing life, with boundaries and ordinary questions rather than perfect happiness." }
       ],
@@ -2110,7 +2110,7 @@ export const STORY_DATA = {
           reflection: "You chose to destroy the portrait and end the secret, knowing the risk was irreversible."
         }
       ],
-      sourceNote: "Your last decision determines what happens next. The risk is clear before you choose; no physical method is described."
+      sourceNote: "Your last decision determines what happens next. The risk is clear before you choose; the scene stays focused on the decision."
     },
     "c6-what-remains": {
       chapterId: "chapter-6",
@@ -2121,15 +2121,11 @@ export const STORY_DATA = {
       location: "The room after the final choice",
       paragraphs: [
         "The room is quiet. The final choice has not repaired the past; it has shown what you are willing to do with the truth that remains.",
-        { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "You chose to destroy the portrait and end the secret. The irreversible consequence is not described.", sensitive: true },
         { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "Dorian is dead." },
         { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "The portrait returns to its original young appearance." },
         { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "The body that had been young now carries the age and damage that the image had carried." },
         { when: { storyFact: { key: "chapterSixOutcome", value: "truth-faced" } }, text: "You stop hiding the truth. You remain alive, but the story offers no promise of forgiveness, legal pardon, restored relationships, or a better portrait." },
         { when: { storyFact: { key: "chapterSixOutcome", value: "secret-kept" } }, text: "You cover the portrait again and survive. The secret is hidden once more, but what the portrait shows has not changed." },
-        { when: { storyFact: { key: "chapterSixOutcome", value: "truth-faced" } }, text: "THE END" },
-        { when: { storyFact: { key: "chapterSixOutcome", value: "secret-kept" } }, text: "THE END" },
-        { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "THE END" }
       ],
       conditionalText: [
         { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil's limited support does not solve the past after the final image." },
@@ -2139,7 +2135,10 @@ export const STORY_DATA = {
         { when: { all: [{ storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }] }, text: "Sibyl's life continues at a distance; this ending is not hers to repair." },
         { when: { all: [{ not: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } } }, { storyFact: { key: "sibylOutcome", value: "alive-together" } }] }, text: "Sibyl remains part of your life, but closeness does not erase what the image remembers." },
         { when: { all: [{ not: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } } }, { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }] }, text: "Sibyl remains alive and independent; the ending does not promise that distance will disappear." },
-        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's loss remains memory and responsibility, not a new event in the room." }
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's loss remains memory and responsibility, not a new event in the room." },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "truth-faced" } }, text: "THE END" },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "secret-kept" } }, text: "THE END" },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "THE END" }
       ],
       terms: ["choice", "truth", "portrait", "secret", "irreversible", "young", "body", "age", "damage", "alive", "survive", "evidence", "concealment", "support", "forgiveness", "distance", "loss", "responsibility"],
       contentWarning: {

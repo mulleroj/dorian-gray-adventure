@@ -14,6 +14,8 @@ import {
 } from "./game-engine.js";
 import { contentWarningForScene, resolveSceneParagraphs, resolveStoryNote } from "./narrative-resolver.js";
 import { portraitViewerModel } from "./portrait-viewer.js";
+import { scrollToSceneStart } from "./scene-navigation.js";
+import { teacherFacingText } from "./teacher-copy.js";
 
 const app = document.querySelector("#app");
 const settingsDialog = document.querySelector("#settings-dialog");
@@ -222,7 +224,9 @@ function canStartChapterForUi(chapterId) {
   return Boolean(state && canStartChapter(state, chapterId));
 }
 
-function render() {
+let skipNextHashRender = false;
+
+function render({ focusApp = true, scrollToScene = false } = {}) {
   updateFooterChapter();
   if (!state || window.location.hash === "#home") {
     app.innerHTML = homeScreen();
@@ -235,7 +239,19 @@ function render() {
     return;
   }
   app.innerHTML = gameScreen(scene);
-  app.focus({ preventScroll: true });
+  if (scrollToScene) {
+    window.requestAnimationFrame(() => scrollToSceneStart(document));
+  }
+  if (focusApp) app.focus({ preventScroll: true });
+}
+
+function renderSceneTransition(nextState) {
+  state = nextState;
+  contentWarningState = null;
+  const targetHash = `#scene/${state.sceneId}`;
+  skipNextHashRender = window.location.hash !== targetHash;
+  window.location.hash = targetHash;
+  render({ focusApp: false, scrollToScene: true });
 }
 
 function updateFooterChapter() {
@@ -261,16 +277,7 @@ function teacherMarkup() {
   if (!notes) {
     return `<p class="eyebrow">Teacher mode</p><h2 id="teacher-title">${escapeHtml(activeChapter?.title ?? "The story")}</h2><p class="modal-intro">Teacher materials for this chapter are not available yet. The chapter remains in preparation.</p>`;
   }
-  const teacherText = (value) => String(value)
-    .replace(/portrait-destroyed/g, "the ending in which the portrait is destroyed")
-    .replace(/dead-canonical/g, "the death ending")
-    .replace(/alive-separated/g, "alive and estranged")
-    .replace(/alive-helping/g, "alive with limited help")
-    .replace(/Stage [456]/g, "portrait milestone")
-    .replace(/shared spine/g, "common story sequence")
-    .replace(/universal reveal/g, "shared reveal")
-    .replace(/resolver/g, "outcome rule")
-    .replace(/not implemented/g, "not included in this chapter");
+  const teacherText = teacherFacingText;
   const sceneList = notes.scenes?.length ? `<div><h3>Scene sequence</h3><ol>${notes.scenes.map((item) => `<li><strong>${escapeHtml(teacherText(item.title))}</strong><br /><span>${escapeHtml(teacherText(item.focus))}</span></li>`).join("")}</ol></div>` : "";
   const decisions = notes.decisions?.length ? `<div><h3>Decision map</h3><ul>${notes.decisions.map((item) => "<li>" + escapeHtml(teacherText(item)) + "</li>").join("")}</ul></div>` : "";
   const comprehension = notes.comprehension?.length ? `<div><h3>Comprehension</h3><ul>${notes.comprehension.map((item) => "<li>" + escapeHtml(teacherText(item)) + "</li>").join("")}</ul></div>` : "";
@@ -374,10 +381,7 @@ document.addEventListener("click", (event) => {
   if (choiceId) {
     const result = choose(state, state.sceneId, choiceId);
     if (result.ok) {
-      state = result.state;
-      contentWarningState = null;
-      window.location.hash = `#scene/${state.sceneId}`;
-      render();
+      renderSceneTransition(result.state);
     }
     return;
   }
@@ -391,28 +395,18 @@ document.addEventListener("click", (event) => {
     openPortraitViewer();
   } else if (action === "new-game") {
     if (state && !window.confirm("Start a new game? Your current progress will be erased.")) return;
-    state = startNewGame();
-    contentWarningState = null;
-    window.location.hash = `#scene/${state.sceneId}`;
-    render();
+    renderSceneTransition(startNewGame());
   } else if (action === "resume") {
-    window.location.hash = `#scene/${state.sceneId}`;
-    render();
+    renderSceneTransition(state);
   } else if (action === "continue") {
     const result = continueFromScene(state, state.sceneId);
     if (result.ok) {
-      state = result.state;
-      contentWarningState = null;
-      window.location.hash = `#scene/${state.sceneId}`;
-      render();
+      renderSceneTransition(result.state);
     }
   } else if (action === "next-chapter") {
     const result = continueToChapter(state, button.dataset.chapterId);
     if (result.ok) {
-      state = result.state;
-      contentWarningState = null;
-      window.location.hash = `#scene/${state.sceneId}`;
-      render();
+      renderSceneTransition(result.state);
     }
   } else if (action === "home") {
     window.location.hash = "#home";
@@ -467,7 +461,13 @@ document.querySelectorAll("dialog").forEach((dialog) => {
     }
   });
 });
-window.addEventListener("hashchange", render);
+window.addEventListener("hashchange", () => {
+  if (skipNextHashRender) {
+    skipNextHashRender = false;
+    return;
+  }
+  render();
+});
 
 if (localStorage.getItem("dorian-gray-reduce-motion") === "true") {
   document.documentElement.classList.add("reduce-motion");
