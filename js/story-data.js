@@ -104,7 +104,7 @@ export const STORY_DATA = {
           { title: "A Promise in Public", focus: "Watch private devotion become a public promise." },
           { title: "The Night of Romeo and Juliet", focus: "Read the final performance as the point where the ideal and the person separate." },
           { title: "After the Curtain", focus: "Choose Dorian's immediate response to Sibyl's last performance." },
-          { title: "The Morning After", focus: "Resolve the canonical or alternative consequence without reopening the arc." }
+          { title: "The Morning After", focus: "Read the consequence without reopening the arc." }
         ],
         decisions: [
           "Decision I: admire Sibyl's roles or ask about Sibyl herself.",
@@ -113,7 +113,7 @@ export const STORY_DATA = {
           "Decision IV: judge the performance, stay and listen, or ask for time."
         ],
         canonAndAlternatives: "Role-first admiration plus a cruel public response resolves to dead-canonical. The other routes resolve to alive-estranged or alive-together; neither alternative is presented as Wilde's original plot.",
-        contentWarning: "Only the canonical aftermath shows a factual, non-graphic death consequence. The warning appears after the route is resolved and offers continue, skip sensitive description, or pause without changing the save."
+        contentWarning: "The death consequence is factual and non-graphic. The warning appears at the right moment and offers continue, skip sensitive description, or pause without changing your progress."
       }
     },
     {
@@ -164,8 +164,8 @@ export const STORY_DATA = {
           { title: "Basil at Breakfast", focus: "Answer a worried friend without turning Basil into a judge or teacher." },
           { title: "What Basil Wants to Know", focus: "Make trust and friendship the emotional problem before the screen is noticed." },
           { title: "The Portrait Behind the Screen", focus: "Choose whether to face the image, show the cover, or name danger without revealing the face." },
-          { title: "The Face That Answers", focus: "Read the existing Stage 2 warning without unlocking a new visual state too early." },
-          { title: "The Room With a Key", focus: "Move the covered portrait into the old schoolroom and atomically unlock Stage 3." },
+          { title: "The Face That Answers", focus: "Read the existing warning without opening the next change too early." },
+          { title: "The Room With a Key", focus: "Move the covered portrait into the old schoolroom and let its first clear change appear." },
           { title: "Rules Around the Secret", focus: "Establish the locked-room rules and the difference between privacy and deception." },
           { title: "The Book That Was Waiting", focus: "Receive Henry's note and yellow-bound book after the portrait is locked." },
           { title: "A Book for the Next Life", focus: "Close Chapter III on the contrast between the key and the book, ready for Chapter IV." }
@@ -225,8 +225,8 @@ export const STORY_DATA = {
           { title: "A House Open to the World", focus: "Use a social evening to show why Dorian's unchanged beauty still protects his public image." },
           { title: "Whispers at the Edge of the Room", focus: "Introduce uncertain rumours and social distance without turning reputation into proof." },
           { title: "A Pleasure for Forgetting", focus: "Reduce the aesthetic catalogue to one decision about how beauty is used." },
-          { title: "The Locked Room, Again", focus: "Make the repeated return to the Stage 3 portrait a private ritual before the universal event." },
-          { title: "The Face in the Mirror", focus: "Apply the shared Stage 4 milestone after years, choices, concealment, and repeated returns." },
+          { title: "The Locked Room, Again", focus: "Make the repeated return to the changed portrait a private ritual before the next turning point." },
+          { title: "The Face in the Mirror", focus: "Let years, choices, concealment, and repeated returns leave a deeper mark." },
           { title: "An Invitation Withheld", focus: "Show accumulated social distance and interpret it through the derived behaviour profile." },
           { title: "The Door Before the Next Chapter", focus: "End with Basil's announced concern and pressure before, but not during, the Chapter V confrontation." }
         ],
@@ -287,11 +287,11 @@ export const STORY_DATA = {
           { title: "Answer Basil", focus: "Choose whether to ask for evidence, defend reputation, or attack the gossip." },
           { title: "I Will Show You the Truth", focus: "Move deliberately from rumours toward evidence without making the transition violent." },
           { title: "The Locked Room", focus: "Choose how honestly to prepare Basil before the universal reveal." },
-          { title: "Basil Sees", focus: "Unlock Stage 5 as Basil witnesses the accumulated damage already held by the portrait." },
+          { title: "Basil Sees", focus: "Let Basil witness the accumulated damage already held by the portrait." },
           { title: "Basil Asks for Change", focus: "Hear Basil's appeal before Dorian answers it." },
           { title: "After the Truth", focus: "Choose whether to listen, shift blame, or reject Basil's judgement." },
           { title: "The Final Response", focus: "Accept limited help, end the conversation, or threaten the witness without sensational wording." },
-          { title: "After the Door", focus: "Resolve the canonical or interactive outcome and close Chapter V without beginning Chapter VI." }
+          { title: "After the Door", focus: "Face what follows and close Chapter V without beginning Chapter VI." }
         ],
         decisions: [
           "Decision I: ask what Basil actually saw, defend the public name, or attack the gossip.",
@@ -300,7 +300,7 @@ export const STORY_DATA = {
           "Decision IV: accept limited help, end the conversation, or silence the witness."
         ],
         canonAndAlternatives: "Canonical: Basil confronts Dorian, sees the portrait, urges change, and dies in Wilde's plot. Interactive alternatives: alive-separated, alive-helping, and the player's four decisions. The alternatives are not presented as Wilde's canon.",
-        contentWarning: "Only the dead-canonical ending uses a warning. The transition is restrained and non-graphic; continue, skip the marked transition, or pause without changing the saved outcome."
+        contentWarning: "The transition is restrained and non-graphic; continue, skip the marked transition, or pause without changing your progress."
       }
     },
     {
@@ -357,10 +357,10 @@ export const STORY_DATA = {
           { title: "The Claim", focus: "Adapt Chapter XIX as Dorian presents one apparently good act to a sceptical Henry." },
           { title: "One Example", focus: "Describe a small considerate act without making the woman owe Dorian gratitude or forgiveness." },
           { title: "What Was the Act For?", focus: "Test the motive behind the claimed change without awarding a moral status." },
-          { title: "The Portrait Does Not Agree", focus: "Unlock Stage 6 as the final damaged evidence, before any irreversible choice." },
+          { title: "The Portrait Does Not Agree", focus: "Let the final damaged image appear before any irreversible choice." },
           { title: "What Does It Show?", focus: "Interpret the image through three perspectives that do not alter the final action." },
           { title: "The Final Choice", focus: "Make the direct choice between facing truth, keeping the secret, or destroying the bond." },
-          { title: "The Last Image", focus: "Close the arc with three clearly labelled outcomes and a factual, non-graphic canonical-shaped movement." }
+          { title: "The Last Image", focus: "Close the arc with three clearly described consequences and a factual, non-graphic movement." }
         ],
         decisions: [
           "Decision I: state the act plainly, use it as proof, or admit uncertainty.",
@@ -369,7 +369,7 @@ export const STORY_DATA = {
           "Decision IV: stop hiding the truth, cover the portrait again, or destroy the portrait."
         ],
         canonAndAlternatives: "Wilde's Chapters XIX and XX supply Dorian's claim of change, Henry's doubt, the worsening portrait, the attempt to destroy it, the death consequence, and the restored young image. `portrait-destroyed` follows that final movement in restrained B1 adaptation; `truth-faced` and `secret-kept` are interactive alternatives and are not presented as Wilde's original plot.",
-        contentWarning: "Only the `portrait-destroyed` ending uses a warning. It states the death consequence factually and non-graphically; continue, skip the marked transition, or pause without changing the saved outcome."
+        contentWarning: "The death consequence is stated factually and without graphic detail; continue, skip the marked transition, or pause without changing your progress."
       }
     }
   ],
@@ -539,7 +539,7 @@ export const STORY_DATA = {
       ],
       terms: ["studio", "canvas"],
       nextScene: "c1-basil-studio",
-      sourceNote: "New opening written for the game; it establishes the setting of the novel's early studio scenes."
+      sourceNote: "This new opening establishes the setting of the novel's early studio scenes."
     },
     "c1-basil-studio": {
       chapterId: "chapter-1",
@@ -567,7 +567,7 @@ export const STORY_DATA = {
         "Basil's expression tightens. He does not want Lord Henry to stay. Lord Henry notices this and smiles."
       ],
       prompt: "How do you answer?",
-      decisionLabel: "Decision I · Whose voice will you trust?",
+      decisionLabel: "Whose voice will you trust?",
       choices: [
         {
           id: "listen-to-henry",
@@ -586,7 +586,7 @@ export const STORY_DATA = {
           reflection: "You made it clear that Basil's trust mattered to you."
         }
       ],
-      sourceNote: "Lord Henry, Basil and their relationship are drawn from the novel; the player's response is an original branch."
+      sourceNote: "Lord Henry, Basil and their relationship are drawn from the novel; the conversation is newly written in clear English."
     },
     "c1-youth-question": {
       chapterId: "chapter-1",
@@ -601,7 +601,7 @@ export const STORY_DATA = {
       ],
       terms: ["fleeting", "vanity", "influence"],
       prompt: "What do you do with Henry's idea?",
-      decisionLabel: "Decision II · Accept the idea or question it?",
+      decisionLabel: "Accept the idea or question it?",
       choices: [
         {
           id: "ask-about-youth",
@@ -634,7 +634,7 @@ export const STORY_DATA = {
         "For a moment, the room is silent. You understand why Basil was afraid to show it."
       ],
       prompt: "How closely do you face the image?",
-      decisionLabel: "Decision III · Look at the portrait or look away?",
+      decisionLabel: "Look at the portrait or look away?",
       choices: [
         {
           id: "study-portrait",
@@ -653,7 +653,7 @@ export const STORY_DATA = {
           reflection: "You kept a careful distance from the portrait's gaze."
         }
       ],
-      sourceNote: "The portrait's presentation follows the novel's central premise; the player's reaction is an original game branch."
+      sourceNote: "The portrait's presentation follows the novel's central premise; your reaction shapes the next moment."
     },
     "c1-hidden-canvas": {
       chapterId: "chapter-1",
@@ -669,7 +669,7 @@ export const STORY_DATA = {
       ],
       terms: ["unease", "warning"],
       nextScene: "c1-closing",
-      sourceNote: "The hidden detail is an original interactive extension and is clearly separated from the novel's original events."
+      sourceNote: "The hidden detail extends the novel's original events with a new moment."
     },
     "c1-closing": {
       chapterId: "chapter-1",
@@ -703,7 +703,7 @@ export const STORY_DATA = {
       ],
       terms: ["theatre", "audience", "portrait"],
       nextScene: "c2-prince-charming",
-      sourceNote: "The theatre setting and Dorian's connection to Sibyl Vane are based on Wilde's Chapter IV; the transition from Chapter I is original game continuity."
+      sourceNote: "The theatre setting and Dorian's connection to Sibyl Vane are based on Wilde's Chapter IV; the transition is newly written."
     },
     "c2-prince-charming": {
       chapterId: "chapter-2",
@@ -717,7 +717,7 @@ export const STORY_DATA = {
       ],
       terms: ["actress", "role", "performance"],
       prompt: "What do you want to know first?",
-      decisionLabel: "Decision I · The role or the person?",
+      decisionLabel: "The role or the person?",
       choices: [
         {
           id: "admire-the-roles",
@@ -736,7 +736,7 @@ export const STORY_DATA = {
           reflection: "You asked for Sibyl's own story, not only the theatre's story about her."
         }
       ],
-      sourceNote: "Sibyl's stage names and Dorian's first attraction to her acting adapt Wilde's theatre chapters; the question is an original branch."
+      sourceNote: "Sibyl's stage names and Dorian's first attraction to her acting adapt Wilde's theatre chapters; the question asks you to look beyond the performance."
     },
     "c2-many-heroines": {
       chapterId: "chapter-2",
@@ -769,7 +769,7 @@ export const STORY_DATA = {
       ],
       terms: ["perfect", "romance", "reputation"],
       prompt: "Which story do you tell?",
-      decisionLabel: "Decision II · Public ideal or private person?",
+      decisionLabel: "Public ideal or private person?",
       choices: [
         {
           id: "tell-beautiful-story",
@@ -788,7 +788,7 @@ export const STORY_DATA = {
           reflection: "You insisted that Sibyl was more than the story her admirers wanted."
         }
       ],
-      sourceNote: "The scene adapts Dorian's reports about Sibyl to Basil and Lord Henry; the alternative emphasis on personhood is an original game extension."
+      sourceNote: "The scene adapts Dorian's reports about Sibyl to Basil and Lord Henry; it also asks you to see Sibyl as a person."
     },
     "c2-offstage-sibyl": {
       chapterId: "chapter-2",
@@ -803,7 +803,7 @@ export const STORY_DATA = {
       visual: { character: "sibylOffstage" },
       terms: ["devotion", "reality", "respectful"],
       prompt: "How do you answer Sibyl?",
-      decisionLabel: "Decision III · Listen, imagine, or promise?",
+      decisionLabel: "Listen, imagine, or promise?",
       choices: [
         {
           id: "listen-to-her-life",
@@ -830,7 +830,7 @@ export const STORY_DATA = {
           reflection: "You answered uncertainty with a promise larger than the moment."
         }
       ],
-      sourceNote: "Sibyl's offstage voice and the engagement adapt Wilde's Chapter V; the three responses are original interactive choices."
+      sourceNote: "Sibyl's offstage voice and the engagement adapt Wilde's Chapter V; each response gives the evening a different direction."
     },
     "c2-engagement": {
       chapterId: "chapter-2",
@@ -849,7 +849,7 @@ export const STORY_DATA = {
       ],
       terms: ["engagement", "promise", "scandal", "ordinary"],
       nextScene: "c2-final-performance",
-      sourceNote: "The public engagement follows Wilde's Chapter V, while the conditional reflections make the player's earlier attitude visible."
+      sourceNote: "The public engagement follows Wilde's Chapter V, while the reflections make earlier attitudes visible."
     },
     "c2-final-performance": {
       chapterId: "chapter-2",
@@ -883,7 +883,7 @@ export const STORY_DATA = {
       visual: { location: "theatreBackstage", character: "sibylOffstage" },
       terms: ["costume", "explanation", "consequence"],
       prompt: "What do you do now?",
-      decisionLabel: "Decision IV · The response that follows",
+      decisionLabel: "The response that follows",
       choices: [
         {
           id: "judge-the-performance",
@@ -910,7 +910,7 @@ export const STORY_DATA = {
           reflection: "You postponed the verdict, leaving the promise uncertain rather than pretending certainty."
         }
       ],
-      sourceNote: "The confrontation after Sibyl's performance adapts Wilde's Chapter VII; the three responses are original alternatives."
+      sourceNote: "The confrontation after Sibyl's performance adapts Wilde's Chapter VII; each response gives the meeting a different tone."
     },
     "c2-the-morning-after": {
       chapterId: "chapter-2",
@@ -920,7 +920,7 @@ export const STORY_DATA = {
       location: "London, the following morning",
       paragraphs: [
         "Morning enters the city without asking what happened in the theatre. The streets are ordinary. The portrait is not visible, but you feel its silence waiting for the next truth.",
-        "This is the end of Sibyl's arc in the game. The next chapter, when written, will begin after this consequence rather than reopening the question of what happened to her."
+        "This is the end of Sibyl's arc. The next chapter begins after this consequence rather than reopening the question of what happened to her."
       ],
       conditionalText: [
         { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "The news is clear: Sibyl Vane is dead. The consequence is stated plainly, without a method or a graphic description." },
@@ -932,11 +932,11 @@ export const STORY_DATA = {
       contentWarning: {
         when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } },
         title: "A difficult aftermath",
-        message: "This canonical ending includes a character's death and grief. The account is factual and non-graphic. You can continue, skip the sensitive description, or pause without changing the outcome.",
+        message: "This ending includes a character's death and grief. The account is factual and non-graphic. You can continue, skip the sensitive description, or pause without changing your progress.",
         canSkip: true
       },
       nextScene: null,
-      sourceNote: "The canonical consequence is based on Wilde's Chapter VIII. The living outcomes are clearly marked interactive alternatives and are not presented as Wilde's original plot."
+      sourceNote: "The loss follows Wilde's Chapter VIII. The living versions imagine different ways the morning might continue."
     },
     "c3-morning-quiet": {
       chapterId: "chapter-3",
@@ -960,7 +960,7 @@ export const STORY_DATA = {
       ],
       terms: ["portrait", "grief", "responsibility", "distant", "honesty"],
       nextScene: "c3-basil-arrives",
-      sourceNote: "The breakfast-after-the-aftermath opening is based on Wilde's Chapter IX. Living Sibyl variants are interactive alternatives and are not Wilde's plot."
+      sourceNote: "The breakfast-after-the-aftermath opening is based on Wilde's Chapter IX. The different mornings imagine what might follow."
     },
     "c3-basil-arrives": {
       chapterId: "chapter-3",
@@ -981,7 +981,7 @@ export const STORY_DATA = {
       ],
       terms: ["trust", "responsibility", "consequence", "excuse", "honest"],
       prompt: "How do you answer Basil's concern?",
-      decisionLabel: "Decision I · Answer the friend or manage the room?",
+      decisionLabel: "Answer the friend or manage the room?",
       choices: [
         {
           id: "speak-plainly",
@@ -1008,7 +1008,7 @@ export const STORY_DATA = {
           reflection: "You asked for trust before giving Basil the full truth."
         }
       ],
-      sourceNote: "Basil's concern, Dorian's avoidance, and Henry's influence are adapted from Chapter IX; the three responses are interactive additions."
+      sourceNote: "Basil's concern, Dorian's avoidance, and Henry's influence are adapted from Chapter IX; each response opens a different conversation."
     },
     "c3-basil-questions": {
       chapterId: "chapter-3",
@@ -1053,7 +1053,7 @@ export const STORY_DATA = {
       ],
       terms: ["screen", "reveal", "cover", "permission", "suspicion", "witness"],
       prompt: "How do you respond to Basil's request?",
-      decisionLabel: "Decision II · Face the evidence or protect it?",
+      decisionLabel: "Face the evidence or protect it?",
       choices: [
         {
           id: "face-the-image-alone",
@@ -1080,7 +1080,7 @@ export const STORY_DATA = {
           reflection: "You named the danger without giving Basil the image itself."
         }
       ],
-      sourceNote: "Dorian blocking Basil from the screened portrait is based on Chapter IX. The partial-disclosure options are game extensions; Basil never sees the changed face here."
+      sourceNote: "Dorian blocking Basil from the screened portrait is based on Chapter IX. The partial answers leave the changed face unseen."
     },
     "c3-the-expression": {
       chapterId: "chapter-3",
@@ -1102,7 +1102,7 @@ export const STORY_DATA = {
       ],
       terms: ["expression", "evidence", "excuse", "portrait", "warning"],
       nextScene: "c3-the-old-schoolroom",
-      sourceNote: "The existing altered expression and the portrait as judgement adapt Chapters IX–X. Stage 3 is deliberately deferred until after the locked-schoolroom event."
+      sourceNote: "The altered expression and the portrait as judgement adapt Chapters IX–X. The first clear change comes after the locked-schoolroom event."
     },
     "c3-the-old-schoolroom": {
       chapterId: "chapter-3",
@@ -1123,7 +1123,7 @@ export const STORY_DATA = {
       ],
       terms: ["room", "key", "cover", "private", "permission", "secret"],
       prompt: "Why and how do you hide the portrait?",
-      decisionLabel: "Decision III · Turn fear into a rule",
+      decisionLabel: "Turn fear into a rule",
       choices: [
         {
           id: "move-it-alone",
@@ -1150,7 +1150,7 @@ export const STORY_DATA = {
           reflection: "You postponed the explanation, but the key made the secret real."
         }
       ],
-      sourceNote: "The schoolroom, cover, key, frame-makers, and move upstairs are based on Chapter X. The choice framing is an interactive expansion."
+      sourceNote: "The schoolroom, cover, key, frame-makers, and move upstairs are based on Chapter X. The moment asks what secrecy can protect."
     },
     "c3-rules-of-secrecy": {
       chapterId: "chapter-3",
@@ -1174,7 +1174,7 @@ export const STORY_DATA = {
       ],
       terms: ["lock", "key", "private", "evidence", "expression", "consequence", "dishonesty"],
       nextScene: "c3-henrys-note",
-      sourceNote: "The locked room and Dorian's decision to keep the key are based on Chapter X. The explicit rules and first logical Stage 3 description are original game structure."
+      sourceNote: "The locked room and Dorian's decision to keep the key are based on Chapter X. The rules and first description of the changed portrait are newly written."
     },
     "c3-henrys-note": {
       chapterId: "chapter-3",
@@ -1198,7 +1198,7 @@ export const STORY_DATA = {
       ],
       terms: ["influence", "escape", "fascination", "question", "responsibility", "key", "portrait"],
       prompt: "What do you do with Henry's influence?",
-      decisionLabel: "Decision IV · Accept, question, or escape",
+      decisionLabel: "Accept, question, or escape",
       choices: [
         {
           id: "accept-the-book",
@@ -1225,7 +1225,7 @@ export const STORY_DATA = {
           reflection: "You used Henry's influence as a shelter from the questions waiting upstairs."
         }
       ],
-      sourceNote: "Henry's note, the yellow-bound book's arrival after the locked-room event, and Dorian beginning to read are based on Chapter X. Chapter XI supplies the long-term influence; the three responses only prepare Chapter IV."
+      sourceNote: "Henry's note, the yellow-bound book's arrival after the locked-room event, and Dorian beginning to read are based on Chapter X. Chapter XI supplies the long-term influence; the three responses open the next period."
     },
     "c3-the-book-on-the-table": {
       chapterId: "chapter-3",
@@ -1251,7 +1251,7 @@ export const STORY_DATA = {
       ],
       terms: ["book", "key", "influence", "private", "portrait", "future", "consequence"],
       nextScene: null,
-      sourceNote: "The yellow-book hook follows Chapter X's immediate sequence; the contrast between public beauty, the locked room, and long-term influence is supported by Chapters X–XI. The Chapter IV handoff is original game architecture."
+      sourceNote: "The yellow-book hook follows Chapter X's immediate sequence; the contrast between public beauty, the locked room, and long-term influence is supported by Chapters X–XI. The next chapter grows from this tension."
     },
     "c4-years-begin": {
       chapterId: "chapter-4",
@@ -1275,7 +1275,7 @@ export const STORY_DATA = {
       ],
       terms: ["book", "key", "portrait", "private", "habit", "influence", "grief", "responsibility", "distant", "boundary"],
       nextScene: "c4-the-book-as-habit",
-      sourceNote: "Wilde's Chapter XI supplies the long-term book influence and unchanged appearance; the compressed opening and Sibyl continuities are interactive adaptations."
+      sourceNote: "Wilde's Chapter XI supplies the long-term book influence and unchanged appearance; the shorter passage carries that influence into a new period."
     },
     "c4-the-book-as-habit": {
       chapterId: "chapter-4",
@@ -1301,7 +1301,7 @@ export const STORY_DATA = {
     "c4-house-open": {
       chapterId: "chapter-4",
       kind: "choice",
-      eyebrow: "Decision I · The public face",
+      eyebrow: "The public face",
       title: "A House Open to the World",
       location: "Dorian's house, a refined evening",
       visual: { location: "dorianHouse" },
@@ -1312,7 +1312,7 @@ export const STORY_DATA = {
       ],
       terms: ["appearance", "reputation", "public", "private", "influence", "consequence"],
       prompt: "How do you use the evening?",
-      decisionLabel: "Decision I · Welcome, perform, or protect yourself",
+      decisionLabel: "Welcome, perform, or protect yourself",
       choices: [
         {
           id: "share-the-evening",
@@ -1339,12 +1339,12 @@ export const STORY_DATA = {
           reflection: "You used charm as a shield, and the room accepted the protection."
         }
       ],
-      sourceNote: "Dorian's social life and aesthetic reputation adapt Wilde's Chapter XI; the three ways of using the evening are original interactive choices."
+      sourceNote: "Dorian's social life and aesthetic reputation adapt Wilde's Chapter XI; each response shows a different way to move through the evening."
     },
     "c4-whispers": {
       chapterId: "chapter-4",
       kind: "choice",
-      eyebrow: "Decision II · What people say",
+      eyebrow: "What people say",
       title: "Whispers at the Edge of the Room",
       location: "Dorian's house, after his twenty-fifth year",
       visual: { location: "dorianHouse" },
@@ -1360,7 +1360,7 @@ export const STORY_DATA = {
       ],
       terms: ["rumour", "reputation", "evidence", "appearance", "public", "distance", "invitation", "observe", "truth", "suspicion"],
       prompt: "How do you answer a story that may be false, but is already changing the room?",
-      decisionLabel: "Decision II · Observe, manage, or perform",
+      decisionLabel: "Observe, manage, or perform",
       choices: [
         {
           id: "ask-what-was-seen",
@@ -1387,12 +1387,12 @@ export const STORY_DATA = {
           reflection: "You made the rumour entertaining, which made its uncertainty easier to ignore."
         }
       ],
-      sourceNote: "The uncertain social rumours and distance adapt Wilde's Chapter XI without inventing a detailed crime; the three responses are original interactive choices."
+      sourceNote: "The uncertain social rumours and distance adapt Wilde's Chapter XI without inventing a detailed crime; each response shows a different way to face uncertainty."
     },
     "c4-chosen-pleasure": {
       chapterId: "chapter-4",
       kind: "choice",
-      eyebrow: "Decision III · A later season",
+      eyebrow: "A later season",
       title: "A Pleasure for Forgetting",
       location: "A later evening in Dorian's house",
       visual: { location: "dorianHouse" },
@@ -1403,7 +1403,7 @@ export const STORY_DATA = {
       ],
       terms: ["season", "beauty", "memory", "private", "public", "question", "influence"],
       prompt: "What do you do with beauty?",
-      decisionLabel: "Decision III · Share, control, or shield",
+      decisionLabel: "Share, control, or shield",
       choices: [
         {
           id: "share-the-music",
@@ -1430,19 +1430,19 @@ export const STORY_DATA = {
           reflection: "You used visible beauty to protect yourself from an inward question."
         }
       ],
-      sourceNote: "The selected music, perfume, objects, jewellery, and textiles compress Wilde's Chapter XI catalogue into one interactive question about use rather than moral value."
+      sourceNote: "The selected music, perfume, objects, jewellery, and textiles compress Wilde's Chapter XI catalogue into a question about use rather than moral value."
     },
     "c4-locked-room-again": {
       chapterId: "chapter-4",
       kind: "choice",
       requires: { storyFacts: { portraitLocation: "locked-schoolroom" } },
-      eyebrow: "Decision IV · The private ritual",
+      eyebrow: "The private ritual",
       title: "The Locked Room, Again",
       location: "The old schoolroom, after many years",
       visual: { location: "secretRoom" },
       paragraphs: [
         "You return to the old schoolroom after another period of company and music. This is not your first return. You have come many times over the years, always with the key and always with a reason to leave again.",
-        "The portrait is still at its logical Stage 3. Your living face remains young; the painted face keeps the evidence you do not show downstairs.",
+        "The portrait is still changed. Your living face remains young; the painted face keeps the evidence you do not show downstairs.",
         "The ritual has become familiar: unlock the door, look at the canvas, decide how much of the comparison you can bear, and choose what to do next."
       ],
       conditionalText: [
@@ -1452,7 +1452,7 @@ export const STORY_DATA = {
       ],
       terms: ["private", "portrait", "unchanged", "evidence", "ritual", "compare", "responsibility", "grief", "boundary"],
       prompt: "How do you meet the portrait?",
-      decisionLabel: "Decision IV · Name, control, or cover",
+      decisionLabel: "Name, control, or cover",
       choices: [
         {
           id: "name-the-change",
@@ -1479,7 +1479,7 @@ export const STORY_DATA = {
           reflection: "You covered the evidence and returned to public life before the question could follow you."
         }
       ],
-      sourceNote: "The repeated locked-room ritual and the Stage 3 portrait continue the approved Chapter IV blueprint; the three responses are original interactive choices."
+      sourceNote: "The repeated locked-room ritual and the changed portrait continue the story's growing pressure; each response shows a different way of returning to the room."
     },
     "c4-face-in-mirror": {
       chapterId: "chapter-4",
@@ -1497,7 +1497,7 @@ export const STORY_DATA = {
         "The change does not belong to one click, one evening, or one sentence. It belongs to repeated years, repeated choices, repeated concealment, and repeated returns to this room.",
         "The portrait has reached a harder stage. The eyes and mouth are more watchful. A restrained fatigue touches the face, and some of its harmony has been lost.",
         "The change is still human and recognisably Dorian. It is not grotesque and it is not final. Your living face remains young while the painting keeps the history that your appearance refuses to show.",
-        "The Stage 4 image is present as a logical change before its final artwork exists. The room holds the evidence, and the key remains in your hand."
+        "The image has changed, though the room holds the evidence and the key remains in your hand."
       ],
       conditionalText: [
         { when: { behaviourProfile: "self-examining" }, text: "You have looked for specifics and shared some experiences, but attention does not erase consequence." },
@@ -1506,7 +1506,7 @@ export const STORY_DATA = {
       ],
       terms: ["consequence", "portrait", "evidence", "unchanged", "recognisable", "human", "private", "history", "key"],
       nextScene: "c4-later-invitation",
-      sourceNote: "This universal Stage 4 event is original game architecture. It represents accumulated time and behaviour, not a single choice; final Stage 4 artwork remains pending."
+      sourceNote: "Time and behaviour gather here into one visible change in the portrait."
     },
     "c4-later-invitation": {
       chapterId: "chapter-4",
@@ -1527,7 +1527,7 @@ export const STORY_DATA = {
       ],
       terms: ["invitation", "distance", "reputation", "appearance", "public", "private", "consequence", "evidence", "rumour"],
       nextScene: "c4-threshold",
-      sourceNote: "The withheld invitation and social distance adapt Wilde's Chapter XI; the derived profile changes interpretation, not the shared event or a legal verdict."
+      sourceNote: "The withheld invitation and social distance adapt Wilde's Chapter XI; your manner changes the feeling of the scene, not the facts."
     },
     "c4-threshold": {
       chapterId: "chapter-4",
@@ -1538,7 +1538,7 @@ export const STORY_DATA = {
       visual: { location: "dorianHouse" },
       paragraphs: [
         "Years have passed. You still look young, and people still read that face before they read the distance around it.",
-        "Upstairs, the Stage 4 portrait remains in the locked schoolroom. It is harder around the eyes and mouth, watchful and tired in a way the living face is not.",
+        "Upstairs, the changed portrait remains in the locked schoolroom. It is harder around the eyes and mouth, watchful and tired in a way the living face is not.",
         "Basil has heard enough to want to speak with you. He has sent a message and announced his concern, but he has not seen the portrait, entered the secret room, or witnessed the truth behind the locked door.",
         "You understand that a difficult conversation may be approaching. The door before it is still closed."
       ],
@@ -1563,7 +1563,7 @@ export const STORY_DATA = {
       paragraphs: [
         "Late at night, cold fog presses against the door of the house. It is the eve of your thirty-eighth birthday, but the house does not feel ready for a celebration.",
         "Basil Hallward has been waiting to speak with you before he leaves London. He has come because rumours, distance, and your silence have become too difficult to ignore.",
-        "Your living face still looks young. Upstairs, the Stage 4 portrait remains locked in the old schoolroom. Basil has not seen it, entered the room, or witnessed the truth behind the door."
+        "Your living face still looks young. Upstairs, the changed portrait remains locked in the old schoolroom. Basil has not seen it, entered the room, or witnessed the truth behind the door."
       ],
       conditionalText: [
         { when: { storyFact: { key: "basilSuspicion", value: "uneasy" } }, text: "Basil has sensed that something is wrong. Unease is not knowledge of the supernatural portrait." },
@@ -1572,7 +1572,7 @@ export const STORY_DATA = {
       ],
       terms: ["fog", "birthday", "concern", "rumour", "young", "portrait", "locked", "witness", "truth", "unease", "suspicion", "concealment"],
       nextScene: "c5-what-people-say",
-      sourceNote: "The late-night threshold and Basil's concern adapt the opening movement of Wilde's Chapter XII; Basil's pre-witness knowledge boundary is an explicit game contract."
+      sourceNote: "The late-night threshold and Basil's concern adapt the opening movement of Wilde's Chapter XII; Basil has not yet seen the portrait."
     },
     "c5-what-people-say": {
       chapterId: "chapter-5",
@@ -1603,7 +1603,7 @@ export const STORY_DATA = {
     "c5-answer-basil": {
       chapterId: "chapter-5",
       kind: "choice",
-      eyebrow: "Decision I · Answer Basil",
+      eyebrow: "Answer Basil",
       title: "Answer Basil",
       location: "The drawing room",
       paragraphs: [
@@ -1612,7 +1612,7 @@ export const STORY_DATA = {
       ],
       terms: ["evidence", "deny", "accuse", "reputation", "truth", "rumour", "question", "public", "gossip", "performance"],
       prompt: "How do you answer Basil's concern?",
-      decisionLabel: "Decision I · Evidence, reputation, or attack",
+      decisionLabel: "Evidence, reputation, or attack",
       choices: [
         {
           id: "ask-what-you-actually-saw",
@@ -1639,7 +1639,7 @@ export const STORY_DATA = {
           reflection: "You attacked the gossip and the person who carried it to you."
         }
       ],
-      sourceNote: "The question about evidence is an interactive B1 adaptation of Basil's concern; the three responses are reserved Chapter V choices."
+      sourceNote: "The question about evidence is a B1 adaptation of Basil's concern; each response lets the conversation take a different turn."
     },
     "c5-show-you-the-truth": {
       chapterId: "chapter-5",
@@ -1659,7 +1659,7 @@ export const STORY_DATA = {
     "c5-the-locked-room": {
       chapterId: "chapter-5",
       kind: "choice",
-      eyebrow: "Decision II · The Locked Room",
+      eyebrow: "The Locked Room",
       title: "The Locked Room",
       location: "The old schoolroom",
       visual: { location: "secretRoom" },
@@ -1670,7 +1670,7 @@ export const STORY_DATA = {
       ],
       terms: ["key", "room", "portrait", "cover", "private", "privacy", "harm", "reveal", "truth", "witness"],
       prompt: "What do you say before you open the truth?",
-      decisionLabel: "Decision II · Warn, challenge, or admit",
+      decisionLabel: "Warn, challenge, or admit",
       choices: [
         {
           id: "warn-before-the-door",
@@ -1710,11 +1710,11 @@ export const STORY_DATA = {
         "You remove the cover. Basil sees the changed portrait. He recognises Dorian, and he recognises his own painting beneath the damage that the years have gathered.",
         "Disbelief gives way to horror, grief, fear, and concern. Basil does not become all-knowing. He sees the portrait and understands the truth it carries, but he does not know every hidden detail of your life.",
         "You give him only a short account: a wish, a portrait, and years hidden behind a young face. You do not explain every supernatural rule. The damage was already there; Basil's gaze witnesses it. The portrait does not transform because he looked at it.",
-        "The Stage 5 milestone marks what has been revealed to another person. It does not claim that Basil caused the change."
+        "The damage marks what has been revealed to another person. It does not claim that Basil caused the change."
       ],
       terms: ["cover", "reveal", "portrait", "recognise", "witness", "damage", "grief", "fear", "concern", "truth", "hidden", "supernatural"],
       nextScene: "c5-basil-asks-for-change",
-      sourceNote: "Basil's universal witness adapts Wilde's Chapter XII. Stage 5 represents accumulated damage revealed to Basil; his gaze does not cause a transformation."
+      sourceNote: "Basil's witness adapts Wilde's Chapter XII. He sees the damage already held by the portrait; his gaze does not cause the change."
     },
     "c5-basil-asks-for-change": {
       chapterId: "chapter-5",
@@ -1740,7 +1740,7 @@ export const STORY_DATA = {
     "c5-after-the-truth": {
       chapterId: "chapter-5",
       kind: "choice",
-      eyebrow: "Decision III · After the Truth",
+      eyebrow: "After the Truth",
       title: "After the Truth",
       location: "The old schoolroom",
       paragraphs: [
@@ -1749,7 +1749,7 @@ export const STORY_DATA = {
       ],
       terms: ["truth", "responsibility", "blame", "portrait", "judge", "change", "answer", "listen"],
       prompt: "How do you answer after the truth is visible?",
-      decisionLabel: "Decision III · Listen, blame, or reject",
+      decisionLabel: "Listen, blame, or reject",
       choices: [
         {
           id: "listen-and-answer",
@@ -1776,12 +1776,12 @@ export const STORY_DATA = {
           reflection: "You rejected Basil's right to judge or ask for change."
         }
       ],
-      sourceNote: "The responses turn Basil's appeal into the third reserved Chapter V decision without resolving his outcome prematurely."
+      sourceNote: "The responses turn Basil's appeal into a final question without deciding his fate too soon."
     },
     "c5-final-response": {
       chapterId: "chapter-5",
       kind: "choice",
-      eyebrow: "Decision IV · The final response",
+      eyebrow: "The final response",
       title: "The Final Response",
       location: "At the door of the old schoolroom",
       paragraphs: [
@@ -1790,7 +1790,7 @@ export const STORY_DATA = {
       ],
       terms: ["conversation", "witness", "change", "help", "survive", "threat", "silence", "boundary", "trust"],
       prompt: "What is your final response to Basil?",
-      decisionLabel: "Decision IV · Help, separation, or danger",
+      decisionLabel: "Help, separation, or danger",
       choices: [
         {
           id: "accept-basil-help",
@@ -1828,7 +1828,7 @@ export const STORY_DATA = {
         { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "Basil is dead. No procedure, concealment, or investigation follows in this chapter." },
         { when: { storyFact: { key: "basilOutcome", value: "alive-separated" } }, text: "Basil survives and leaves. The trust between you is severely damaged, and the distance between you is now a boundary he has chosen." },
         { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil survives and leaves willing to offer limited human support. He does not forgive everything, solve you, or accept responsibility for your choices." },
-        "Chapter VI has not begun. The next consequences belong to a future chapter, not to a procedural ending here."
+        "The next consequences lie beyond this room. Tonight offers no easy closing."
       ],
       conditionalText: [
         { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's loss remains part of memory and responsibility; it is not described again." },
@@ -1839,11 +1839,11 @@ export const STORY_DATA = {
       contentWarning: {
         when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } },
         title: "A difficult aftermath",
-        message: "This canonical adaptation includes a factual, non-graphic death consequence. You can continue, skip the restrained transition, or pause without changing the saved outcome.",
+        message: "This ending includes a factual, non-graphic death consequence. You can continue, skip the restrained transition, or pause without changing your progress.",
         canSkip: true
       },
       nextScene: null,
-      sourceNote: "Chapter V closes at the immediate consequence and Chapter VI handoff. The canonical death remains factual and non-graphic; Chapter XIV procedural aftermath is outside this implementation."
+      sourceNote: "Chapter V ends at the immediate consequence. The death is described factually and without graphic detail; later events are left outside this chapter."
     },
     "c6-after-the-confrontation": {
       chapterId: "chapter-6",
@@ -1886,7 +1886,7 @@ export const STORY_DATA = {
         { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil's limited support makes some conversations possible, but it cannot forgive you or speak for every part of your life." },
         { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl's continuing closeness gives the evening an ordinary centre, not a perfect ending." },
         { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl's independent distance reminds you that another person's life cannot be held still by your explanation." },
-        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Memory makes the absent person present in the conversation, but it does not turn loss into a new route." }
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Memory makes the absent person present in the conversation, but it does not turn loss into a new event." }
       ],
       terms: ["consequence", "witness", "invitation", "distance", "rumour", "truth", "private", "public", "boundary", "support", "memory", "loss", "alive"],
       nextScene: "c6-a-new-life",
@@ -1895,7 +1895,7 @@ export const STORY_DATA = {
     "c6-a-new-life": {
       chapterId: "chapter-6",
       kind: "choice",
-      eyebrow: "Decision I · The Claim",
+       eyebrow: "The Claim",
       title: "The Claim",
       location: "A quiet visit with Lord Henry",
       paragraphs: [
@@ -1905,7 +1905,7 @@ export const STORY_DATA = {
       ],
       terms: ["change", "life", "example", "country", "pleasure", "freedom", "choice", "dignity", "forgiveness", "question", "proof", "character"],
       prompt: "How do you present the act?",
-      decisionLabel: "Decision I · State, prove, or question the claim",
+       decisionLabel: "State, prove, or question the claim",
       choices: [
         {
           id: "state-the-act-plainly",
@@ -1949,12 +1949,12 @@ export const STORY_DATA = {
       ],
       terms: ["act", "freedom", "choice", "pleasure", "harm", "life", "example", "change", "history", "question", "answer", "uncertainty"],
       nextScene: "c6-the-test-of-motive",
-      sourceNote: "The claimed good act remains specific and limited; the woman is not turned into a route, romance, or collectible subplot."
+       sourceNote: "The claimed good act remains specific and limited; the woman remains a person, not a romance or a reward."
     },
     "c6-the-test-of-motive": {
       chapterId: "chapter-6",
       kind: "choice",
-      eyebrow: "Decision II · What Was the Act For?",
+       eyebrow: "What Was the Act For?",
       title: "What Was the Act For?",
       location: "The drawing room, after Henry's question",
       paragraphs: [
@@ -1963,7 +1963,7 @@ export const STORY_DATA = {
       ],
       terms: ["motive", "dignity", "image", "question", "responsibility", "change", "protect", "honest"],
       prompt: "What will you admit about the motive?",
-      decisionLabel: "Decision II · Dignity, image, or refusal",
+       decisionLabel: "Dignity, image, or refusal",
       choices: [
         {
           id: "protect-her-dignity",
@@ -1987,12 +1987,12 @@ export const STORY_DATA = {
           reflection: "You refused to examine the motive behind the act."
         }
       ],
-      sourceNote: "Decision II tests motive without granting a good status, numeric reward, or hidden moral score."
+       sourceNote: "The question asks what a good act can and cannot change."
     },
     "c6-the-last-proof": {
       chapterId: "chapter-6",
       kind: "narrative",
-      eyebrow: "The universal Stage 6 evidence",
+       eyebrow: "The final evidence",
       title: "The Portrait Does Not Agree",
       location: "The locked schoolroom",
       effects: { storyFacts: { portraitStageUnlock: "stage-6" } },
@@ -2008,12 +2008,12 @@ export const STORY_DATA = {
       ],
       terms: ["portrait", "evidence", "conscience", "history", "image", "face", "change", "explanation", "motive", "life", "watchful", "damage"],
       nextScene: "c6-what-it-shows",
-      sourceNote: "This universal Stage 6 event adapts Wilde's Chapter XX. The final damaged image is represented through the existing CSS fallback; no Stage 6 artwork is generated or integrated."
+       sourceNote: "The final damaged image adapts Wilde's Chapter XX and is shown through the portrait itself."
     },
     "c6-what-it-shows": {
       chapterId: "chapter-6",
       kind: "choice",
-      eyebrow: "Decision III · What Does It Show?",
+       eyebrow: "What Does It Show?",
       title: "What Does It Show?",
       location: "The locked schoolroom",
       paragraphs: [
@@ -2022,7 +2022,7 @@ export const STORY_DATA = {
       ],
       terms: ["interpretation", "evidence", "history", "portrait", "supernatural", "judge", "truth", "responsibility", "choice"],
       prompt: "What does the portrait show?",
-      decisionLabel: "Decision III · Face, blame, or question the image",
+       decisionLabel: "Face, blame, or question the image",
       choices: [
         {
           id: "face-what-it-shows",
@@ -2046,12 +2046,12 @@ export const STORY_DATA = {
           reflection: "You questioned whether an image can define the whole truth about you."
         }
       ],
-      sourceNote: "Decision III changes interpretation and reflection only. It does not alter Stage 6, survival, portrait restoration, or the final action."
+       sourceNote: "This choice changes only your interpretation. It does not alter the portrait, survival, restoration, or the final action."
     },
     "c6-the-final-choice": {
       chapterId: "chapter-6",
       kind: "choice",
-      eyebrow: "Decision IV · The Final Choice",
+       eyebrow: "The Final Choice",
       title: "The Final Choice",
       location: "Before the portrait",
       paragraphs: [
@@ -2065,7 +2065,7 @@ export const STORY_DATA = {
       ],
       terms: ["portrait", "evidence", "truth", "history", "secret", "choice", "irreversible", "destroy", "hide", "risk", "responsibility", "change"],
       prompt: "What will you do with the final evidence?",
-      decisionLabel: "Decision IV · Face, conceal, or destroy",
+       decisionLabel: "Face, conceal, or destroy",
       choices: [
         {
           id: "stop-hiding-the-truth",
@@ -2077,9 +2077,9 @@ export const STORY_DATA = {
         {
           id: "cover-the-portrait-again",
           label: "Cover the portrait and keep the secret.",
-          description: "You return to concealment. The portrait remains Stage 6, and the choice is not labelled for you.",
+          description: "You return to concealment. The portrait remains changed, and the choice is not labelled for you.",
           nextScene: "c6-what-remains",
-          reflection: "You covered the portrait again and kept the secret, leaving the Stage 6 evidence unchanged."
+          reflection: "You covered the portrait again and kept the secret, but what it shows has not changed."
         },
         {
           id: "destroy-the-portrait",
@@ -2089,7 +2089,7 @@ export const STORY_DATA = {
           reflection: "You chose to destroy the portrait and end the secret, knowing the risk was irreversible."
         }
       ],
-      sourceNote: "Decision IV is the explicit source of the Chapter VI outcome. The destroy option is understood before selection and uses no weapon, method, or procedural detail."
+      sourceNote: "Your last decision determines what happens next. The risk is clear before you choose; no physical method is described."
     },
     "c6-what-remains": {
       chapterId: "chapter-6",
@@ -2104,7 +2104,7 @@ export const STORY_DATA = {
         { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "The portrait returns to its original young appearance." },
         { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "The body that had been young now carries the age and damage that the image had carried." },
         { when: { storyFact: { key: "chapterSixOutcome", value: "truth-faced" } }, text: "You stop hiding the truth. You remain alive, but the story offers no promise of forgiveness, legal pardon, restored relationships, or a better portrait." },
-        { when: { storyFact: { key: "chapterSixOutcome", value: "secret-kept" } }, text: "You cover the portrait again and survive. The secret returns to concealment, while the Stage 6 evidence remains unchanged. This is an interactive ending, not a label placed over your whole life." }
+        { when: { storyFact: { key: "chapterSixOutcome", value: "secret-kept" } }, text: "You cover the portrait again and survive. The secret is hidden once more, but what the portrait shows has not changed." }
       ],
       conditionalText: [
         { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil's limited support does not solve the past after the final image." },
@@ -2118,11 +2118,11 @@ export const STORY_DATA = {
       contentWarning: {
         when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } },
         title: "A non-graphic final consequence",
-        message: "The Wilde-aligned ending includes a factual, non-graphic death consequence. You can continue, skip the restrained transition, or pause without changing the saved outcome.",
+        message: "This ending includes a factual, non-graphic death consequence. You can continue, skip the restrained transition, or pause without changing your progress.",
         canSkip: true
       },
       nextScene: null,
-      sourceNote: "Chapter VI closes the six-chapter arc. The destroy ending follows Wilde's final movement in restrained B1 language; the other endings are interactive alternatives. No detailed aftermath is included."
+      sourceNote: "Chapter VI closes the six-chapter arc. The destroy ending follows Wilde's final movement in restrained B1 language; the other possibilities imagine different consequences. No detailed aftermath is included."
     }
   }
 };

@@ -72,7 +72,7 @@ function portraitPanel() {
     ? `<img class="portrait-image" data-portrait-image="true" src="${escapeHtml(portraitAsset)}" alt="Dorian's portrait: ${escapeHtml(stageText)}" />`
     : portraitPlaceholderMarkup(stage);
   return `<aside class="portrait-panel" aria-label="Portrait status">
-    <div class="portrait-heading"><span class="eyebrow">The portrait</span><span class="portrait-stage">Stage ${stage}</span></div>
+    <div class="portrait-heading"><span class="eyebrow">The portrait</span><span class="portrait-stage">As it is now</span></div>
     <button class="portrait-trigger" type="button" data-action="examine-portrait" aria-label="Examine the current portrait: ${escapeHtml(stageText)}">
       <div class="portrait-frame stage-${stage}" data-stage="${stage}" role="img" aria-label="${portraitAsset ? `Dorian's portrait: ${stageText}` : `A CSS placeholder portrait: ${stageText}`}" data-renderer="${portraitAsset ? "image" : "placeholder"}">
         ${portraitVisual}
