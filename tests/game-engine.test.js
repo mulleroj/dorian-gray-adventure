@@ -93,13 +93,14 @@ test("portrait image stages use stable numeric thresholds", () => {
   assert.equal(portraitStage({ portrait: 3, storyFacts: { portraitStageUnlock: "stage-4" } }), 4);
   assert.equal(portraitStage({ portrait: 3, storyFacts: { portraitStageUnlock: "stage-5" } }), 5);
   assert.equal(portraitStage({ portrait: 3, storyFacts: {} }), 2);
-  assert.deepEqual(Object.keys(STORY_DATA.assets.portraitStages), ["0", "1", "2", "3", "4", "5"]);
+  assert.deepEqual(Object.keys(STORY_DATA.assets.portraitStages), ["0", "1", "2", "3", "4", "5", "6"]);
   assert.equal(STORY_DATA.assets.portraitStages[0], "assets/portraits/portrait-dorian-stage-0.webp");
   assert.equal(STORY_DATA.assets.portraitStages[1], "assets/portraits/portrait-dorian-stage-1.webp");
   assert.equal(STORY_DATA.assets.portraitStages[2], "assets/portraits/portrait-dorian-stage-2.webp");
   assert.equal(STORY_DATA.assets.portraitStages[3], "assets/portraits/portrait-dorian-stage-3.webp");
   assert.equal(STORY_DATA.assets.portraitStages[4], "assets/portraits/portrait-dorian-stage-4.webp");
   assert.equal(STORY_DATA.assets.portraitStages[5], "assets/portraits/portrait-dorian-stage-5.webp");
+  assert.equal(STORY_DATA.assets.portraitStages[6], "assets/portraits/portrait-dorian-stage-final.webp");
 });
 
 test("all declared scene targets exist and the ending has no outgoing edge", () => {

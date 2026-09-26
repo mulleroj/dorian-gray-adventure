@@ -131,7 +131,7 @@ Chapter V je přesně desetiscénový shared-spine oblouk inspirovaný Wildeovou
 
 Čtyři rozhodnutí používají přesně contract z `js/chapter-five-outcome.js`: `ask-what-you-actually-saw`, `defend-the-public-name`, `attack-the-gossip`; `warn-before-the-door`, `challenge-him-to-look`, `admit-partial-truth`; `listen-and-answer`, `blame-the-portrait-and-basil`, `reject-his-judgement`; `accept-basil-help`, `end-the-conversation`, `silence-the-witness`. Všechny cesty zůstávají v jednom spine a končí scénou `c5-after-the-door`.
 
-Canonical je Basilova konfrontace, pohled na portrait, appeal for change a jeho smrt. `alive-separated` a `alive-helping` jsou interaktivní alternativy, nikoli Wildeův canon. Výsledek se zapisuje až po čtvrtém rozhodnutí a canonical warning používá existující continue/skip/pause mechanismus pouze pro `dead-canonical`. Chapter XIV procedural aftermath i Chapter VI story scenes zůstávají mimo implementaci; Chapter VI má pouze technickou foundation s `chapterSixOutcome` a logickou podporou Stage 6.
+Canonical je Basilova konfrontace, pohled na portrait, appeal for change a jeho smrt. `alive-separated` a `alive-helping` jsou interaktivní alternativy, nikoli Wildeův canon. Výsledek se zapisuje až po čtvrtém rozhodnutí a canonical warning používá existující continue/skip/pause mechanismus pouze pro `dead-canonical`. Chapter XIV procedural aftermath zůstává mimo implementaci. Chapter VI je nyní lokálně playable jako devítiscénový shared-spine oblouk podle schváleného blueprintu; její Stage 6 je univerzální finální runtime portrait z `portrait-dorian-stage-final.webp` a `chapterSixOutcome` vzniká až po čtvrtém rozhodnutí.
 
 ## Budoucí výukové vrstvy
 

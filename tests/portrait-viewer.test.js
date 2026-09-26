@@ -56,6 +56,18 @@ test("logical Stage 5 maps to the approved runtime artwork", () => {
   });
 });
 
+test("logical Stage 6 maps to the approved final runtime artwork", () => {
+  assert.equal(existsSync("assets/portraits/portrait-dorian-stage-final.webp"), true);
+  assert.deepEqual(portraitViewerModel({
+    portrait: 0,
+    storyFacts: { portraitStageUnlock: "stage-6" }
+  }), {
+    stage: 6,
+    stageText: "The final evidence",
+    asset: "assets/portraits/portrait-dorian-stage-final.webp"
+  });
+});
+
 test("portrait viewer keeps its CSS fallback when a mapped image fails", () => {
   const uiSource = readFileSync(new URL("../js/ui.js", import.meta.url), "utf8");
   assert.match(uiSource, /if \(!asset \|\| portraitViewerState\.imageFailed\) return portraitViewerFallback\(\);/);

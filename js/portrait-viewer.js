@@ -20,8 +20,16 @@ export function portraitAssetForStage(stage) {
   return typeof asset === "string" && asset.trim() ? asset : null;
 }
 
+function portraitDisplayStage(state = {}) {
+  const restoredAtEnding = state.activeChapterId === "chapter-6"
+    && state.sceneId === "c6-what-remains"
+    && state.storyFacts?.chapterSixOutcome === "portrait-destroyed";
+  if (restoredAtEnding) return 0;
+  return Number.isInteger(state.stage) ? state.stage : portraitStage(state);
+}
+
 export function portraitViewerModel(state = {}) {
-  const stage = Number.isInteger(state.stage) ? state.stage : portraitStage(state);
+  const stage = portraitDisplayStage(state);
   return {
     stage,
     stageText: portraitStageText(stage),

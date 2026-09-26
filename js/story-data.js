@@ -8,7 +8,8 @@ export const STORY_DATA = {
       2: "assets/portraits/portrait-dorian-stage-2.webp",
       3: "assets/portraits/portrait-dorian-stage-3.webp",
       4: "assets/portraits/portrait-dorian-stage-4.webp",
-      5: "assets/portraits/portrait-dorian-stage-5.webp"
+      5: "assets/portraits/portrait-dorian-stage-5.webp",
+      6: "assets/portraits/portrait-dorian-stage-final.webp"
     },
     chapterTwo: {
       characters: {
@@ -307,8 +308,9 @@ export const STORY_DATA = {
       number: "VI",
       title: "The Final Choice",
       subtitle: "Change may begin now, but the past cannot be undone.",
-      status: "in-preparation",
-      available: false,
+      status: "playable",
+      available: true,
+      firstScene: "c6-after-the-confrontation",
       requiresCompletedChapters: ["chapter-5"],
       requiresStoryFacts: [
         "basilOutcome",
@@ -318,7 +320,57 @@ export const STORY_DATA = {
         "c2FinalResponse",
         "yellowBookResponse"
       ],
-      requiresStoryFactValues: { portraitStageUnlock: "stage-5" }
+      requiresStoryFactValues: { portraitStageUnlock: "stage-5" },
+      teacherNotes: {
+        literaryBasis: "This chapter adapts the final movement of Oscar Wilde's 1891 Chapters XIX and XX: Dorian claims that he has changed, Henry questions one good act, and the portrait becomes the last evidence against an easy explanation.",
+        adaptation: "The nine-scene shared spine, four decisions, continuity variants, universal Stage 6 milestone, and three endings are original B1 interactive adaptations. Chapters XIV–XVIII are compressed into consequences only; their procedural subplots are not implemented.",
+        continuity: "Sibyl's outcome, Basil's outcome, the yellow-book response, and the derived Chapter IV behaviour profile alter short prose only. They never create alternate chains, hidden morality scores, or different final-choice menus.",
+        goals: [
+          "Distinguish an intention to change from proof of transformation.",
+          "Discuss how motive can complicate an apparently good action.",
+          "Use evidence, responsibility, consequence, and boundary in short literary discussion.",
+          "Recognise the difference between Wilde's final movement and interactive alternatives.",
+          "Read a non-graphic ending without procedural or sensational detail."
+        ],
+        vocabulary: ["change", "evidence", "motive", "dignity", "freedom", "responsibility", "consequence", "history", "interpretation", "secret", "irreversible", "survive", "body", "age"],
+        comprehension: [
+          "Why does Dorian believe that one act can prove he has changed?",
+          "Why does Henry remain sceptical about the act?",
+          "What is the difference between a kind result and a selfless motive?",
+          "Why does Dorian return to the portrait?",
+          "What does Stage 6 show about the limits of his explanation?",
+          "How do the three interpretation choices change the way Dorian reads the image?",
+          "Why is the final decision irreversible even when Dorian does not attack the portrait?",
+          "Which ending follows Wilde's final movement and which endings are interactive alternatives?"
+        ],
+        discussion: [
+          "Can one good action prove that a person has changed?",
+          "Can a person begin to change while still carrying responsibility for the past?",
+          "Is the portrait evidence, a conscience, a curse, or something more uncertain?",
+          "What is the difference between privacy and concealment?",
+          "Why should the alternative endings not be labelled simply good or bad?",
+          "How does an adaptation remain faithful without copying every subplot?"
+        ],
+        scenes: [
+          { title: "The Quiet House", focus: "Bridge from Basil's witnessed truth to the consequences Dorian carries without procedural aftermath." },
+          { title: "A Consequence With a Witness", focus: "Show that private evidence has a social consequence without turning rumour into proof." },
+          { title: "The Claim", focus: "Adapt Chapter XIX as Dorian presents one apparently good act to a sceptical Henry." },
+          { title: "One Example", focus: "Describe a small considerate act without making the woman owe Dorian gratitude or forgiveness." },
+          { title: "What Was the Act For?", focus: "Test the motive behind the claimed change without awarding a moral status." },
+          { title: "The Portrait Does Not Agree", focus: "Unlock Stage 6 as the final damaged evidence, before any irreversible choice." },
+          { title: "What Does It Show?", focus: "Interpret the image through three perspectives that do not alter the final action." },
+          { title: "The Final Choice", focus: "Make the direct choice between facing truth, keeping the secret, or destroying the bond." },
+          { title: "The Last Image", focus: "Close the arc with three clearly labelled outcomes and a factual, non-graphic canonical-shaped movement." }
+        ],
+        decisions: [
+          "Decision I: state the act plainly, use it as proof, or admit uncertainty.",
+          "Decision II: protect her dignity, protect your image, or refuse the motive question.",
+          "Decision III: face what the portrait shows, call it a curse, or deny that it can judge.",
+          "Decision IV: stop hiding the truth, cover the portrait again, or destroy the portrait."
+        ],
+        canonAndAlternatives: "Wilde's Chapters XIX and XX supply Dorian's claim of change, Henry's doubt, the worsening portrait, the attempt to destroy it, the death consequence, and the restored young image. `portrait-destroyed` follows that final movement in restrained B1 adaptation; `truth-faced` and `secret-kept` are interactive alternatives and are not presented as Wilde's original plot.",
+        contentWarning: "Only the `portrait-destroyed` ending uses a warning. It states the death consequence factually and non-graphically; continue, skip the marked transition, or pause without changing the saved outcome."
+      }
     }
   ],
   glossary: {
@@ -440,7 +492,39 @@ export const STORY_DATA = {
     hidden: "kept where other people cannot see it",
     change: "the act or result of becoming different",
     answer: "something said or written in reply to a question",
-    listen: "to pay attention to what someone says"
+    listen: "to pay attention to what someone says",
+    act: "something that a person does",
+    age: "the length of time a person has lived",
+    alive: "living, not dead",
+    body: "the physical form of a person",
+    dignity: "the value and respect that belong to a person",
+    destroy: "to damage something so completely that it cannot continue as before",
+    explain: "to make an idea or action clear",
+    freedom: "the power to choose or act without unfair control",
+    image: "a picture or idea of someone or something",
+    innocence: "the state of not being responsible for wrongdoing",
+    irreversible: "impossible to change back to the earlier state",
+    kind: "caring and considerate toward another person",
+    motive: "the reason why someone does something",
+    philosophy: "a set of ideas about life and how people should live",
+    pleasure: "a feeling of enjoyment",
+    safe: "protected from danger or harm",
+    attempt: "an effort to do something",
+    interpretation: "an explanation of what something means",
+    choice: "an act of selecting between possibilities",
+    face: "the front part of a person's head",
+    house: "a building where people live",
+    quiet: "making very little sound",
+    peace: "a calm state without conflict",
+    life: "the condition of being alive",
+    example: "something used to show what another thing is like",
+    country: "an area of land with its own people and government",
+    proof: "facts or information that show something is true",
+    character: "the qualities that make a person different from others",
+    uncertainty: "the state of not knowing what is true or what will happen",
+    protect: "to keep someone or something safe from harm",
+    watchful: "carefully looking for possible danger or change",
+    risk: "the possibility that something harmful may happen"
   },
   scenes: {
     "c1-opening": {
@@ -1760,6 +1844,285 @@ export const STORY_DATA = {
       },
       nextScene: null,
       sourceNote: "Chapter V closes at the immediate consequence and Chapter VI handoff. The canonical death remains factual and non-graphic; Chapter XIV procedural aftermath is outside this implementation."
+    },
+    "c6-after-the-confrontation": {
+      chapterId: "chapter-6",
+      kind: "opening",
+      eyebrow: "Chapter VI · The Final Choice",
+      title: "The Quiet House",
+      location: "Dorian's house, some time later",
+      paragraphs: [
+        "Time passes without becoming an apology. The house is quiet again, but quiet is not the same as peace.",
+        "Someone has seen the truth, and the room cannot become innocent simply because its door is closed. You still have the young public face. The portrait still holds the private evidence."
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "Basil's absence remains an unresolved loss. No further events are shown here; only the responsibility remains." },
+        { when: { storyFact: { key: "basilOutcome", value: "alive-separated" } }, text: "Basil is alive, but his distance is a boundary he has chosen. Survival has not restored the old friendship." },
+        { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil is alive and offers limited support. His support is not forgiveness, and it cannot make your choices for you." },
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's loss returns as memory rather than a new event. The past cannot be visited again and made harmless." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl is alive with an independent life. The distance between you is real, even when the house is full of memories." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains part of your life, with ordinary boundaries and questions that no beautiful explanation can remove." },
+        { when: { behaviourProfile: "self-examining" }, text: "Your recent habit of looking for specifics gives you words for the question you have avoided." },
+        { when: { behaviourProfile: "divided" }, text: "You move between honest flashes and polished escapes, never staying long in either place." },
+        { when: { behaviourProfile: "pleasure-as-escape" }, text: "The old habit of turning difficulty into an attractive idea still waits close to the surface." }
+      ],
+      terms: ["house", "quiet", "peace", "witness", "truth", "private", "evidence", "responsibility", "loss", "boundary", "survive", "support", "forgiveness", "memory", "distance", "change"],
+      nextScene: "c6-the-world-has-noticed",
+      sourceNote: "This compressed bridge carries Chapter V's witnessed consequence into Chapter VI without importing the detailed aftermath of Wilde's Chapters XIV–XVIII."
+    },
+    "c6-the-world-has-noticed": {
+      chapterId: "chapter-6",
+      kind: "narrative",
+      eyebrow: "A consequence beyond the room",
+      title: "A Consequence With a Witness",
+      location: "A London drawing room",
+      paragraphs: [
+        "The consequence does not stay inside the old schoolroom. An invitation is absent. A conversation ends early. Someone who once leaned close now keeps a careful distance.",
+        "This is not proof of every rumour. It is the social shape of a private truth after another person has seen it. The world has noticed that something has changed, even if it cannot name the portrait."
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "People speak around Basil's absence. You hear concern without hearing the whole truth." },
+        { when: { storyFact: { key: "basilOutcome", value: "alive-separated" } }, text: "Basil's boundary appears in small refusals and careful distances. It is not a promise that he will return." },
+        { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil's limited support makes some conversations possible, but it cannot forgive you or speak for every part of your life." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl's continuing closeness gives the evening an ordinary centre, not a perfect ending." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl's independent distance reminds you that another person's life cannot be held still by your explanation." },
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Memory makes the absent person present in the conversation, but it does not turn loss into a new route." }
+      ],
+      terms: ["consequence", "witness", "invitation", "distance", "rumour", "truth", "private", "public", "boundary", "support", "memory", "loss", "alive"],
+      nextScene: "c6-a-new-life",
+      sourceNote: "The scene turns witnessed private evidence into social consequence without making public rumour equal proof."
+    },
+    "c6-a-new-life": {
+      chapterId: "chapter-6",
+      kind: "choice",
+      eyebrow: "Decision I · The Claim",
+      title: "The Claim",
+      location: "A quiet visit with Lord Henry",
+      paragraphs: [
+        "You tell Henry that you have begun a new life. The sentence sounds brave when it is spoken quickly. It sounds less certain when the room becomes quiet.",
+        "You offer one example. In the country, you chose not to continue a relationship for your own pleasure. You left a young woman free to make her own choice. She does not owe you gratitude, silence, love, or forgiveness.",
+        "Henry listens with his familiar ease. Then he asks the question you hoped the example would prevent: can one safe act prove a changed character?"
+      ],
+      terms: ["change", "life", "example", "country", "pleasure", "freedom", "choice", "dignity", "forgiveness", "question", "proof", "character"],
+      prompt: "How do you present the act?",
+      decisionLabel: "Decision I · State, prove, or question the claim",
+      choices: [
+        {
+          id: "state-the-act-plainly",
+          label: "State the act plainly.",
+          description: "You describe what happened without calling it proof that you are good.",
+          nextScene: "c6-the-good-act",
+          reflection: "You stated the act without turning it into proof of goodness."
+        },
+        {
+          id: "use-it-as-proof",
+          label: "Use it as proof of change.",
+          description: "You make one considerate act carry the weight of your whole history.",
+          nextScene: "c6-the-good-act",
+          reflection: "You used one act as proof against the whole history."
+        },
+        {
+          id: "admit-the-uncertainty",
+          label: "Admit that the motive is unclear.",
+          description: "You accept that a kind result may still have served a self-protective need.",
+          nextScene: "c6-the-good-act",
+          reflection: "You admitted that a kind result does not explain its motive."
+        }
+      ],
+      sourceNote: "This conversation adapts Wilde's Chapter XIX through newly written B1 prose; the claimed act is evidence Dorian offers, not a redemption reward."
+    },
+    "c6-the-good-act": {
+      chapterId: "chapter-6",
+      kind: "narrative",
+      eyebrow: "One example",
+      title: "One Example",
+      location: "The same drawing room",
+      paragraphs: [
+        "The act was small. The young woman wanted freedom from the part you had imagined for her. You noticed this and did not continue to press your own pleasure into the conversation.",
+        "Nothing heroic happened. No one applauded. She simply kept the right to choose her own life. That right belonged to her before you noticed it.",
+        "Henry turns the example over with a smile that is not quite kind. One act can reduce immediate harm, he says. It cannot explain a whole life."
+      ],
+      conditionalText: [
+        { when: { choice: { sceneId: "c6-a-new-life", choiceId: "state-the-act-plainly" } }, text: "Because you stated the act plainly, its limits are easier to see: it was considerate, but it was not a verdict on your character." },
+        { when: { choice: { sceneId: "c6-a-new-life", choiceId: "use-it-as-proof" } }, text: "The example grows larger in your telling until it almost covers the years Henry is asking you to remember." },
+        { when: { choice: { sceneId: "c6-a-new-life", choiceId: "admit-the-uncertainty" } }, text: "Naming uncertainty does not erase the good result. It only refuses to make the result answer every question." }
+      ],
+      terms: ["act", "freedom", "choice", "pleasure", "harm", "life", "example", "change", "history", "question", "answer", "uncertainty"],
+      nextScene: "c6-the-test-of-motive",
+      sourceNote: "The claimed good act remains specific and limited; the woman is not turned into a route, romance, or collectible subplot."
+    },
+    "c6-the-test-of-motive": {
+      chapterId: "chapter-6",
+      kind: "choice",
+      eyebrow: "Decision II · What Was the Act For?",
+      title: "What Was the Act For?",
+      location: "The drawing room, after Henry's question",
+      paragraphs: [
+        "You remember the moment again. The result was considerate. The motive is harder to hold still.",
+        "Did you protect her dignity, or did you protect the image you wanted to have of yourself? Henry does not answer for you. He only leaves the question where you cannot politely move it away."
+      ],
+      terms: ["motive", "dignity", "image", "question", "responsibility", "change", "protect", "honest"],
+      prompt: "What will you admit about the motive?",
+      decisionLabel: "Decision II · Dignity, image, or refusal",
+      choices: [
+        {
+          id: "protect-her-dignity",
+          label: "Admit that her freedom mattered.",
+          description: "You give the other person an independent reason for the act.",
+          nextScene: "c6-the-last-proof",
+          reflection: "You admitted that her dignity and freedom mattered independently of you."
+        },
+        {
+          id: "protect-my-image",
+          label: "Admit that I wanted to feel innocent.",
+          description: "You identify the self-protective wish inside the apparently good act.",
+          nextScene: "c6-the-last-proof",
+          reflection: "You admitted that the act also protected the image you wanted of yourself."
+        },
+        {
+          id: "refuse-the-question",
+          label: "Refuse to examine the motive.",
+          description: "You keep control of the explanation and leave the difficult question unanswered.",
+          nextScene: "c6-the-last-proof",
+          reflection: "You refused to examine the motive behind the act."
+        }
+      ],
+      sourceNote: "Decision II tests motive without granting a good status, numeric reward, or hidden moral score."
+    },
+    "c6-the-last-proof": {
+      chapterId: "chapter-6",
+      kind: "narrative",
+      eyebrow: "The universal Stage 6 evidence",
+      title: "The Portrait Does Not Agree",
+      location: "The locked schoolroom",
+      effects: { storyFacts: { portraitStageUnlock: "stage-6" } },
+      paragraphs: [
+        "You return to the portrait expecting some answer. If your life has improved, you think, the image should show it.",
+        "The portrait is worse. The eyes are tired and watchful. The mouth has lost its easy shape. The painted surface seems dry with years that your living face has refused to carry.",
+        "The portrait has not rewarded the explanation. It shows a life, not one carefully chosen example. It is evidence and conscience, but it does not explain every motive for you."
+      ],
+      conditionalText: [
+        { when: { choice: { sceneId: "c6-the-test-of-motive", choiceId: "protect-her-dignity" } }, text: "You can name a reason that was not only about you. The image is still worse. A true reason does not undo a long history." },
+        { when: { choice: { sceneId: "c6-the-test-of-motive", choiceId: "protect-my-image" } }, text: "The admission makes the portrait harder to dismiss. Feeling innocent is not the same as becoming different." },
+        { when: { choice: { sceneId: "c6-the-test-of-motive", choiceId: "refuse-the-question" } }, text: "You refuse the question, but the portrait does not need your permission to keep the history it has carried." }
+      ],
+      terms: ["portrait", "evidence", "conscience", "history", "image", "face", "change", "explanation", "motive", "life", "watchful", "damage"],
+      nextScene: "c6-what-it-shows",
+      sourceNote: "This universal Stage 6 event adapts Wilde's Chapter XX. The final damaged image is represented through the existing CSS fallback; no Stage 6 artwork is generated or integrated."
+    },
+    "c6-what-it-shows": {
+      chapterId: "chapter-6",
+      kind: "choice",
+      eyebrow: "Decision III · What Does It Show?",
+      title: "What Does It Show?",
+      location: "The locked schoolroom",
+      paragraphs: [
+        "The image does not speak in words. You must decide what kind of evidence it is before you decide what to do with it.",
+        "An interpretation can be honest without being complete. The portrait may hold a history you cannot undo, or it may be a supernatural object whose judgement you do not fully accept. The question is not a hidden test with one approved answer."
+      ],
+      terms: ["interpretation", "evidence", "history", "portrait", "supernatural", "judge", "truth", "responsibility", "choice"],
+      prompt: "What does the portrait show?",
+      decisionLabel: "Decision III · Face, blame, or question the image",
+      choices: [
+        {
+          id: "face-what-it-shows",
+          label: "Face what it shows.",
+          description: "You admit that the portrait holds a history you cannot undo.",
+          nextScene: "c6-the-final-choice",
+          reflection: "You faced the history held by the portrait without calling it repaired."
+        },
+        {
+          id: "call-it-a-curse",
+          label: "Call it a curse.",
+          description: "You treat the portrait primarily as something done to you, while the choices remain yours.",
+          nextScene: "c6-the-final-choice",
+          reflection: "You called the portrait a curse without proving that it caused your choices."
+        },
+        {
+          id: "deny-it-can-judge",
+          label: "Deny that it can judge.",
+          description: "You reject the idea that an image can define the whole truth about a person.",
+          nextScene: "c6-the-final-choice",
+          reflection: "You questioned whether an image can define the whole truth about you."
+        }
+      ],
+      sourceNote: "Decision III changes interpretation and reflection only. It does not alter Stage 6, survival, portrait restoration, or the final action."
+    },
+    "c6-the-final-choice": {
+      chapterId: "chapter-6",
+      kind: "choice",
+      eyebrow: "Decision IV · The Final Choice",
+      title: "The Final Choice",
+      location: "Before the portrait",
+      paragraphs: [
+        "The portrait is the last evidence you have tried to control. The past cannot be undone by a sentence, and one final action cannot make earlier harm disappear.",
+        "You understand the risk before you choose. If you attack the portrait, you may break more than a secret. The consequence may be irreversible for you. If you leave it untouched, the evidence remains outside your control."
+      ],
+      conditionalText: [
+        { when: { choice: { sceneId: "c6-what-it-shows", choiceId: "face-what-it-shows" } }, text: "You have admitted that the image holds a history. Now you must decide whether to stop hiding that truth." },
+        { when: { choice: { sceneId: "c6-what-it-shows", choiceId: "call-it-a-curse" } }, text: "You have named the supernatural burden. The final choice still belongs to you, not to the object alone." },
+        { when: { choice: { sceneId: "c6-what-it-shows", choiceId: "deny-it-can-judge" } }, text: "You have questioned the portrait's authority. The question does not remove the risk of what you choose next." }
+      ],
+      terms: ["portrait", "evidence", "truth", "history", "secret", "choice", "irreversible", "destroy", "hide", "risk", "responsibility", "change"],
+      prompt: "What will you do with the final evidence?",
+      decisionLabel: "Decision IV · Face, conceal, or destroy",
+      choices: [
+        {
+          id: "stop-hiding-the-truth",
+          label: "Stop hiding the truth.",
+          description: "You do not attack the portrait. You accept that consequences may follow beyond your control.",
+          nextScene: "c6-what-remains",
+          reflection: "You stopped hiding the truth without receiving a promise of forgiveness or repair."
+        },
+        {
+          id: "cover-the-portrait-again",
+          label: "Cover the portrait and keep the secret.",
+          description: "You return to concealment. The portrait remains Stage 6, and the choice is not labelled for you.",
+          nextScene: "c6-what-remains",
+          reflection: "You covered the portrait again and kept the secret, leaving the Stage 6 evidence unchanged."
+        },
+        {
+          id: "destroy-the-portrait",
+          label: "Destroy the portrait and end the secret.",
+          description: "You turn against the supernatural bond or secret, knowing that the consequence may be irreversible.",
+          nextScene: "c6-what-remains",
+          reflection: "You chose to destroy the portrait and end the secret, knowing the risk was irreversible."
+        }
+      ],
+      sourceNote: "Decision IV is the explicit source of the Chapter VI outcome. The destroy option is understood before selection and uses no weapon, method, or procedural detail."
+    },
+    "c6-what-remains": {
+      chapterId: "chapter-6",
+      kind: "ending",
+      requires: { requiredChoiceScenes: ["c6-the-final-choice"], resolvedStoryFacts: ["chapterSixOutcome"] },
+      eyebrow: "End of Chapter VI",
+      title: "The Last Image",
+      location: "The room after the final choice",
+      paragraphs: [
+        "The room is quiet. The final choice has not repaired the past; it has shown what you are willing to do with the truth that remains.",
+        { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "You chose to destroy the portrait and end the secret. Dorian dies as the irreversible consequence. This adaptation states the fact without describing the physical moment.", sensitive: true },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "The portrait returns to its original young appearance." },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "The body that had been young now carries the age and damage that the image had carried." },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "truth-faced" } }, text: "You stop hiding the truth. You remain alive, but the story offers no promise of forgiveness, legal pardon, restored relationships, or a better portrait." },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "secret-kept" } }, text: "You cover the portrait again and survive. The secret returns to concealment, while the Stage 6 evidence remains unchanged. This is an interactive ending, not a label placed over your whole life." }
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil's limited support does not solve the past after the final image." },
+        { when: { storyFact: { key: "basilOutcome", value: "alive-separated" } }, text: "Basil's chosen distance remains real, whatever you have decided about the portrait." },
+        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "Basil's absence remains part of the consequence. This ending does not add a detailed aftermath." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains part of your life, but closeness does not erase what the image remembers." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl remains alive and independent; the ending does not promise that distance will disappear." },
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's loss remains memory and responsibility, not a new event in the room." }
+      ],
+      terms: ["choice", "truth", "portrait", "secret", "irreversible", "young", "body", "age", "damage", "alive", "survive", "evidence", "concealment", "support", "forgiveness", "distance", "loss", "responsibility"],
+      contentWarning: {
+        when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } },
+        title: "A non-graphic final consequence",
+        message: "The Wilde-aligned ending includes a factual, non-graphic death consequence. You can continue, skip the restrained transition, or pause without changing the saved outcome.",
+        canSkip: true
+      },
+      nextScene: null,
+      sourceNote: "Chapter VI closes the six-chapter arc. The destroy ending follows Wilde's final movement in restrained B1 language; the other endings are interactive alternatives. No detailed aftermath is included."
     }
   }
 };

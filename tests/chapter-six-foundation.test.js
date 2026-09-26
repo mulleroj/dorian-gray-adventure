@@ -19,6 +19,7 @@ const {
 } = await import("../js/game-state.js");
 const {
   canStartChapter,
+  continueToChapter,
   isChapterAvailable,
   portraitStage,
   startNewGame
@@ -50,19 +51,48 @@ function stateFor(choiceIds, overrides = {}) {
   };
 }
 
-test("Chapter VI metadata is present but unavailable and has no runtime scenes", () => {
+test("Chapter VI metadata is playable and exposes the exact nine-scene spine", () => {
   const chapterSix = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-6");
 
   assert.ok(chapterSix);
   assert.equal(chapterSix.number, "VI");
   assert.equal(chapterSix.title, "The Final Choice");
-  assert.equal(chapterSix.status, "in-preparation");
-  assert.equal(chapterSix.available, false);
-  assert.equal(Object.hasOwn(chapterSix, "firstScene"), false);
-  assert.equal(Object.values(STORY_DATA.scenes).some((scene) => scene.chapterId === "chapter-6"), false);
-  assert.equal(Object.keys(STORY_DATA.scenes).some((sceneId) => sceneId.startsWith("c6-")), false);
-  assert.equal(isChapterAvailable("chapter-6"), false);
-  assert.equal(canStartChapter(createInitialStateForChapterFive(), "chapter-6"), false);
+  assert.equal(chapterSix.status, "playable");
+  assert.equal(chapterSix.available, true);
+  assert.equal(chapterSix.firstScene, "c6-after-the-confrontation");
+  const sceneIds = Object.keys(STORY_DATA.scenes).filter((sceneId) => sceneId.startsWith("c6-"));
+  assert.deepEqual(sceneIds, [
+    "c6-after-the-confrontation",
+    "c6-the-world-has-noticed",
+    "c6-a-new-life",
+    "c6-the-good-act",
+    "c6-the-test-of-motive",
+    "c6-the-last-proof",
+    "c6-what-it-shows",
+    "c6-the-final-choice",
+    "c6-what-remains"
+  ]);
+  assert.deepEqual(sceneIds.map((sceneId) => STORY_DATA.scenes[sceneId].title), [
+    "The Quiet House",
+    "A Consequence With a Witness",
+    "The Claim",
+    "One Example",
+    "What Was the Act For?",
+    "The Portrait Does Not Agree",
+    "What Does It Show?",
+    "The Final Choice",
+    "The Last Image"
+  ]);
+  assert.equal(chapterSix.teacherNotes.scenes.length, 9);
+  assert.equal(chapterSix.teacherNotes.decisions.length, 4);
+  assert.equal(isChapterAvailable("chapter-6"), true);
+  const entry = createInitialStateForChapterFive();
+  assert.equal(canStartChapter(entry, "chapter-6"), true);
+  const entered = continueToChapter(entry, "chapter-6");
+  assert.equal(entered.ok, true);
+  assert.equal(entered.state.sceneId, "c6-after-the-confrontation");
+  assert.equal(entered.state.activeChapterId, "chapter-6");
+  assert.equal(entered.state.storyFacts.portraitStageUnlock, "stage-5");
   assert.equal(startNewGame("chapter-6"), null);
 });
 
@@ -198,18 +228,18 @@ test("Chapter VI outcome resolver is pure, latest-choice based, and safe for inc
   assert.equal(chapterSixOutcome(state), "truth-faced");
 });
 
-test("Stage 6 is logically supported without runtime artwork", () => {
+test("Stage 6 maps to the approved production runtime artwork", () => {
   assert.equal(portraitStage({ portrait: 0, storyFacts: { portraitStageUnlock: "stage-6" } }), 6);
   assert.equal(portraitStage({ portrait: 3, storyFacts: { portraitStageUnlock: "stage-6" } }), 6);
   assert.equal(portraitStageText(6), "The final evidence");
-  assert.equal(portraitAssetForStage(6), null);
+  assert.equal(existsSync("assets/portraits/portrait-dorian-stage-final.webp"), true);
+  assert.equal(portraitAssetForStage(6), "assets/portraits/portrait-dorian-stage-final.webp");
   assert.deepEqual(portraitViewerModel({
     portrait: 0,
     storyFacts: { portraitStageUnlock: "stage-6" }
   }), {
     stage: 6,
     stageText: "The final evidence",
-    asset: null
+    asset: "assets/portraits/portrait-dorian-stage-final.webp"
   });
-  assert.equal(existsSync("assets/portraits/portrait-dorian-stage-final.webp"), false);
 });

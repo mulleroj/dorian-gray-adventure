@@ -376,4 +376,5 @@ test("portrait thresholds remain unchanged", () => {
   assert.equal(STORY_DATA.assets.portraitStages[3], "assets/portraits/portrait-dorian-stage-3.webp");
   assert.equal(STORY_DATA.assets.portraitStages[4], "assets/portraits/portrait-dorian-stage-4.webp");
   assert.equal(STORY_DATA.assets.portraitStages[5], "assets/portraits/portrait-dorian-stage-5.webp");
+  assert.equal(STORY_DATA.assets.portraitStages[6], "assets/portraits/portrait-dorian-stage-final.webp");
 });

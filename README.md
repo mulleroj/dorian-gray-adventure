@@ -33,7 +33,7 @@ Implementováno:
 - plně hratelná Chapter IV — *A Life of Pleasure* s devíti shared-spine scénami, čtyřmi rozhodnutími, dlouhodobým časovým skokem, derived behaviour profilem a universal Stage 4 eventem;
 - Chapter IV Teacher mode s vazbou na Wildeovu Chapter XI a Chapter XII jako hranici budoucí Chapter V;
 - plně hratelná Chapter V — *The Confrontation* s deseti shared-spine scénami, čtyřmi rozhodnutími, univerzálním Basilovým svědectvím, integrovaným `basilOutcome` resolverem a integrovaným Stage 5 WebP s bezpečným fallbackem;
-- Chapter VI technical foundation s unavailable metadata, pure `chapterSixOutcome` resolverem, allow-listed `chapterSixOutcome` factem a logickou podporou Stage 6 bez playable scén a artworku;
+- plně lokálně playable Chapter VI — *The Final Choice* s devíti shared-spine scénami, čtyřmi rozhodnutími, univerzálním Stage 6 milestone, přímým `chapterSixOutcome` mappingem a integrovaným finálním Stage 6 WebP s bezpečným fallbackem;
 - schválený Chapter III narrative blueprint, jeho přesný story-fact contract a integrovaný Stage 3 artwork;
 - integrované schválené Chapter III P0 visuals pro Dorianův dům a starou školní místnost;
 - deklarativní podmíněné texty, derived `behaviourProfile` podmínky a znovupoužitelný content-warning mechanismus.
@@ -73,8 +73,8 @@ node --check js/ui.js
 node --test tests/*.test.js
 ```
 
-Regresní testy ověřují všech osm kombinací Chapter I, všech 288 kombinací Chapter I + II, všech 23 328 kombinací Chapter I + II + III, 81 Chapter V local paths, 81 Chapter VI outcome combinations, tři výsledky Sibylina příběhu, migraci v1 → v2, samostatné dokončení kapitol, storyFacts, podmíněné texty, content warnings, gated scény, validitu přechodů, slovníček, portrétní prahy, Stage 3, Stage 4, Stage 5 asset a logickou Stage 6 podporu bez artworku, Chapter III location mapping, Basil outcome distribution, continuity, knowledge boundary a poškozené nebo nekompatibilní save soubory.
+Regresní testy ověřují všech osm kombinací Chapter I, všech 288 kombinací Chapter I + II, všech 23 328 kombinací Chapter I + II + III, 81 Chapter V local paths, 81 Chapter VI local paths, tři výsledky Sibylina příběhu, migraci v1 → v2, samostatné dokončení kapitol, storyFacts, podmíněné texty, content warnings, gated scény, validitu přechodů, slovníček, portrétní prahy, Stage 3, Stage 4, Stage 5 a Stage 6 runtime assety, Chapter III location mapping, Basil outcome distribution, continuity, knowledge boundary a poškozené nebo nekompatibilní save soubory.
 
 ## Stav vizuální integrace
 
-Chapters I–V jsou lokálně playable a schválené P0 visual assets jsou integrovány do runtime. Stage 3, Stage 4 a Stage 5 final runtime art, Dorian's house a secret-room location existují jako lokální WebP assety s fallback safety. Chapter V používá před revelem pouze kompatibilní secret-room asset a po revealu skutečný Stage 5 WebP. Chapter VI má pouze technical foundation: zůstává unavailable, bez story scén a bez Stage 6 artworku. Runtime nadále zůstává statický a bez AI API.
+Chapters I–VI jsou lokálně playable a schválené P0 visual assets jsou integrovány do runtime. Stage 3, Stage 4, Stage 5 a finální Stage 6 runtime art, Dorian's house a secret-room location existují jako lokální WebP assety s fallback safety. Chapter V používá před revelem pouze kompatibilní secret-room asset a po revealu skutečný Stage 5 WebP. Chapter VI používá Stage 6 WebP z `assets/portraits/portrait-dorian-stage-final.webp`; při chybě assetu zůstává bezpečný CSS fallback. Runtime nadále zůstává statický a bez AI API.

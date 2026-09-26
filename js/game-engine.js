@@ -1,6 +1,7 @@
 import { STORY_DATA } from "./story-data.js";
 import { createInitialState, saveState, STORY_FACT_DEFAULTS, STORY_FACT_KEYS } from "./game-state.js";
 import { chapterFiveBasilOutcome } from "./chapter-five-outcome.js";
+import { chapterSixOutcome } from "./chapter-six-outcome.js";
 
 function sceneFor(sceneId) {
   return STORY_DATA.scenes[sceneId] ?? null;
@@ -197,6 +198,12 @@ export function choose(state, sceneId, choiceId) {
     const basilOutcome = chapterFiveBasilOutcome(next);
     if (!basilOutcome) throw new Error("Chapter V final response did not resolve a Basil outcome");
     next = applyEffects(next, { storyFacts: { basilOutcome } });
+  }
+
+  if (scene.chapterId === "chapter-6" && sceneId === "c6-the-final-choice") {
+    const finalOutcome = chapterSixOutcome(next);
+    if (!finalOutcome) throw new Error("Chapter VI final choice did not resolve an outcome");
+    next = applyEffects(next, { storyFacts: { chapterSixOutcome: finalOutcome } });
   }
 
   if (choice.nextScene) {
