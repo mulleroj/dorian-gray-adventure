@@ -107,14 +107,23 @@ test("all Chapter II, V and VI ending prose stays player-facing", () => {
 
 test("Must-fix story wording contains no player-facing metatext", () => {
   const chapterFour = resolveSceneParagraphs(STORY_DATA.scenes["c4-face-in-mirror"], stateForFacts()).join(" ");
-  const chapterFive = resolveSceneParagraphs(STORY_DATA.scenes["c5-basil-sees"], stateForFacts({ basilOutcome: "alive-helping" })).join(" ");
+  const chapterFiveScene = STORY_DATA.scenes["c5-basil-sees"];
+  const chapterFiveParagraphs = resolveSceneParagraphs(chapterFiveScene, stateForFacts({ basilOutcome: "alive-helping" }));
+  const chapterFive = chapterFiveParagraphs.join(" ");
   const chapterSix = resolveSceneParagraphs(STORY_DATA.scenes["c6-what-remains"], stateForFacts({ chapterSixOutcome: "portrait-destroyed" })).join(" ");
 
   assert.doesNotMatch(chapterFour, /one click|trigger|milestone/i);
-  assert.doesNotMatch(chapterFive, /does not transform because he looked|does not claim|trigger|milestone/i);
+  assert.doesNotMatch(chapterFive, /already held by the portrait|his gaze does not cause|does not cause the change|does not transform because he looked|does not claim|trigger|milestone/i);
   assert.doesNotMatch(chapterSix, /not described|irreversible consequence/i);
   assert.doesNotMatch(chapterSix, /This ending does not add/i);
-  assert.match(chapterFive, /The painted face changes before you both/i);
+  assert.match(chapterFiveScene.sourceNote, /For the first time, another person sees the truth Dorian has tried to hide/i);
+  assert.match(chapterFive, /Basil recognises his own painting and Dorian's face/i);
+  assert.match(chapterFive, /Then the painted face changes before you both/i);
+  assert.match(chapterFive, /What appears there is worse than Basil expected/i);
+  assert.ok(chapterFiveParagraphs.findIndex((paragraph) => /recognises his own painting and Dorian's face/i.test(paragraph))
+    < chapterFiveParagraphs.findIndex((paragraph) => /painted face changes before you both/i.test(paragraph)));
+  assert.ok(chapterFiveParagraphs.findIndex((paragraph) => /painted face changes before you both/i.test(paragraph))
+    < chapterFiveParagraphs.findIndex((paragraph) => /Disbelief gives way to horror/i.test(paragraph)));
   assert.match(chapterSix, /Dorian is dead\./);
 });
 

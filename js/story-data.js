@@ -1721,14 +1721,14 @@ export const STORY_DATA = {
       location: "The old schoolroom, with the portrait uncovered",
       effects: { storyFacts: { portraitStageUnlock: "stage-5" } },
       paragraphs: [
-        "You remove the cover. Basil sees the changed portrait. He recognises Dorian, and he recognises his own painting beneath the damage that the years have gathered.",
-        "Disbelief gives way to horror, grief, fear, and concern. Basil does not become all-knowing. He sees the portrait and understands the truth it carries, but he does not know every hidden detail of your life.",
-        "You give him only a short account: a wish, a portrait, and years hidden behind a young face. You do not explain every supernatural rule.",
-        "The painted face changes before you both. Basil's horror comes after the change, when he sees the damage Dorian has tried to hide."
+        "You remove the cover. Basil recognises his own painting and Dorian's face.",
+        "Then the painted face changes before you both. What appears there is worse than Basil expected.",
+        "Disbelief gives way to horror, grief, fear, and concern. For the first time, another person sees the damage Dorian has tried to hide. Basil understands the truth the portrait reveals, but he does not know every hidden detail of your life.",
+        "You give him only a short account: a wish, a portrait, and years hidden behind a young face. You do not explain every supernatural rule."
       ],
       terms: ["cover", "reveal", "portrait", "recognise", "witness", "damage", "grief", "fear", "concern", "truth", "hidden", "supernatural"],
       nextScene: "c5-basil-asks-for-change",
-      sourceNote: "Basil's witness adapts Wilde's Chapter XII. He sees the damage already held by the portrait; his gaze does not cause the change."
+      sourceNote: "Basil's witness adapts Wilde's Chapter XII. For the first time, another person sees the truth Dorian has tried to hide."
     },
     "c5-basil-asks-for-change": {
       chapterId: "chapter-5",

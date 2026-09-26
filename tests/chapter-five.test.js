@@ -256,7 +256,7 @@ test("Basil knowledge boundary is preserved before and after the witness scene",
   const afterText = ["c5-basil-sees", "c5-basil-asks-for-change", "c5-after-the-truth"]
     .flatMap((sceneId) => resolveSceneParagraphs(STORY_DATA.scenes[sceneId], { ...preState, storyFacts: { ...preState.storyFacts, portraitStageUnlock: "stage-5" } }))
     .join(" ");
-  assert.match(afterText, /Basil sees the changed portrait|recognises Dorian/i);
+  assert.match(afterText, /recognises his own painting and Dorian's face|painted face changes before you both/i);
   assert.doesNotMatch(afterText, /has not seen it|only guessing whether a portrait exists/i);
 });
 
