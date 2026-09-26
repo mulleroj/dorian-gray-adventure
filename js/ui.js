@@ -18,7 +18,6 @@ import { scrollToSceneStart } from "./scene-navigation.js";
 import { teacherFacingText } from "./teacher-copy.js";
 
 const app = document.querySelector("#app");
-const settingsDialog = document.querySelector("#settings-dialog");
 const teacherDialog = document.querySelector("#teacher-dialog");
 const teacherContent = document.querySelector("#teacher-content");
 const portraitDialog = document.querySelector("#portrait-dialog");
@@ -420,12 +419,7 @@ document.addEventListener("click", (event) => {
   }
 });
 
-document.querySelector("#settings-button").addEventListener("click", () => openDialog(settingsDialog));
 document.querySelector("#teacher-mode-button").addEventListener("click", () => openDialog(teacherDialog));
-document.querySelector("#reduce-motion-toggle").addEventListener("change", (event) => {
-  document.documentElement.classList.toggle("reduce-motion", event.target.checked);
-  localStorage.setItem("dorian-gray-reduce-motion", event.target.checked ? "true" : "false");
-});
 document.querySelectorAll("[data-close-dialog]").forEach((button) => button.addEventListener("click", () => {
   const dialog = document.getElementById(button.dataset.closeDialog);
   closeDialog(dialog);
@@ -468,10 +462,5 @@ window.addEventListener("hashchange", () => {
   }
   render();
 });
-
-if (localStorage.getItem("dorian-gray-reduce-motion") === "true") {
-  document.documentElement.classList.add("reduce-motion");
-  document.querySelector("#reduce-motion-toggle").checked = true;
-}
 
 render();
