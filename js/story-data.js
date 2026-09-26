@@ -7,7 +7,8 @@ export const STORY_DATA = {
       1: "assets/portraits/portrait-dorian-stage-1.webp",
       2: "assets/portraits/portrait-dorian-stage-2.webp",
       3: "assets/portraits/portrait-dorian-stage-3.webp",
-      4: "assets/portraits/portrait-dorian-stage-4.webp"
+      4: "assets/portraits/portrait-dorian-stage-4.webp",
+      5: "assets/portraits/portrait-dorian-stage-5.webp"
     },
     chapterTwo: {
       characters: {
@@ -242,10 +243,64 @@ export const STORY_DATA = {
       number: "V",
       title: "The Confrontation",
       subtitle: "A private truth becomes a witnessed truth.",
-      status: "in-preparation",
-      available: false,
+      status: "playable",
+      available: true,
+      firstScene: "c5-fog-at-the-door",
       requiresCompletedChapters: ["chapter-4"],
-      requiresStoryFacts: ["portraitLocation", "portraitStageUnlock", "basilSuspicion", "sibylOutcome", "yellowBookResponse"]
+      requiresStoryFacts: ["portraitLocation", "portraitStageUnlock", "basilSuspicion", "sibylOutcome", "yellowBookResponse"],
+      requiresStoryFactValues: { portraitLocation: "locked-schoolroom", portraitStageUnlock: "stage-4" },
+      teacherNotes: {
+        literaryBasis: "This chapter adapts Oscar Wilde's 1891 Chapters XII and XIII: Basil confronts Dorian, sees the portrait, urges him to change, and dies in the canonical plot. Chapter XIV remains outside this chapter.",
+        adaptation: "The ten-scene shared spine, four decisions, Basil's surviving alternatives, the finite outcome resolver, and the Stage 5 witness milestone are interactive adaptations. Alive-separated and alive-helping are not Wilde's canonical plot.",
+        continuity: "Sibyl's outcome, the yellow book, Basil's suspicion, and the derived Chapter IV behaviour profile alter short prose only. They never create alternate scene chains or change the Basil outcome rules.",
+        goals: [
+          "Distinguish rumour from evidence.",
+          "Describe accusation, denial, and responsibility.",
+          "Notice how a witness can change a conversation without solving it.",
+          "Discuss blame, persuasion, boundaries, and consequences.",
+          "Separate Wilde's canonical event from interactive alternatives."
+        ],
+        vocabulary: ["rumour", "evidence", "deny", "accuse", "reputation", "witness", "reveal", "recognise", "responsibility", "blame", "threat", "boundary", "consequence", "separate", "help", "survive", "truth"],
+        comprehension: [
+          "Why does Basil confront Dorian?",
+          "Why does he initially doubt the rumours?",
+          "What had Basil actually seen before entering the room?",
+          "Why does Dorian show him the portrait?",
+          "What does Basil understand after seeing it?",
+          "What does Basil ask Dorian to do?",
+          "How does Dorian respond to responsibility?",
+          "Which endings are canonical and which are interactive?"
+        ],
+        discussion: [
+          "Is seeing evidence the same as understanding a person?",
+          "Why does Dorian want Basil to see the portrait?",
+          "Can Basil help after seeing the truth?",
+          "When does blame become avoidance?",
+          "Does knowing a secret create responsibility?",
+          "Should an adaptation allow Basil to survive?",
+          "What is the difference between a boundary and control?"
+        ],
+        scenes: [
+          { title: "Fog at the Door", focus: "Meet Basil before the reveal and establish what he does not yet know." },
+          { title: "What People Say", focus: "Separate broad rumours from proof without reproducing a scandal catalogue." },
+          { title: "Answer Basil", focus: "Choose whether to ask for evidence, defend reputation, or attack the gossip." },
+          { title: "I Will Show You the Truth", focus: "Move deliberately from rumours toward evidence without making the transition violent." },
+          { title: "The Locked Room", focus: "Choose how honestly to prepare Basil before the universal reveal." },
+          { title: "Basil Sees", focus: "Unlock Stage 5 as Basil witnesses the accumulated damage already held by the portrait." },
+          { title: "Basil Asks for Change", focus: "Hear Basil's appeal before Dorian answers it." },
+          { title: "After the Truth", focus: "Choose whether to listen, shift blame, or reject Basil's judgement." },
+          { title: "The Final Response", focus: "Accept limited help, end the conversation, or threaten the witness without sensational wording." },
+          { title: "After the Door", focus: "Resolve the canonical or interactive outcome and close Chapter V without beginning Chapter VI." }
+        ],
+        decisions: [
+          "Decision I: ask what Basil actually saw, defend the public name, or attack the gossip.",
+          "Decision II: warn before the door, challenge Basil to look, or admit partial truth.",
+          "Decision III: listen and answer, blame the portrait and Basil, or reject his judgement.",
+          "Decision IV: accept limited help, end the conversation, or silence the witness."
+        ],
+        canonAndAlternatives: "Canonical: Basil confronts Dorian, sees the portrait, urges change, and dies in Wilde's plot. Interactive alternatives: alive-separated, alive-helping, and the player's four decisions. The alternatives are not presented as Wilde's canon.",
+        contentWarning: "Only the dead-canonical ending uses a warning. The transition is restrained and non-graphic; continue, skip the marked transition, or pause without changing the saved outcome."
+      }
     }
   ],
   glossary: {
@@ -334,7 +389,40 @@ export const STORY_DATA = {
     question: "a sentence or request that asks for information",
     future: "the time that will come after now",
     room: "a space inside a building",
-    rule: "an instruction about what is allowed or expected"
+    rule: "an instruction about what is allowed or expected",
+    deny: "to say that something is not true",
+    accuse: "to say that someone has done something wrong",
+    blame: "to say that someone is responsible for a problem",
+    threat: "words or actions that show possible danger",
+    help: "to give support to someone",
+    survive: "to continue to live after danger or difficulty",
+    separate: "to move apart or stop being together",
+    recognise: "to know someone or something because it is familiar",
+    fog: "a thick cloud close to the ground that makes it hard to see",
+    birthday: "the day each year when a person was born",
+    young: "having lived for only a small number of years",
+    locked: "closed with a lock so that it cannot be opened freely",
+    concealment: "the act of keeping something hidden",
+    gossip: "talk about other people that may not be true",
+    dangerous: "able to cause harm or trouble",
+    door: "a movable part of a wall that opens an entrance",
+    privacy: "the right to keep personal matters away from other people",
+    harm: "physical or emotional damage",
+    supernatural: "not explained by ordinary natural rules",
+    damage: "harm that makes something less whole or safe",
+    fear: "the feeling of being afraid",
+    forgiveness: "the decision to stop being angry about a wrong",
+    judge: "to form an opinion about someone or something",
+    conversation: "a talk between two or more people",
+    silence: "the absence of sound or speech",
+    unresolved: "not finished or settled",
+    dead: "no longer alive",
+    support: "help or encouragement given to someone",
+    loss: "the fact of no longer having someone or something",
+    hidden: "kept where other people cannot see it",
+    change: "the act or result of becoming different",
+    answer: "something said or written in reply to a question",
+    listen: "to pay attention to what someone says"
   },
   scenes: {
     "c1-opening": {
@@ -1363,6 +1451,297 @@ export const STORY_DATA = {
       terms: ["unchanged", "portrait", "private", "public", "consequence", "message", "concern", "distance", "responsibility", "boundary"],
       nextScene: null,
       sourceNote: "Chapter IV ends before Wilde's Chapter XII confrontation. Basil's announced concern is a threshold for future Chapter V, not the confrontation itself."
+    },
+    "c5-fog-at-the-door": {
+      chapterId: "chapter-5",
+      kind: "opening",
+      eyebrow: "Chapter V · The Confrontation",
+      title: "Fog at the Door",
+      location: "Dorian's house, late at night",
+      paragraphs: [
+        "Late at night, cold fog presses against the door of the house. It is the eve of your thirty-eighth birthday, but the house does not feel ready for a celebration.",
+        "Basil Hallward has been waiting to speak with you before he leaves London. He has come because rumours, distance, and your silence have become too difficult to ignore.",
+        "Your living face still looks young. Upstairs, the Stage 4 portrait remains locked in the old schoolroom. Basil has not seen it, entered the room, or witnessed the truth behind the door."
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "basilSuspicion", value: "uneasy" } }, text: "Basil has sensed that something is wrong. Unease is not knowledge of the supernatural portrait." },
+        { when: { storyFact: { key: "basilSuspicion", value: "suspects" } }, text: "Basil believes you are deliberately hiding something serious. He still does not know about the portrait." },
+        { when: { storyFact: { key: "basilSuspicion", value: "clear" } }, text: "Basil knows that the concealment is serious and deliberate. He has not seen the portrait and does not know its truth." }
+      ],
+      terms: ["fog", "birthday", "concern", "rumour", "young", "portrait", "locked", "witness", "truth", "unease", "suspicion", "concealment"],
+      nextScene: "c5-what-people-say",
+      sourceNote: "The late-night threshold and Basil's concern adapt the opening movement of Wilde's Chapter XII; Basil's pre-witness knowledge boundary is an explicit game contract."
+    },
+    "c5-what-people-say": {
+      chapterId: "chapter-5",
+      kind: "narrative",
+      eyebrow: "Before the door",
+      title: "What People Say",
+      location: "The drawing room, with the fog outside",
+      paragraphs: [
+        "Basil speaks carefully. People say that serious things have happened around you. They repeat stories about absences, strange visitors, and people who no longer wish to be seen with you.",
+        "He does not call the rumours proof. They are stories repeated by people who have seen parts of a pattern, not facts that explain the whole of your life.",
+        "Your young face makes the worst stories hard for Basil to believe. He wants truth rather than gossip, but he also wants to believe that the friend he painted is still someone he can reach."
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "yellowBookResponse", value: "accepted" } }, text: "You can almost hear an elegant idea turning social harm into a permission to remain untouched." },
+        { when: { storyFact: { key: "yellowBookResponse", value: "questioned" } }, text: "You remember that an attractive idea can still become an excuse when it avoids responsibility." },
+        { when: { storyFact: { key: "yellowBookResponse", value: "escape" } }, text: "The old habit of abstraction offers a polished way to look away from the personal question." },
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "The memory of loss makes the difference between a rumour and a consequence harder to ignore." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl is alive and independent, but distance has shown that harm can change a relationship without ending a life." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains part of your life, yet closeness has not removed the need for honesty and boundaries." },
+        { when: { behaviourProfile: "self-examining" }, text: "Your recent habit of looking for specifics gives you a language for asking what was actually seen." },
+        { when: { behaviourProfile: "divided" }, text: "Public control and private fear meet in the same quiet room." },
+        { when: { behaviourProfile: "pleasure-as-escape" }, text: "You know how easily a polished answer can move a conversation away from the person who is asking." }
+      ],
+      terms: ["rumour", "evidence", "reputation", "appearance", "public", "private", "truth", "gossip", "responsibility", "consequence", "distance", "boundary", "escape"],
+      nextScene: "c5-answer-basil",
+      sourceNote: "The broad social rumours compress Wilde's Chapter XII without reproducing its long catalogue or inventing detailed crimes."
+    },
+    "c5-answer-basil": {
+      chapterId: "chapter-5",
+      kind: "choice",
+      eyebrow: "Decision I · Answer Basil",
+      title: "Answer Basil",
+      location: "The drawing room",
+      paragraphs: [
+        "Basil looks at you for a long moment. 'I do not believe every story,' he says. 'But I cannot pretend that nothing has changed. What have you actually seen, and what do you only deny because it is unpleasant?'",
+        "He asks for an answer, not a performance. The question is whether you will separate evidence from gossip, defend the public name, or attack the person who brought the rumours to your door."
+      ],
+      terms: ["evidence", "deny", "accuse", "reputation", "truth", "rumour", "question", "public", "gossip", "performance"],
+      prompt: "How do you answer Basil's concern?",
+      decisionLabel: "Decision I · Evidence, reputation, or attack",
+      choices: [
+        {
+          id: "ask-what-you-actually-saw",
+          label: "Ask what he actually saw.",
+          description: "You ask Basil to separate evidence from gossip before either of you gives the rumour more power.",
+          nextScene: "c5-show-you-the-truth",
+          effects: { reputation: -1, conscience: 1, portrait: 0 },
+          reflection: "You asked Basil to separate evidence from gossip."
+        },
+        {
+          id: "defend-the-public-name",
+          label: "Defend the public name.",
+          description: "You protect the appearance that has always made other people believe you are innocent.",
+          nextScene: "c5-show-you-the-truth",
+          effects: { reputation: 1, conscience: 0, portrait: 0 },
+          reflection: "You defended the public name before answering the private question."
+        },
+        {
+          id: "attack-the-gossip",
+          label: "Attack the gossip.",
+          description: "You accuse Basil of listening to rumours and make his concern sound like a personal insult.",
+          nextScene: "c5-show-you-the-truth",
+          effects: { reputation: 1, conscience: -1, portrait: 1 },
+          reflection: "You attacked the gossip and the person who carried it to you."
+        }
+      ],
+      sourceNote: "The question about evidence is an interactive B1 adaptation of Basil's concern; the three responses are reserved Chapter V choices."
+    },
+    "c5-show-you-the-truth": {
+      chapterId: "chapter-5",
+      kind: "narrative",
+      eyebrow: "A deliberate decision",
+      title: "I Will Show You the Truth",
+      location: "The passage toward the old schoolroom",
+      paragraphs: [
+        "The rumours are no longer enough for either of you. You decide to move the conversation from what people say to what can be seen.",
+        "'You wanted to know,' you tell Basil. 'I will show you the truth.' The words are deliberate. They are dangerous because they cannot be taken back, but they are not yet violent.",
+        "Basil follows you toward the locked schoolroom. He does not know what waits behind the door, and you do not explain the secret before you reach it."
+      ],
+      terms: ["rumour", "evidence", "reveal", "truth", "dangerous", "locked", "secret", "door"],
+      nextScene: "c5-the-locked-room",
+      sourceNote: "Dorian's decision to replace gossip with evidence prepares Wilde's Chapter XII reveal without foreshadowing a weapon or promising violence."
+    },
+    "c5-the-locked-room": {
+      chapterId: "chapter-5",
+      kind: "choice",
+      eyebrow: "Decision II · The Locked Room",
+      title: "The Locked Room",
+      location: "The old schoolroom",
+      visual: { location: "secretRoom" },
+      paragraphs: [
+        "The key turns. The old schoolroom is cold and quiet. The portrait stands under its cover, holding the years that your living face refuses to show.",
+        "Basil stops at the door. He has not seen the changed portrait. You can warn him, challenge him to look, or admit that your silence has protected harm as well as privacy.",
+        "Whatever you say, the cover will be removed. No answer can avoid the reveal now."
+      ],
+      terms: ["key", "room", "portrait", "cover", "private", "privacy", "harm", "reveal", "truth", "witness"],
+      prompt: "What do you say before you open the truth?",
+      decisionLabel: "Decision II · Warn, challenge, or admit",
+      choices: [
+        {
+          id: "warn-before-the-door",
+          label: "Warn him before the door.",
+          description: "You tell Basil that the truth will be difficult, without making him responsible for what he is about to see.",
+          nextScene: "c5-basil-sees",
+          effects: { conscience: 1 },
+          reflection: "You warned Basil that the truth would be difficult."
+        },
+        {
+          id: "challenge-him-to-look",
+          label: "Challenge him to look.",
+          description: "You ask Basil to judge the evidence for himself, even though you know the room will answer him.",
+          nextScene: "c5-basil-sees",
+          effects: { portrait: 1 },
+          reflection: "You challenged Basil to judge the evidence for himself."
+        },
+        {
+          id: "admit-partial-truth",
+          label: "Admit a partial truth.",
+          description: "You admit that you have hidden harm and responsibility before you uncover the portrait.",
+          nextScene: "c5-basil-sees",
+          effects: { reputation: -1, conscience: 1 },
+          reflection: "You admitted concealment, harm, and responsibility before the reveal."
+        }
+      ],
+      sourceNote: "The covered canvas and locked schoolroom continue the established visual foundation; all three choices lead to the universal reveal."
+    },
+    "c5-basil-sees": {
+      chapterId: "chapter-5",
+      kind: "narrative",
+      eyebrow: "The universal witness",
+      title: "Basil Sees",
+      location: "The old schoolroom, with the portrait uncovered",
+      effects: { storyFacts: { portraitStageUnlock: "stage-5" } },
+      paragraphs: [
+        "You remove the cover. Basil sees the changed portrait. He recognises Dorian, and he recognises his own painting beneath the damage that the years have gathered.",
+        "Disbelief gives way to horror, grief, fear, and concern. Basil does not become all-knowing. He sees the portrait and understands the truth it carries, but he does not know every hidden detail of your life.",
+        "You give him only a short account: a wish, a portrait, and years hidden behind a young face. You do not explain every supernatural rule. The damage was already there; Basil's gaze witnesses it. The portrait does not transform because he looked at it.",
+        "The Stage 5 milestone marks what has been revealed to another person. It does not claim that Basil caused the change."
+      ],
+      terms: ["cover", "reveal", "portrait", "recognise", "witness", "damage", "grief", "fear", "concern", "truth", "hidden", "supernatural"],
+      nextScene: "c5-basil-asks-for-change",
+      sourceNote: "Basil's universal witness adapts Wilde's Chapter XII. Stage 5 represents accumulated damage revealed to Basil; his gaze does not cause a transformation."
+    },
+    "c5-basil-asks-for-change": {
+      chapterId: "chapter-5",
+      kind: "narrative",
+      eyebrow: "Basil's appeal",
+      title: "Basil Asks for Change",
+      location: "The old schoolroom",
+      paragraphs: [
+        "Basil looks from the portrait to your living face. He is frightened, but he does not turn the moment into a lesson. He speaks as a friend who has finally seen what you kept from him.",
+        "'Face what you have done,' he says. 'Stop hiding behind the room, the portrait, and your appearance. Change while change is still possible.'",
+        "He admits that he once idealised you too much. That admission is his own responsibility, not yours. Basil does not promise easy forgiveness, and he does not take responsibility for your choices.",
+        "Before you answer, his appeal remains in the room: responsibility is difficult, but the conversation is not over."
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "His words touch the old loss without repeating its death. Grief can name responsibility, but it cannot repair the past." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "He speaks of harm and boundaries. Sibyl is alive, but distance has still become a consequence." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "He speaks of secrecy and emotional distance. Sibyl remains part of your life, but closeness does not cancel responsibility." }
+      ],
+      terms: ["portrait", "responsibility", "change", "hide", "forgiveness", "blame", "boundary", "distance", "consequence", "grief"],
+      nextScene: "c5-after-the-truth",
+      sourceNote: "Basil's appeal adapts Wilde's Chapter XIII while keeping him human, limited, and separate from a teacher or therapist role."
+    },
+    "c5-after-the-truth": {
+      chapterId: "chapter-5",
+      kind: "choice",
+      eyebrow: "Decision III · After the Truth",
+      title: "After the Truth",
+      location: "The old schoolroom",
+      paragraphs: [
+        "Basil does not ask you to explain every year. He asks for one honest answer about what you will do now.",
+        "The portrait cannot speak for you. Neither can Basil. You can listen, shift responsibility toward the image and the man who painted it, or reject Basil's right to ask for change."
+      ],
+      terms: ["truth", "responsibility", "blame", "portrait", "judge", "change", "answer", "listen"],
+      prompt: "How do you answer after the truth is visible?",
+      decisionLabel: "Decision III · Listen, blame, or reject",
+      choices: [
+        {
+          id: "listen-and-answer",
+          label: "Listen and answer.",
+          description: "You hear Basil's concern and respond without promising redemption or asking him to solve you.",
+          nextScene: "c5-final-response",
+          effects: { conscience: 1 },
+          reflection: "You listened to Basil and answered without promising redemption."
+        },
+        {
+          id: "blame-the-portrait-and-basil",
+          label: "Blame the portrait and Basil.",
+          description: "You shift responsibility toward the painting, the wish, or Basil's earlier idealisation.",
+          nextScene: "c5-final-response",
+          effects: { conscience: -1, portrait: 1 },
+          reflection: "You shifted responsibility toward the portrait and Basil's idealisation."
+        },
+        {
+          id: "reject-his-judgement",
+          label: "Reject his judgement.",
+          description: "You deny Basil the right to judge your life or ask you to change.",
+          nextScene: "c5-final-response",
+          effects: { reputation: 1, conscience: -1, portrait: 1 },
+          reflection: "You rejected Basil's right to judge or ask for change."
+        }
+      ],
+      sourceNote: "The responses turn Basil's appeal into the third reserved Chapter V decision without resolving his outcome prematurely."
+    },
+    "c5-final-response": {
+      chapterId: "chapter-5",
+      kind: "choice",
+      eyebrow: "Decision IV · The final response",
+      title: "The Final Response",
+      location: "At the door of the old schoolroom",
+      paragraphs: [
+        "The conversation has reached its final question. Basil has seen the portrait, asked for change, and heard your answer.",
+        "What you do now will decide whether he leaves with a broken trust, remains for limited human support, or is threatened into silence."
+      ],
+      terms: ["conversation", "witness", "change", "help", "survive", "threat", "silence", "boundary", "trust"],
+      prompt: "What is your final response to Basil?",
+      decisionLabel: "Decision IV · Help, separation, or danger",
+      choices: [
+        {
+          id: "accept-basil-help",
+          label: "Accept limited help.",
+          description: "You let Basil stay for an honest conversation and accept that support is not the same as forgiveness.",
+          nextScene: "c5-after-the-door",
+          reflection: "You accepted limited help without claiming that the damage was repaired."
+        },
+        {
+          id: "end-the-conversation",
+          label: "End the conversation.",
+          description: "You tell Basil to leave and end the relationship rather than continue the difficult exchange.",
+          nextScene: "c5-after-the-door",
+          reflection: "You ended the conversation and let Basil leave with the trust between you broken."
+        },
+        {
+          id: "silence-the-witness",
+          label: "Silence the witness.",
+          description: "You make the danger clear: Basil must not speak of what he saw, and you want to prevent him from telling anyone.",
+          nextScene: "c5-after-the-door",
+          reflection: "You threatened the witness because you wanted to control what he could say."
+        }
+      ],
+      sourceNote: "The final wording communicates coercion and danger without labelling the option as murder or using sensational instruction."
+    },
+    "c5-after-the-door": {
+      chapterId: "chapter-5",
+      kind: "ending",
+      eyebrow: "End of Chapter V",
+      title: "After the Door",
+      location: "Dorian's house, after the confrontation",
+      paragraphs: [
+        "The door closes. The house is quiet again, but the secret is no longer private. Basil has seen the portrait, and the consequences of the conversation remain unresolved.",
+        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "The conversation reaches a breaking point. The narrative pauses before any physical detail is described.", sensitive: true },
+        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "Basil is dead. No procedure, concealment, or investigation follows in this chapter." },
+        { when: { storyFact: { key: "basilOutcome", value: "alive-separated" } }, text: "Basil survives and leaves. The trust between you is severely damaged, and the distance between you is now a boundary he has chosen." },
+        { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil survives and leaves willing to offer limited human support. He does not forgive everything, solve you, or accept responsibility for your choices." },
+        "Chapter VI has not begun. The next consequences belong to a future chapter, not to a procedural ending here."
+      ],
+      conditionalText: [
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's loss remains part of memory and responsibility; it is not described again." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl remains alive and independent. Her life does not become a promise that distance will disappear." },
+        { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains part of your changing life, with boundaries and ordinary questions rather than perfect happiness." }
+      ],
+      terms: ["door", "secret", "private", "witness", "consequence", "unresolved", "dead", "survive", "support", "trust", "distance", "boundary", "responsibility", "loss"],
+      contentWarning: {
+        when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } },
+        title: "A difficult aftermath",
+        message: "This canonical adaptation includes a factual, non-graphic death consequence. You can continue, skip the restrained transition, or pause without changing the saved outcome.",
+        canSkip: true
+      },
+      nextScene: null,
+      sourceNote: "Chapter V closes at the immediate consequence and Chapter VI handoff. The canonical death remains factual and non-graphic; Chapter XIV procedural aftermath is outside this implementation."
     }
   }
 };

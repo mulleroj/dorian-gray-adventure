@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { existsSync, readFileSync } from "node:fs";
 
 const { portraitAssetForStage, portraitStageText, portraitViewerModel } = await import("../js/portrait-viewer.js");
 
@@ -41,6 +42,25 @@ test("logical Stage 4 maps to the approved runtime artwork", () => {
     stageText: "The established damage",
     asset: "assets/portraits/portrait-dorian-stage-4.webp"
   });
+});
+
+test("logical Stage 5 maps to the approved runtime artwork", () => {
+  assert.equal(existsSync("assets/portraits/portrait-dorian-stage-5.webp"), true);
+  assert.deepEqual(portraitViewerModel({
+    portrait: 0,
+    storyFacts: { portraitStageUnlock: "stage-5" }
+  }), {
+    stage: 5,
+    stageText: "The witnessed damage",
+    asset: "assets/portraits/portrait-dorian-stage-5.webp"
+  });
+});
+
+test("portrait viewer keeps its CSS fallback when a mapped image fails", () => {
+  const uiSource = readFileSync(new URL("../js/ui.js", import.meta.url), "utf8");
+  assert.match(uiSource, /if \(!asset \|\| portraitViewerState\.imageFailed\) return portraitViewerFallback\(\);/);
+  assert.match(uiSource, /portraitViewerState\.imageFailed = true;/);
+  assert.match(uiSource, /renderPortraitViewer\(\);/);
 });
 
 test("portrait viewer preserves an already-resolved logical stage for fallback rendering", () => {

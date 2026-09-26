@@ -1,5 +1,6 @@
 import { STORY_DATA } from "./story-data.js";
 import { createInitialState, saveState, STORY_FACT_DEFAULTS, STORY_FACT_KEYS } from "./game-state.js";
+import { chapterFiveBasilOutcome } from "./chapter-five-outcome.js";
 
 function sceneFor(sceneId) {
   return STORY_DATA.scenes[sceneId] ?? null;
@@ -35,15 +36,23 @@ export function isChapterComplete(state = {}, chapterId = state.activeChapterId)
 function storyFactsAreResolved(state = {}, requiredFacts = []) {
   return requiredFacts.every((key) => (
     Object.prototype.hasOwnProperty.call(STORY_FACT_KEYS, key)
-    && state.storyFacts?.[key] !== null
-    && state.storyFacts?.[key] !== undefined
+    && STORY_FACT_KEYS[key].includes(state.storyFacts?.[key])
+  ));
+}
+
+function storyFactValuesMatch(state = {}, requiredValues = {}) {
+  return Object.entries(requiredValues).every(([key, value]) => (
+    Object.prototype.hasOwnProperty.call(STORY_FACT_KEYS, key)
+    && STORY_FACT_KEYS[key].includes(value)
+    && state.storyFacts?.[key] === value
   ));
 }
 
 export function chapterRequirementsMet(state = {}, chapter = null) {
   if (!chapter) return false;
   return (chapter.requiresCompletedChapters ?? []).every((requiredId) => isChapterComplete(state, requiredId))
-    && storyFactsAreResolved(state, chapter.requiresStoryFacts ?? []);
+    && storyFactsAreResolved(state, chapter.requiresStoryFacts ?? [])
+    && storyFactValuesMatch(state, chapter.requiresStoryFactValues ?? {});
 }
 
 export function nextChapterAfter(chapterId) {
@@ -85,7 +94,9 @@ export function meetsRequirements(state = {}, requirements = {}) {
 export function canEnterScene(state, sceneId) {
   const scene = sceneFor(sceneId);
   const chapter = chapterForScene(scene);
-  return Boolean(scene && chapter?.available === true && chapterRequirementsMet(state, chapter) && meetsRequirements(state, scene.requires));
+  const chapterEntry = scene?.id === chapter?.firstScene || sceneId === chapter?.firstScene;
+  const chapterReady = state?.activeChapterId === chapter?.id || chapterRequirementsMet(state, chapter);
+  return Boolean(scene && chapter?.available === true && (!chapterEntry || chapterReady) && meetsRequirements(state, scene.requires));
 }
 
 function clamp(value, min = -3, max = 3) {
@@ -181,6 +192,12 @@ export function choose(state, sceneId, choiceId) {
     ...next,
     choices: [...next.choices, { sceneId, choiceId, reflection: choice.reflection }]
   };
+
+  if (scene.chapterId === "chapter-5" && sceneId === "c5-final-response") {
+    const basilOutcome = chapterFiveBasilOutcome(next);
+    if (!basilOutcome) throw new Error("Chapter V final response did not resolve a Basil outcome");
+    next = applyEffects(next, { storyFacts: { basilOutcome } });
+  }
 
   if (choice.nextScene) {
     const entered = enterScene(next, choice.nextScene);

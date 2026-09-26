@@ -45,7 +45,7 @@ function termsIn(text, terms = []) {
 
 function sceneParagraphs(scene) {
   const skipSensitive = contentWarningState !== null
-    && contentWarningState.sceneId === scene.id
+    && contentWarningState.sceneId === state.sceneId
     && contentWarningState.skipSensitive === true;
   return resolveSceneParagraphs(scene, state, { skipSensitive })
     .map((paragraph) => `<p>${termsIn(paragraph, scene.terms)}</p>`)
@@ -112,6 +112,8 @@ function sceneVisualMarkup(scene) {
     ? "Chapter II"
     : scene.chapterId === "chapter-3"
       ? "Chapter III"
+      : scene.chapterId === "chapter-5"
+        ? "Chapter V"
       : "Chapter IV";
   return `<div class="scene-visual ${layout}" aria-label="${chapterLabel} scene illustration">${figures.join("")}</div>`;
 }
@@ -160,7 +162,7 @@ function gameScreen(scene) {
   const chapter = chapterForScene(scene);
   const isEnding = scene.kind === "ending";
   const warning = contentWarningForScene(scene, state);
-  const warningPending = Boolean(warning && (contentWarningState === null || contentWarningState.sceneId !== scene.id));
+  const warningPending = Boolean(warning && (contentWarningState === null || contentWarningState.sceneId !== state.sceneId));
   const storyContent = warningPending ? contentWarningBlock(warning) : `<div class="story-text">${sceneParagraphs(scene)}</div>`;
   const sceneActions = warningPending ? "" : `${scene.kind === "choice" ? choiceBlock(scene) : continueBlock(scene, isEnding)}${isEnding ? summaryBlock() : ""}`;
   return `<section class="game-layout" aria-labelledby="scene-title">

@@ -53,54 +53,79 @@ function completeChapterFourState(overrides = {}) {
   });
 }
 
-test("Chapter V metadata is in preparation and has no runtime scenes or choices", () => {
+test("Chapter V exposes the exact playable ten-scene spine and four decisions", () => {
   const chapterFive = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-5");
 
-  assert.deepEqual(chapterFive, {
-    id: "chapter-5",
-    number: "V",
-    title: "The Confrontation",
-    subtitle: "A private truth becomes a witnessed truth.",
-    status: "in-preparation",
-    available: false,
-    requiresCompletedChapters: ["chapter-4"],
-    requiresStoryFacts: ["portraitLocation", "portraitStageUnlock", "basilSuspicion", "sibylOutcome", "yellowBookResponse"]
-  });
-  assert.equal(Object.values(STORY_DATA.scenes).filter((scene) => scene.chapterId === "chapter-5").length, 0);
-  assert.equal(Object.values(STORY_DATA.scenes).filter((scene) => scene.chapterId === "chapter-5").flatMap((scene) => scene.choices ?? []).length, 0);
+  assert.equal(chapterFive.status, "playable");
+  assert.equal(chapterFive.available, true);
+  assert.equal(chapterFive.firstScene, "c5-fog-at-the-door");
+  assert.equal(chapterFive.teacherNotes.scenes.length, 10);
+  assert.equal(chapterFive.teacherNotes.decisions.length, 4);
+  assert.equal(chapterFive.teacherNotes.comprehension.length, 8);
+  assert.match(chapterFive.teacherNotes.literaryBasis, /Chapters XII and XIII/);
+  assert.match(chapterFive.teacherNotes.canonAndAlternatives, /alive-separated/);
+  assert.match(chapterFive.teacherNotes.canonAndAlternatives, /not presented as Wilde's canon/);
+
+  const chapterFiveScenes = Object.values(STORY_DATA.scenes).filter((scene) => scene.chapterId === "chapter-5");
+  assert.deepEqual(chapterFiveScenes.map((scene) => scene.id ?? Object.keys(STORY_DATA.scenes).find((id) => STORY_DATA.scenes[id] === scene)), [
+    "c5-fog-at-the-door",
+    "c5-what-people-say",
+    "c5-answer-basil",
+    "c5-show-you-the-truth",
+    "c5-the-locked-room",
+    "c5-basil-sees",
+    "c5-basil-asks-for-change",
+    "c5-after-the-truth",
+    "c5-final-response",
+    "c5-after-the-door"
+  ]);
+  assert.deepEqual(chapterFiveScenes.map((scene) => scene.title), [
+    "Fog at the Door",
+    "What People Say",
+    "Answer Basil",
+    "I Will Show You the Truth",
+    "The Locked Room",
+    "Basil Sees",
+    "Basil Asks for Change",
+    "After the Truth",
+    "The Final Response",
+    "After the Door"
+  ]);
+  assert.deepEqual(chapterFiveScenes.filter((scene) => scene.choices).map((scene) => scene.choices.length), [3, 3, 3, 3]);
 });
 
-test("Chapter V requirement contract is testable but cannot start while unavailable", () => {
+test("Chapter V requirement contract gates entry and starts without resetting the handoff", () => {
   const chapterFive = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-5");
   const complete = completeChapterFourState();
   const missingFact = completeChapterFourState({ storyFacts: { portraitStageUnlock: null } });
+  const wrongStage = completeChapterFourState({ storyFacts: { portraitStageUnlock: "stage-3" } });
   const incomplete = completeChapterFourState({ completedChapters: { "chapter-1": true, "chapter-2": true, "chapter-3": true }, chapterComplete: false });
 
   assert.equal(chapterRequirementsMet(complete, chapterFive), true);
   assert.equal(chapterRequirementsMet(missingFact, chapterFive), false);
+  assert.equal(chapterRequirementsMet(wrongStage, chapterFive), false);
   assert.equal(chapterRequirementsMet(incomplete, chapterFive), false);
-  assert.equal(isChapterAvailable("chapter-5"), false);
-  assert.equal(canStartChapter(complete, "chapter-5"), false);
-  assert.equal(continueToChapter(complete, "chapter-5").reason, "chapter-unavailable");
+  assert.equal(isChapterAvailable("chapter-5"), true);
+  assert.equal(canStartChapter(complete, "chapter-5"), true);
+  assert.equal(continueToChapter(complete, "chapter-5").state.sceneId, "c5-fog-at-the-door");
+  assert.equal(continueToChapter(missingFact, "chapter-5").reason, "chapter-locked");
   assert.equal(startNewGame("chapter-5"), null);
 });
 
-test("Chapter V foundation preserves the existing handoff state", () => {
+test("Chapter V entry preserves the existing handoff state", () => {
   const state = completeChapterFourState();
   const before = structuredClone(state);
   const result = continueToChapter(state, "chapter-5");
 
-  assert.equal(result.ok, false);
+  assert.equal(result.ok, true);
   assert.deepEqual(state, before);
-  assert.deepEqual(state.completedChapters, {
-    "chapter-1": true,
-    "chapter-2": true,
-    "chapter-3": true,
-    "chapter-4": true
-  });
-  assert.equal(state.activeChapterId, "chapter-4");
-  assert.equal(state.sceneId, "c4-threshold");
-  assert.deepEqual(state.choices, [{ sceneId: "c4-locked-room-again", choiceId: "name-the-change", reflection: "named" }]);
+  assert.equal(result.state.activeChapterId, "chapter-5");
+  assert.equal(result.state.sceneId, "c5-fog-at-the-door");
+  assert.deepEqual(result.state.choices, before.choices);
+  assert.deepEqual(result.state.storyFacts, before.storyFacts);
+  assert.deepEqual(result.state.completedChapters, before.completedChapters);
+  assert.deepEqual(result.state.visitedScenes.slice(0, -1), before.visitedScenes);
+  assert.equal(result.state.completedChapters["chapter-5"], undefined);
 });
 
 test("basilOutcome accepts only the three approved finite values", () => {
@@ -141,7 +166,7 @@ test("old saves remain readable with basilOutcome unset", () => {
   assert.equal(migrated.storyFacts.basilOutcome, null);
 });
 
-test("Stage 5 is logically supported with fallback safety but has no asset mapping", () => {
+test("Stage 5 is logically supported and maps to the approved runtime asset", () => {
   const state = normaliseState({
     version: 2,
     sceneId: "c4-threshold",
@@ -149,11 +174,11 @@ test("Stage 5 is logically supported with fallback safety but has no asset mappi
   });
 
   assert.equal(portraitStage(state), 5);
-  assert.equal(portraitAssetForStage(5), null);
+  assert.equal(portraitAssetForStage(5), "assets/portraits/portrait-dorian-stage-5.webp");
   assert.deepEqual(portraitViewerModel(state), {
     stage: 5,
     stageText: "The witnessed damage",
-    asset: null
+    asset: "assets/portraits/portrait-dorian-stage-5.webp"
   });
   assert.deepEqual(applyEffects(state, { storyFacts: { portraitStageUnlock: "stage-5" } }).storyFacts, {
     ...STORY_FACT_DEFAULTS,

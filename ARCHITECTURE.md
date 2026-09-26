@@ -8,7 +8,7 @@ Projekt je statická webová aplikace bez frameworku, backendu, databáze a exte
 story-data.js
    -> game-engine.js -> ui.js -> index.html
    -> narrative-resolver.js
-   -> chapter-five-outcome.js (future Chapter V resolver, not runtime-integrated)
+   -> chapter-five-outcome.js (Chapter V Basil outcome single source of truth)
 game-state.js -> localStorage
 ~~~
 
@@ -25,7 +25,7 @@ js/story-data.js exportuje objekt STORY_DATA:
 - teacherNotes obsahují cíle a odlišení předlohy od herního rozšíření;
 - žádná data nespouštějí JavaScript.
 
-Chapter II je od Milestone 2C playable. Chapter III je playable od Milestone 3C a obsahuje přesně devět schválených scén `c3-*`; Chapter IV je playable od Milestone 4C a obsahuje přesně devět shared-spine scén `c4-*` a čtyři rozhodovací body. Chapter V má od Milestone 5B pouze metadata `in-preparation`, je `available: false` a nemá runtime scenes ani choices. Stage 3 portrait, Dorian's house a secret-room P0 visuals jsou integrovány deklarativně podle kontextu scény; Chapter IV znovu používá existující house a secret-room assets.
+Chapter II je od Milestone 2C playable. Chapter III je playable od Milestone 3C a obsahuje přesně devět schválených scén `c3-*`; Chapter IV je playable od Milestone 4C a obsahuje přesně devět shared-spine scén `c4-*` a čtyři rozhodovací body. Chapter V je playable a obsahuje přesně deset shared-spine scén `c5-*` a čtyři rozhodovací body. Její entry vyžaduje dokončenou Chapter IV, `portraitLocation = "locked-schoolroom"`, `portraitStageUnlock = "stage-4"` a validní existující handoff facts. Stage 5 se idempotentně odemyká při vstupu do `c5-basil-sees`; Chapter V po dokončení zapisuje pouze `basilOutcome`. Chapter VI nemá metadata ani runtime. Stage 3 portrait, Dorian's house a secret-room P0 visuals jsou integrovány deklarativně podle kontextu scény; Chapter V používá secret-room asset pouze před revealem a po revealu bezpečný fallback.
 
 ## Stav hráče a migrace
 
@@ -90,7 +90,7 @@ game-engine.js poskytuje:
 - stabilní `portraitStageForValue` s prahy 0, 1 a 2–3;
 - logický Stage 3, Stage 4 nebo připravený Stage 5 z `storyFacts.portraitStageUnlock`, bez požadavku na numeric Portrait threshold.
 
-Chapter II je dostupná pouze po `completedChapters["chapter-1"] === true`; Chapter III stejným mechanismem vyžaduje dokončenou Chapter II a vyřešené `sibylRelationship`, `sibylOutcome` a `c2FinalResponse`. `canStartChapter` i `meetsRequirements` podporují přesné allow-listed story-fact požadavky. Chapter II ending nabízí bezpečný přechod do Chapter III a její ending už nepřesměrovává do neexistující Chapter IV. Chapter IV vyžaduje dokončenou Chapter III a všech pět schválených handoff facts. Její Stage 4 event je universal entry effect po čtyřech Chapter IV decisions; není řízen numeric hodnotami ani derived profilem. Chapter IV ending ponechává `activeChapterId = "chapter-4"`. Chapter V má připravený requirement contract pro dokončenou Chapter IV, `portraitLocation`, Stage 4, `basilSuspicion`, `sibylOutcome` a `yellowBookResponse`, ale protože nemá `firstScene` a je `available: false`, nelze ji spustit.
+Chapter II je dostupná pouze po `completedChapters["chapter-1"] === true`; Chapter III stejným mechanismem vyžaduje dokončenou Chapter II a vyřešené `sibylRelationship`, `sibylOutcome` a `c2FinalResponse`. `canStartChapter` i `meetsRequirements` podporují přesné allow-listed story-fact požadavky. Chapter II ending nabízí bezpečný přechod do Chapter III a její ending už nepřesměrovává do neexistující Chapter IV. Chapter IV vyžaduje dokončenou Chapter III a všech pět schválených handoff facts. Její Stage 4 event je universal entry effect po čtyřech Chapter IV decisions; není řízen numeric hodnotami ani derived profilem. Chapter IV ending ponechává `activeChapterId = "chapter-4"`. Chapter V používá jeden sdílený flow, jehož final choice nejprve zapíše choice history a poté přes `chapterFiveBasilOutcome(state)` zapíše přesně jeden `basilOutcome`. `c5-after-the-door` dokončuje Chapter V a její warning je pouze pro `dead-canonical`.
 
 ## Persistent story facts
 
@@ -123,7 +123,9 @@ narrative-resolver.js obsahuje čisté funkce:
 
 `chapterFourBehaviourProfile(state)` je čistý derived resolver mimo save data. Čte pouze choice history, používá centrální classification contract pro 12 budoucích Chapter IV IDs a vrací přesně `self-examining`, `divided` nebo `pleasure-as-escape`. Chapter IV používá profile pouze pro krátkou conditional prose; nevytváří další route chain ani persistent fact.
 
-Budoucí datový příklad:
+Chapter V používá stejný deklarativní mechanismus pro krátkou kontinuitu `basilSuspicion`, `sibylOutcome`, `yellowBookResponse` a `behaviourProfile`; tyto varianty nemění choices, Stage 5 ani Basil outcome.
+
+Datový příklad:
 
 ~~~js
 conditionalText: [
@@ -153,11 +155,11 @@ UI drží volbu continue, skip nebo pause pouze v paměti. Není zapisována do 
 - pause vrátí hráče na titulní obrazovku bez změny postupu;
 - při návratu na scénu se warning zobrazí znovu.
 
-Chapter II používá warning pouze pro větev `dead-canonical`; jeho podmínka se vyhodnotí až po vyřešení výsledku. Text tedy neoznamuje osud předem. Skip odstraní jen označený citlivý segment a ponechá základní fakt o výsledku.
+Chapter II používá warning pouze pro větev `dead-canonical`; Chapter V používá stejnou infrastrukturu na `c5-after-the-door` až po vyřešení `basilOutcome`. Text tedy neoznamuje osud předem. Skip odstraní jen označený citlivý přechod a ponechá základní fakt o výsledku.
 
 ## Chapter-aware UI
 
-Domovská obrazovka vykresluje story map z STORY_DATA.chapters. Po dokončení předchozí kapitoly a splnění jejích story facts se v ending summary objeví další schválený handoff. Teacher mode čte aktivní kapitolu a pro Chapter III i Chapter IV zobrazuje scénovou mapu, rozhodnutí, výukové cíle, slovní zásobu, porozumění, diskusi, kontinuitu a rozlišení kanonu od alternativ.
+Domovská obrazovka vykresluje story map z STORY_DATA.chapters. Po dokončení předchozí kapitoly a splnění jejích story facts se v ending summary objeví další schválený handoff. Teacher mode čte aktivní kapitolu a pro Chapter III, Chapter IV i Chapter V zobrazuje scénovou mapu, rozhodnutí, výukové cíle, slovní zásobu, porozumění, diskusi, kontinuitu a rozlišení kanonu od alternativ.
 
 ## Portrét
 
@@ -167,22 +169,24 @@ Portrétní systém zůstává nezměněn:
 - Portrait 1 → stage 1;
 - Portrait 2–3 → stage 2.
 
-Pokud `storyFacts.portraitStageUnlock` obsahuje `"stage-3"`, `"stage-4"` nebo připravené `"stage-5"`, `portraitStage(state)` vrátí odpovídající logický Stage nezávisle na numeric Portrait. Stage 4 používá schválený `portrait-dorian-stage-4.webp`; Stage 5 zatím nemá asset mapping a viewer, stavový panel i scene image proto bezpečně použijí CSS fallback. Numeric Portrait zůstává samostatnou pressure/context hodnotou a sám Stage 3, Stage 4 ani Stage 5 neodemkne.
+Pokud `storyFacts.portraitStageUnlock` obsahuje `"stage-3"`, `"stage-4"` nebo `"stage-5"`, `portraitStage(state)` vrátí odpovídající logický Stage nezávisle na numeric Portrait. Stage 4 používá `portrait-dorian-stage-4.webp` a Stage 5 používá schválený `portrait-dorian-stage-5.webp`; při chybě načtení viewer, stavový panel i scene image bezpečně použijí CSS fallback. Numeric Portrait zůstává samostatnou pressure/context hodnotou a sám Stage 3, Stage 4 ani Stage 5 neodemkne.
 
-Chapter II nemá nový obrazový soubor ani nový threshold. Chapter III a Chapter IV používají house asset v domácích scénách a secret-room asset ve scénách staré školní místnosti; samotný Portrait nikdy neurčuje SibylOutcome. Chapter IV Stage 4 je skutečný runtime WebP s bezpečným fallbackem. Milestone 5B pouze připravuje logickou hodnotu Stage 5; její artwork a witness event patří do budoucí implementace.
+Chapter II nemá nový obrazový soubor ani nový threshold. Chapter III a Chapter IV používají house asset v domácích scénách a secret-room asset ve scénách staré školní místnosti; samotný Portrait nikdy neurčuje SibylOutcome. Chapter IV Stage 4 a Chapter V Stage 5 jsou skutečné runtime WebP assety s bezpečným fallbackem. Chapter V používá logickou hodnotu Stage 5 při univerzálním witness eventu `c5-basil-sees`; Basilův pohled pouze odhaluje již nashromážděné poškození a není jeho příčinou.
 
-## Technická foundation Chapter V
+## Implementace Chapter V
 
-Chapter V (`The Confrontation`) je v `STORY_DATA.chapters` vedená jako `status: "in-preparation"` a `available: false`, bez `firstScene`, scén nebo voleb. Budoucí entry contract vyžaduje:
+Chapter V (`The Confrontation`) je v `STORY_DATA.chapters` vedená jako `status: "playable"`, `available: true` a `firstScene: "c5-fog-at-the-door"`. Obsahuje přesně deset scén, čtyři decisions a jeden shared spine. Entry contract vyžaduje:
 
 - `completedChapters["chapter-4"] === true`;
 - `portraitLocation === "locked-schoolroom"`;
 - `portraitStageUnlock === "stage-4"`;
 - vyřešené allow-listed hodnoty `basilSuspicion`, `sibylOutcome` a `yellowBookResponse`.
 
-Save v2 nyní bezpečně normalizuje `basilOutcome` jako `null` nebo jednu z hodnot `dead-canonical`, `alive-separated`, `alive-helping`. Staré saves zůstávají kompatibilní. Tato foundation nepřidává Chapter V runtime obsah, nespouští Chapter V a nevytváří Stage 5 asset.
+Save v2 nyní bezpečně normalizuje `basilOutcome` jako `null` nebo jednu z hodnot `dead-canonical`, `alive-separated`, `alive-helping`. Staré saves zůstávají kompatibilní. Stage 5 runtime artwork je mapován pouze na `assets/portraits/portrait-dorian-stage-5.webp`; review candidate PNG soubory nejsou runtime assety.
 
-`js/chapter-five-outcome.js` je pure single source of truth pro 12 budoucích Chapter V choice IDs. Čte pouze relevantní choice history, používá nejnovější validní záznam pro každé ze čtyř rozhodnutí, při neúplném nebo nevalidním stavu vrací `null` a nikdy nezapisuje `basilOutcome`. Resolver je připravený pro budoucí integraci, ale v Milestone 5B.1 není napojený na žádnou runtime scénu.
+Scéna `c5-basil-sees` je univerzální a idempotentně odemyká Stage 5. Basilův outcome se neřeší dříve než v `c5-final-response`; po záznamu finální choice se vypočítá pouze přes `chapterFiveBasilOutcome(state)`. Všechny cesty končí v `c5-after-the-door`, kde se nastaví `completedChapters["chapter-5"] = true`.
+
+`js/chapter-five-outcome.js` je pure single source of truth pro 12 Chapter V choice IDs. Čte pouze relevantní choice history, používá nejnovější validní záznam pro každé ze čtyř rozhodnutí, při neúplném nebo nevalidním stavu vrací `null` a sám nikdy nemutuje stav. Runtime engine ho volá až po záznamu Decision IV a zapíše přesně jeden persistentní `basilOutcome`.
 
 ## Přidání další kapitoly
 

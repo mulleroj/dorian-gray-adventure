@@ -78,7 +78,7 @@ Chapter III používá následující allow-listed facts:
 
 - portraitLocation: null nebo locked-schoolroom;
 - basilSuspicion: null, uneasy, suspects nebo clear;
-- portraitStageUnlock: null, stage-3 nebo stage-4;
+- portraitStageUnlock: null, stage-3, stage-4 nebo stage-5;
 - yellowBookResponse: null, accepted, questioned nebo escape.
 
 `portraitHidden` a `secretRoomEstablished` se odvozují z `portraitLocation`; nejsou to save keys. Sibyl contact se neukládá; odvozuje se z existujícího `sibylOutcome`. Locked-schoolroom choice nastavuje `portraitLocation` a `portraitStageUnlock` atomicky, ne z numeric Portrait threshold.
@@ -124,6 +124,14 @@ Scény jsou:
 Sibyl zůstává v jedné ze tří schválených kontinuit: dead-canonical znamená memory, grief a responsibility; alive-estranged znamená živou nezávislou osobu, která na Doriana nečeká; alive-together znamená pokračující, časem proměněný vztah s hranicemi. Chapter IV nepřidává nové Sibyl, Basil ani behavioural facts a neobsahuje nový player-facing content warning.
 
 Teacher mode Chapter IV vychází z Wildeovy Chapter XI. Dlouhé časové zkrácení, čtyři decisions, živé Sibyl routes, derived behaviour profile a Stage 4 event jsou interaktivní adaptace. Chapter XII zůstává literární i herní hranicí pro budoucí Chapter V.
+
+## Implementovaná Chapter V — The Confrontation
+
+Chapter V je přesně desetiscénový shared-spine oblouk inspirovaný Wildeovou 1891 Chapters XII a XIII. Dorian potká Basila u dveří v pozdní mlze, oddělí rumour od evidence, dovede ho do locked schoolroom a v univerzální scéně `c5-basil-sees` mu ukáže již nashromážděné poškození portrétu. Stage 5 se odemkne při tomto svědectví; Basilův pohled transformaci nezpůsobuje.
+
+Čtyři rozhodnutí používají přesně contract z `js/chapter-five-outcome.js`: `ask-what-you-actually-saw`, `defend-the-public-name`, `attack-the-gossip`; `warn-before-the-door`, `challenge-him-to-look`, `admit-partial-truth`; `listen-and-answer`, `blame-the-portrait-and-basil`, `reject-his-judgement`; `accept-basil-help`, `end-the-conversation`, `silence-the-witness`. Všechny cesty zůstávají v jednom spine a končí scénou `c5-after-the-door`.
+
+Canonical je Basilova konfrontace, pohled na portrait, appeal for change a jeho smrt. `alive-separated` a `alive-helping` jsou interaktivní alternativy, nikoli Wildeův canon. Výsledek se zapisuje až po čtvrtém rozhodnutí a canonical warning používá existující continue/skip/pause mechanismus pouze pro `dead-canonical`. Chapter XIV procedural aftermath i Chapter VI zůstávají mimo implementaci.
 
 ## Budoucí výukové vrstvy
 
