@@ -5,7 +5,7 @@ const STAGE_TEXT = [
   "Untouched surface",
   "A troubling detail",
   "The painted warning",
-  "The first visible change",
+  "A deeper visible change",
   "The established damage",
   "The witnessed damage",
   "The final evidence"

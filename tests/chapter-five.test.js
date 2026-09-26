@@ -21,7 +21,8 @@ const { chapterFiveBasilOutcome, CHAPTER_FIVE_DECISION_CHOICE_IDS } = await impo
 const {
   contentWarningAction,
   contentWarningForScene,
-  resolveSceneParagraphs
+  resolveSceneParagraphs,
+  resolveStoryNote
 } = await import("../js/narrative-resolver.js");
 const { chapterFourBehaviourProfile } = await import("../js/chapter-four-behaviour.js");
 
@@ -337,6 +338,13 @@ test("Chapter V warning is canonical-only, safe, and skip preserves the fact", (
     const living = playChapterFive(outcomeChoices).state;
     assert.equal(contentWarningForScene(ending, living), null);
   }
+});
+
+test("Chapter V story note follows Basil's resolved branch", () => {
+  const ending = STORY_DATA.scenes["c5-after-the-door"];
+  assert.match(resolveStoryNote(ending, { storyFacts: { basilOutcome: "dead-canonical" } }), /Basil's death/);
+  assert.match(resolveStoryNote(ending, { storyFacts: { basilOutcome: "alive-separated" } }), /survives and leaves/);
+  assert.match(resolveStoryNote(ending, { storyFacts: { basilOutcome: "alive-helping" } }), /limited help/);
 });
 
 test("Chapter V prose avoids graphic or procedural safeguarding leaks", () => {

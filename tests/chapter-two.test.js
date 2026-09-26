@@ -19,7 +19,8 @@ const {
 } = await import("../js/game-engine.js");
 const {
   contentWarningForScene,
-  resolveSceneParagraphs
+  resolveSceneParagraphs,
+  resolveStoryNote
 } = await import("../js/narrative-resolver.js");
 
 const chapterOnePaths = [
@@ -151,6 +152,15 @@ test("Chapter II has teacher material and Chapter III is now playable", () => {
   assert.equal(chapterThree.teacherNotes.scenes.length, 9);
   assert.equal(chapterThree.teacherNotes.decisions.length, 4);
   assert.equal(Object.keys(STORY_DATA.scenes).filter((sceneId) => sceneId.startsWith("c3-")).length, 9);
+});
+
+test("Chapter II has comprehension questions and branch-specific story notes", () => {
+  const chapterTwo = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-2");
+  assert.ok(chapterTwo.teacherNotes.comprehension.length >= 4);
+  const ending = STORY_DATA.scenes["c2-the-morning-after"];
+  assert.match(resolveStoryNote(ending, { storyFacts: { sibylOutcome: "dead-canonical" } }), /Sibyl's death/);
+  assert.match(resolveStoryNote(ending, { storyFacts: { sibylOutcome: "alive-estranged" } }), /distance/);
+  assert.doesNotMatch(resolveStoryNote(ending, { storyFacts: { sibylOutcome: "alive-together" } }), /Sibyl's death/);
 });
 
 test("Chapter II approved visual assets map only to compatible scenes", () => {

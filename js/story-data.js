@@ -95,6 +95,13 @@ export const STORY_DATA = {
           "Which response after the final performance protects Sibyl's agency most clearly?",
           "Why does the canonical outcome remain separate from the two alternative outcomes?"
         ],
+        comprehension: [
+          "Where does Dorian first meet Sibyl?",
+          "What does the theatre audience admire about Sibyl?",
+          "What does Sibyl ask Dorian to notice about her life off stage?",
+          "How does the final performance change Dorian's feelings?",
+          "What different futures can follow the morning after the performance?"
+        ],
         scenes: [
           { title: "The Theatre in the Evening", focus: "Return from Basil's studio to the theatre and carry Chapter I continuity forward." },
           { title: "Prince Charming", focus: "Meet Sibyl through the names and roles the theatre gives her." },
@@ -920,7 +927,7 @@ export const STORY_DATA = {
       location: "London, the following morning",
       paragraphs: [
         "Morning enters the city without asking what happened in the theatre. The streets are ordinary. The portrait is not visible, but you feel its silence waiting for the next truth.",
-        "This is the end of Sibyl's arc. The next chapter begins after this consequence rather than reopening the question of what happened to her."
+        "The morning closes this part of your story. The next chapter begins with the consequence of what happened here."
       ],
       conditionalText: [
         { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "The news is clear: Sibyl Vane is dead. The consequence is stated plainly, without a method or a graphic description." },
@@ -936,7 +943,14 @@ export const STORY_DATA = {
         canSkip: true
       },
       nextScene: null,
-      sourceNote: "The loss follows Wilde's Chapter VIII. The living versions imagine different ways the morning might continue."
+      sourceNote: "The morning after the performance leaves a different kind of consequence in each life.",
+      storyNoteByStoryFact: {
+        sibylOutcome: {
+          "dead-canonical": "Sibyl's death follows the direction of Wilde's Chapter VIII.",
+          "alive-estranged": "Sibyl's decision to live at a distance opens an original continuation after the theatre story.",
+          "alive-together": "Sibyl's decision to continue with clear boundaries opens an original continuation after the theatre story."
+        }
+      }
     },
     "c3-morning-quiet": {
       chapterId: "chapter-3",
@@ -1242,10 +1256,10 @@ export const STORY_DATA = {
       ],
       conditionalText: [
         { when: { any: [{ storyFact: { key: "basilSuspicion", value: "suspects" } }, { storyFact: { key: "basilSuspicion", value: "clear" } }] }, text: "Basil's unanswered suspicion remains in the house even after he has gone." },
-        { when: { storyFact: { key: "yellowBookResponse", value: "accepted" } }, text: "The book's fascination is the hook: a beautiful explanation can become a long habit." },
-        { when: { storyFact: { key: "yellowBookResponse", value: "questioned" } }, text: "The hook is ambivalence. You can question the book and still feel its influence waiting for another evening." },
-        { when: { storyFact: { key: "yellowBookResponse", value: "escape" } }, text: "The hook is avoidance. The book gives you somewhere to look while the locked portrait keeps looking back." },
-        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's death remains part of the responsibility you carry; it is not reopened or made into a new scene." },
+        { when: { storyFact: { key: "yellowBookResponse", value: "accepted" } }, text: "The book's fascination pulls you in: a beautiful explanation can become a long habit." },
+        { when: { storyFact: { key: "yellowBookResponse", value: "questioned" } }, text: "You can question the book and still feel its influence waiting for another evening." },
+        { when: { storyFact: { key: "yellowBookResponse", value: "escape" } }, text: "The book gives you somewhere to look while the locked portrait keeps looking back." },
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's death remains part of the responsibility you carry. You remember the loss without returning to that morning." },
         { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl remains alive and distant. Her status is not changed by the room, the key, or the book." },
         { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains alive and close under pressure. The secret is still yours, and the relationship is not a reward." }
       ],
@@ -1269,7 +1283,7 @@ export const STORY_DATA = {
         { when: { storyFact: { key: "yellowBookResponse", value: "accepted" } }, text: "The book's ideas still feel elegant and attractive. They turn experience into a language that sounds almost like wisdom." },
         { when: { storyFact: { key: "yellowBookResponse", value: "questioned" } }, text: "You still argue with the book in the margins of your thoughts, but you keep returning to its language." },
         { when: { storyFact: { key: "yellowBookResponse", value: "escape" } }, text: "You use the book deliberately when a difficult thought comes too close. Its pages give you somewhere else to look." },
-        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl remains part of memory, grief, and responsibility. You do not repeat the method of her death; you carry the fact of the loss." },
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl remains part of memory, grief, and responsibility. You carry the fact of the loss." },
         { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl is alive and independent. She is no longer waiting for you, and her life has learned to continue at a distance." },
         { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains part of your life, but years have changed the relationship. Closeness now includes distance, boundaries, and questions you avoid." }
       ],
@@ -1351,7 +1365,7 @@ export const STORY_DATA = {
       paragraphs: [
         "After his twenty-fifth year, the room begins to change around you. A conversation stops when you approach. Someone leaves early. An invitation is mentioned, then not explained.",
         "You hear a story that may be false, but the uncertainty is already changing the room. People have observed a pattern of absences and distance. They have not proved what the pattern means.",
-        "Your young face makes some people doubt the rumour. It does not make the rumour impossible, and Reputation is not the same as truth."
+        "Your young face makes some people doubt the rumour. It does not make the rumour impossible, and public opinion is not the same as truth."
       ],
       conditionalText: [
         { when: { storyFact: { key: "basilSuspicion", value: "uneasy" } }, text: "Basil once sensed that something was wrong. The memory is an unease, not a knowledge of the secret." },
@@ -1546,7 +1560,7 @@ export const STORY_DATA = {
         { when: { behaviourProfile: "self-examining" }, text: "You have tried to look closely at what happened. Looking closely has not made the approaching conversation unnecessary." },
         { when: { behaviourProfile: "divided" }, text: "You have lived between public control and private examination. Basil's message reaches both sides of that life." },
         { when: { behaviourProfile: "pleasure-as-escape" }, text: "You have often used beauty and wit to return to public life. This time, the unanswered question is waiting at the door." },
-        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl remains part of memory, grief, and responsibility; her story is not reopened here." },
+        { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl remains part of memory, grief, and responsibility. You carry the loss into this room." },
         { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl remains alive with an independent life beyond your choices; distance is not a promise that she will return." },
         { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains part of your changing life, with boundaries and ordinary questions that cannot be replaced by a perfect romance." }
       ],
@@ -1697,12 +1711,12 @@ export const STORY_DATA = {
           reflection: "You admitted concealment, harm, and responsibility before the reveal."
         }
       ],
-      sourceNote: "The covered canvas and locked schoolroom continue the established visual foundation; all three choices lead to the universal reveal."
+      sourceNote: "The covered canvas and locked schoolroom bring Basil to the truth in the same room, whatever you choose."
     },
     "c5-basil-sees": {
       chapterId: "chapter-5",
       kind: "narrative",
-      eyebrow: "The universal witness",
+      eyebrow: "The Witness",
       title: "Basil Sees",
       location: "The old schoolroom, with the portrait uncovered",
       effects: { storyFacts: { portraitStageUnlock: "stage-5" } },
@@ -1814,7 +1828,7 @@ export const STORY_DATA = {
           reflection: "You threatened the witness because you wanted to control what he could say."
         }
       ],
-      sourceNote: "The final wording communicates coercion and danger without labelling the option as murder or using sensational instruction."
+      sourceNote: "The final words show how far the trust between Dorian and Basil has fallen."
     },
     "c5-after-the-door": {
       chapterId: "chapter-5",
@@ -1824,8 +1838,8 @@ export const STORY_DATA = {
       location: "Dorian's house, after the confrontation",
       paragraphs: [
         "The door closes. The house is quiet again, but the secret is no longer private. Basil has seen the portrait, and the consequences of the conversation remain unresolved.",
-        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "The conversation reaches a breaking point. The narrative pauses before any physical detail is described.", sensitive: true },
-        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "Basil is dead. No procedure, concealment, or investigation follows in this chapter." },
+        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "The conversation reaches a breaking point. The moment is not described.", sensitive: true },
+        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "Basil is dead. The room gives you no easy answer." },
         { when: { storyFact: { key: "basilOutcome", value: "alive-separated" } }, text: "Basil survives and leaves. The trust between you is severely damaged, and the distance between you is now a boundary he has chosen." },
         { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil survives and leaves willing to offer limited human support. He does not forgive everything, solve you, or accept responsibility for your choices." },
         "The next consequences lie beyond this room. Tonight offers no easy closing."
@@ -1843,7 +1857,14 @@ export const STORY_DATA = {
         canSkip: true
       },
       nextScene: null,
-      sourceNote: "Chapter V ends at the immediate consequence. The death is described factually and without graphic detail; later events are left outside this chapter."
+      sourceNote: "The door closes on the consequence of the meeting, while the lives around it continue.",
+      storyNoteByStoryFact: {
+        basilOutcome: {
+          "dead-canonical": "Basil's death follows the direction of Wilde's Chapters XII and XIII.",
+          "alive-separated": "Basil survives and leaves; the damaged friendship opens an original continuation after the meeting.",
+          "alive-helping": "Basil survives and offers limited help; the difficult relationship opens an original continuation after the meeting."
+        }
+      }
     },
     "c6-after-the-confrontation": {
       chapterId: "chapter-6",
@@ -2018,7 +2039,7 @@ export const STORY_DATA = {
       location: "The locked schoolroom",
       paragraphs: [
         "The image does not speak in words. You must decide what kind of evidence it is before you decide what to do with it.",
-        "An interpretation can be honest without being complete. The portrait may hold a history you cannot undo, or it may be a supernatural object whose judgement you do not fully accept. The question is not a hidden test with one approved answer."
+        "An interpretation can be honest without being complete. The portrait may hold a history you cannot undo, or it may be a supernatural object whose judgement you do not fully accept. No single answer can settle the question for you."
       ],
       terms: ["interpretation", "evidence", "history", "portrait", "supernatural", "judge", "truth", "responsibility", "choice"],
       prompt: "What does the portrait show?",
@@ -2077,7 +2098,7 @@ export const STORY_DATA = {
         {
           id: "cover-the-portrait-again",
           label: "Cover the portrait and keep the secret.",
-          description: "You return to concealment. The portrait remains changed, and the choice is not labelled for you.",
+          description: "You return to concealment. The portrait remains changed, and you must live with the choice.",
           nextScene: "c6-what-remains",
           reflection: "You covered the portrait again and kept the secret, but what it shows has not changed."
         },
@@ -2100,18 +2121,24 @@ export const STORY_DATA = {
       location: "The room after the final choice",
       paragraphs: [
         "The room is quiet. The final choice has not repaired the past; it has shown what you are willing to do with the truth that remains.",
-        { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "You chose to destroy the portrait and end the secret. Dorian dies as the irreversible consequence. This adaptation states the fact without describing the physical moment.", sensitive: true },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "You chose to destroy the portrait and end the secret. The irreversible consequence is not described.", sensitive: true },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "Dorian is dead." },
         { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "The portrait returns to its original young appearance." },
         { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "The body that had been young now carries the age and damage that the image had carried." },
         { when: { storyFact: { key: "chapterSixOutcome", value: "truth-faced" } }, text: "You stop hiding the truth. You remain alive, but the story offers no promise of forgiveness, legal pardon, restored relationships, or a better portrait." },
-        { when: { storyFact: { key: "chapterSixOutcome", value: "secret-kept" } }, text: "You cover the portrait again and survive. The secret is hidden once more, but what the portrait shows has not changed." }
+        { when: { storyFact: { key: "chapterSixOutcome", value: "secret-kept" } }, text: "You cover the portrait again and survive. The secret is hidden once more, but what the portrait shows has not changed." },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "truth-faced" } }, text: "THE END" },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "secret-kept" } }, text: "THE END" },
+        { when: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, text: "THE END" }
       ],
       conditionalText: [
         { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil's limited support does not solve the past after the final image." },
         { when: { storyFact: { key: "basilOutcome", value: "alive-separated" } }, text: "Basil's chosen distance remains real, whatever you have decided about the portrait." },
         { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "Basil's absence remains part of the consequence. This ending does not add a detailed aftermath." },
-        { when: { storyFact: { key: "sibylOutcome", value: "alive-together" } }, text: "Sibyl remains part of your life, but closeness does not erase what the image remembers." },
-        { when: { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }, text: "Sibyl remains alive and independent; the ending does not promise that distance will disappear." },
+        { when: { all: [{ storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, { storyFact: { key: "sibylOutcome", value: "alive-together" } }] }, text: "Sibyl's life continues, but closeness did not prevent this ending." },
+        { when: { all: [{ storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }] }, text: "Sibyl's life continues at a distance; this ending is not hers to repair." },
+        { when: { all: [{ not: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } } }, { storyFact: { key: "sibylOutcome", value: "alive-together" } }] }, text: "Sibyl remains part of your life, but closeness does not erase what the image remembers." },
+        { when: { all: [{ not: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } } }, { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }] }, text: "Sibyl remains alive and independent; the ending does not promise that distance will disappear." },
         { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's loss remains memory and responsibility, not a new event in the room." }
       ],
       terms: ["choice", "truth", "portrait", "secret", "irreversible", "young", "body", "age", "damage", "alive", "survive", "evidence", "concealment", "support", "forgiveness", "distance", "loss", "responsibility"],
@@ -2122,7 +2149,7 @@ export const STORY_DATA = {
         canSkip: true
       },
       nextScene: null,
-      sourceNote: "Chapter VI closes the six-chapter arc. The destroy ending follows Wilde's final movement in restrained B1 language; the other possibilities imagine different consequences. No detailed aftermath is included."
+      sourceNote: "The story ends with the choice you made; no further result is promised."
     }
   }
 };

@@ -142,6 +142,7 @@ h1 em { color: var(--gold-bright); font-style: italic; font-weight: 500; }
 .stat-track span { display: block; height: 100%; background: var(--gold); transition: width .45s ease; }
 .stat-row small { color: var(--muted-dark); font-size: 11px; }
 .subtle-button { padding: 0; border-bottom: 1px solid var(--muted-dark); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.state-panel .subtle-button { padding: 10px 4px; margin-top: 4px; }
 .summary-block { border-top: 1px solid var(--line); margin-top: 43px; padding-top: 30px; }
 .summary-block h2 { font-size: 39px; margin: 5px 0 17px; }
 .summary-block ol { list-style: none; padding: 0; margin: 0 0 26px; display: grid; gap: 10px; }

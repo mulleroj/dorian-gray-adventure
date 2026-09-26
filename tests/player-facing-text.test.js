@@ -106,3 +106,11 @@ test("the ordinary portrait panel does not expose its internal numeric stage", (
   assert.doesNotMatch(uiSource, /portrait-stage[^>]*>Stage\s*\$\{stage\}/i);
   assert.doesNotMatch(uiSource, /portrait-stage[^>]*>Stage\s*[0-6]/i);
 });
+
+test("restart wording warns before erasing progress and Chapter I starts available", () => {
+  const uiSource = readFileSync(new URL("../js/ui.js", import.meta.url), "utf8");
+  assert.match(uiSource, /Start a new game\? Your current progress will be erased\./);
+  assert.match(uiSource, /Start a new game/);
+  assert.match(uiSource, /chapter\.id === "chapter-1"/);
+  assert.match(uiSource, /portraitDisplayState/);
+});

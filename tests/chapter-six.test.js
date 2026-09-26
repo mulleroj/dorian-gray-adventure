@@ -20,7 +20,8 @@ const {
 const {
   contentWarningAction,
   contentWarningForScene,
-  resolveSceneParagraphs
+  resolveSceneParagraphs,
+  resolveStoryNote
 } = await import("../js/narrative-resolver.js");
 const { CHAPTER_SIX_DECISION_CHOICE_IDS, chapterSixOutcome } = await import("../js/chapter-six-outcome.js");
 const { portraitAssetForStage, portraitViewerModel } = await import("../js/portrait-viewer.js");
@@ -290,8 +291,10 @@ test("only portrait-destroyed uses the factual non-graphic ending warning", () =
   assert.equal(contentWarningAction(destroyedScene, "skip", destroyed).ok, true);
   const skipped = resolveSceneParagraphs(destroyedScene, destroyed, { skipSensitive: true }).join(" ");
   const continued = resolveSceneParagraphs(destroyedScene, destroyed).join(" ");
-  assert.match(continued, /Dorian dies/);
-  assert.doesNotMatch(skipped, /Dorian dies/);
+  assert.match(continued, /Dorian is dead/);
+  assert.match(skipped, /Dorian is dead/);
+  assert.match(continued, /THE END/);
+  assert.match(skipped, /THE END/);
   assert.doesNotMatch(skipped, /irreversible consequence/);
   assert.match(skipped, /returns to its original young appearance/);
   assert.match(skipped, /age and damage/);
@@ -300,6 +303,31 @@ test("only portrait-destroyed uses the factual non-graphic ending warning", () =
     const state = playChapterSix(["state-the-act-plainly", "protect-her-dignity", "face-what-it-shows", finalChoice]);
     assert.equal(contentWarningForScene(STORY_DATA.scenes[state.sceneId], state), null);
   }
+});
+
+test("all three Chapter VI endings clearly close the story", () => {
+  const finalChoices = [
+    ["state-the-act-plainly", "protect-her-dignity", "face-what-it-shows", "stop-hiding-the-truth"],
+    ["admit-the-uncertainty", "protect-my-image", "deny-it-can-judge", "cover-the-portrait-again"],
+    ["state-the-act-plainly", "protect-her-dignity", "face-what-it-shows", "destroy-the-portrait"]
+  ];
+  for (const choices of finalChoices) {
+    const state = playChapterSix(choices);
+    const text = resolveSceneParagraphs(STORY_DATA.scenes[state.sceneId], state).join(" ");
+    assert.match(text, /THE END/);
+  }
+});
+
+test("Chapter VI destroy continuity does not address Dorian as living", () => {
+  const destroyed = playChapterSix([
+    "state-the-act-plainly",
+    "protect-her-dignity",
+    "face-what-it-shows",
+    "destroy-the-portrait"
+  ]);
+  const text = resolveSceneParagraphs(STORY_DATA.scenes[destroyed.sceneId], destroyed).join(" ");
+  assert.match(text, /Sibyl's life continues/);
+  assert.doesNotMatch(text, /Sibyl remains part of your life/);
 });
 
 test("Chapter VI ending survives save and reload without changing the Stage 6 fact", () => {

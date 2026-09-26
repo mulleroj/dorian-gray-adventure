@@ -70,6 +70,18 @@ export function resolveSceneParagraphs(scene, state = {}, options = {}) {
   return [...base, ...conditional];
 }
 
+export function resolveStoryNote(scene, state = {}) {
+  if (!scene) return "";
+  const variants = scene.storyNoteByStoryFact;
+  if (variants && typeof variants === "object") {
+    for (const [key, values] of Object.entries(variants)) {
+      const value = state.storyFacts?.[key];
+      if (value && typeof values?.[value] === "string") return values[value];
+    }
+  }
+  return typeof scene.sourceNote === "string" ? scene.sourceNote : "";
+}
+
 export function contentWarningForScene(scene, state = {}) {
   if (!isPlainObject(scene?.contentWarning)) return null;
   const warning = scene.contentWarning;

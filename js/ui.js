@@ -12,7 +12,7 @@ import {
   nextChapterAfter,
   startNewGame
 } from "./game-engine.js";
-import { contentWarningForScene, resolveSceneParagraphs } from "./narrative-resolver.js";
+import { contentWarningForScene, resolveSceneParagraphs, resolveStoryNote } from "./narrative-resolver.js";
 import { portraitViewerModel } from "./portrait-viewer.js";
 
 const app = document.querySelector("#app");
@@ -65,12 +65,29 @@ function heroPlaceholderMarkup() {
   return `<span class="portrait-hair"></span><span class="portrait-face"></span><span class="portrait-neck"></span><span class="hero-crack"></span>`;
 }
 
-function portraitPanel() {
-  const portrait = portraitViewerModel(state);
+function portraitDisplayState(scene = null) {
+  const chapterOneBeforeReveal = [
+    "c1-opening",
+    "c1-basil-studio",
+    "c1-henry-arrives",
+    "c1-youth-question",
+    "c1-portrait-unveiled"
+  ];
+  if (scene?.chapterId === "chapter-1" && chapterOneBeforeReveal.includes(state?.sceneId)) {
+    return { ...state, portrait: 0, storyFacts: { ...state.storyFacts, portraitStageUnlock: null } };
+  }
+  return state;
+}
+
+function portraitPanel(scene) {
+  const portrait = portraitViewerModel(portraitDisplayState(scene));
   const { stage, stageText, asset: portraitAsset } = portrait;
   const portraitVisual = portraitAsset
     ? `<img class="portrait-image" data-portrait-image="true" src="${escapeHtml(portraitAsset)}" alt="Dorian's portrait: ${escapeHtml(stageText)}" />`
     : portraitPlaceholderMarkup(stage);
+  const caption = state?.storyFacts?.chapterSixOutcome === "portrait-destroyed" && state?.sceneId === "c6-what-remains"
+    ? "The portrait is young again. The painting remembers."
+    : `${stageText}. The face remains yours. The painting remembers.`;
   return `<aside class="portrait-panel" aria-label="Portrait status">
     <div class="portrait-heading"><span class="eyebrow">The portrait</span><span class="portrait-stage">As it is now</span></div>
     <button class="portrait-trigger" type="button" data-action="examine-portrait" aria-label="Examine the current portrait: ${escapeHtml(stageText)}">
@@ -78,7 +95,7 @@ function portraitPanel() {
         ${portraitVisual}
       </div>
     </button>
-    <p class="portrait-caption">${stageText}. The face remains yours. The painting remembers.</p>
+    <p class="portrait-caption">${caption}</p>
   </aside>`;
 }
 
@@ -128,7 +145,7 @@ function chapterListMarkup(activeChapterId = state?.activeChapterId) {
       : active
         ? "In progress"
         : chapter.available === true
-          ? canStart ? "Available" : "Locked"
+          ? canStart || (!state && chapter.id === "chapter-1") ? "Available" : "Locked"
           : "In preparation";
     return `<li class="${active ? "is-active" : ""}"><span>Chapter ${escapeHtml(chapter.number)}</span><strong>${escapeHtml(chapter.title)}</strong><small>${status}</small></li>`;
   }).join("");
@@ -137,14 +154,14 @@ function chapterListMarkup(activeChapterId = state?.activeChapterId) {
 
 function homeScreen() {
   const chapter = getChapter(state?.activeChapterId) ?? STORY_DATA.chapters[0];
-  const heroPortrait = portraitViewerModel(state ?? {});
+  const heroPortrait = portraitViewerModel(portraitDisplayState(getScene(state?.sceneId)) ?? {});
   const { stage: heroStage, asset: heroAsset } = heroPortrait;
   const heroVisual = heroAsset
     ? `<img class="hero-portrait-image" data-portrait-image="true" src="${escapeHtml(heroAsset)}" alt="" />`
     : heroPlaceholderMarkup();
   const resume = state ? `<button class="button button-primary" type="button" data-action="resume">Continue the story <span aria-hidden="true">→</span></button>` : "";
   return `<section class="home-screen" aria-labelledby="home-title">
-    <div class="hero-copy"><p class="eyebrow">An interactive reading adventure · B1 English</p><h1 id="home-title">The Portrait's<br /><em>Secret</em></h1><p class="hero-lead">Your face never changes.<br /><strong>Your portrait remembers everything.</strong></p><p class="hero-description">Step into Oscar Wilde's world of beauty, influence and hidden consequences. Read, decide, and discover what your choices leave behind.</p><div class="hero-actions">${resume}<button class="button ${state ? "button-secondary" : "button-primary"}" type="button" data-action="new-game">${state ? "Start a new chapter" : "Begin Chapter I"} <span aria-hidden="true">→</span></button></div></div>
+    <div class="hero-copy"><p class="eyebrow">An interactive reading adventure · B1 English</p><h1 id="home-title">The Portrait's<br /><em>Secret</em></h1><p class="hero-lead">Your face never changes.<br /><strong>Your portrait remembers everything.</strong></p><p class="hero-description">Step into Oscar Wilde's world of beauty, influence and hidden consequences. Read, decide, and discover what your choices leave behind.</p><div class="hero-actions">${resume}<button class="button ${state ? "button-secondary" : "button-primary"}" type="button" data-action="new-game">${state ? "Start a new game" : "Begin Chapter I"} <span aria-hidden="true">→</span></button></div></div>
     <div class="hero-art" aria-hidden="true"><div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div><div class="hero-portrait" data-stage="${heroStage}" data-renderer="${heroAsset ? "image" : "placeholder"}">${heroVisual}</div><p>Chapter ${chapter.number}<br /><span>${chapter.title}</span></p></div>
     <div class="home-note"><span class="note-line"></span><span>Every choice changes the story's atmosphere.</span></div>
     ${chapterListMarkup()}
@@ -166,8 +183,8 @@ function gameScreen(scene) {
   const storyContent = warningPending ? contentWarningBlock(warning) : `<div class="story-text">${sceneParagraphs(scene)}</div>`;
   const sceneActions = warningPending ? "" : `${scene.kind === "choice" ? choiceBlock(scene) : continueBlock(scene, isEnding)}${isEnding ? summaryBlock() : ""}`;
   return `<section class="game-layout" aria-labelledby="scene-title">
-    <div class="story-column"><div class="story-meta"><span>${escapeHtml(scene.eyebrow)}</span><span>${escapeHtml(scene.location)}</span></div><h1 id="scene-title">${escapeHtml(scene.title)}</h1>${sceneVisualMarkup(scene)}${storyContent}${sceneActions}<p class="source-note"><span>Story note</span> ${escapeHtml(scene.sourceNote)}</p></div>
-    <div class="side-column">${portraitPanel()}${statePanel()}</div>
+    <div class="story-column"><div class="story-meta"><span>${escapeHtml(scene.eyebrow)}</span><span>${escapeHtml(scene.location)}</span></div><h1 id="scene-title">${escapeHtml(scene.title)}</h1>${sceneVisualMarkup(scene)}${storyContent}${sceneActions}<p class="source-note"><span>Story note</span> ${escapeHtml(resolveStoryNote(scene, state))}</p></div>
+    <div class="side-column">${portraitPanel(scene)}${statePanel()}</div>
   </section>`;
 }
 
@@ -184,7 +201,7 @@ function handleWarningAction(warningAction) {
 }
 
 function choiceBlock(scene) {
-  return `<section class="choice-block" aria-labelledby="choice-prompt"><p class="decision-label">${escapeHtml(scene.decisionLabel)}</p><h2 id="choice-prompt">${escapeHtml(scene.prompt)}</h2><div class="choice-list">${scene.choices.map((choice, index) => `<button class="choice-card" type="button" data-choice-id="${choice.id}"><span class="choice-number">0${index + 1}</span><span><strong>${escapeHtml(choice.label)}</strong><small>${escapeHtml(choice.description)}</small></span><span class="choice-arrow" aria-hidden="true">→</span></button>`).join("")}</div></section>`;
+  return `<section class="choice-block" aria-labelledby="choice-prompt"><p class="decision-label">${escapeHtml(scene.decisionLabel)}</p><h2 id="choice-prompt">${escapeHtml(scene.prompt)}</h2><div class="choice-list">${scene.choices.map((choice, index) => `<button class="choice-card" type="button" data-choice-id="${choice.id}"><span class="choice-number">${String(index + 1).padStart(2, "0")}</span><span><strong>${escapeHtml(choice.label)}</strong><small>${escapeHtml(choice.description)}</small></span><span class="choice-arrow" aria-hidden="true">→</span></button>`).join("")}</div></section>`;
 }
 
 function continueBlock(scene, isEnding) {
@@ -193,7 +210,7 @@ function continueBlock(scene, isEnding) {
 }
 
 function summaryBlock() {
-  const reflections = state.choices.map((choice, index) => `<li><span>0${index + 1}</span>${escapeHtml(choice.reflection)}</li>`).join("");
+  const reflections = state.choices.map((choice, index) => `<li><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(choice.reflection)}</li>`).join("");
   const nextChapter = nextChapterAfter(state.activeChapterId);
   const nextButton = nextChapter && canStartChapterForUi(nextChapter.id)
     ? `<button class="button button-primary" type="button" data-action="next-chapter" data-chapter-id="${escapeHtml(nextChapter.id)}">Continue to Chapter ${escapeHtml(nextChapter.number)} <span aria-hidden="true">→</span></button>`
@@ -244,13 +261,23 @@ function teacherMarkup() {
   if (!notes) {
     return `<p class="eyebrow">Teacher mode</p><h2 id="teacher-title">${escapeHtml(activeChapter?.title ?? "The story")}</h2><p class="modal-intro">Teacher materials for this chapter are not available yet. The chapter remains in preparation.</p>`;
   }
-  const sceneList = notes.scenes?.length ? `<div><h3>Scene sequence</h3><ol>${notes.scenes.map((item) => `<li><strong>${escapeHtml(item.title)}</strong><br /><span>${escapeHtml(item.focus)}</span></li>`).join("")}</ol></div>` : "";
-  const decisions = notes.decisions?.length ? `<div><h3>Decision map</h3><ul>${notes.decisions.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")}</ul></div>` : "";
-  const comprehension = notes.comprehension?.length ? `<div><h3>Comprehension</h3><ul>${notes.comprehension.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")}</ul></div>` : "";
-  const distinction = notes.canonAndAlternatives ? `<p class="source-note"><span>Canon and alternatives</span> ${escapeHtml(notes.canonAndAlternatives)}</p>` : "";
-  const continuity = notes.continuity ? `<p class="source-note"><span>Chapter II continuity</span> ${escapeHtml(notes.continuity)}</p>` : "";
-  const warning = notes.contentWarning ? `<p class="source-note"><span>Content guidance</span> ${escapeHtml(notes.contentWarning)}</p>` : "";
-  return `<p class="eyebrow">Teacher mode · Chapter ${escapeHtml(activeChapter.number)}</p><h2 id="teacher-title">${escapeHtml(activeChapter.title)}</h2><p class="modal-intro">${escapeHtml(notes.literaryBasis)}</p><div class="teacher-grid"><div><h3>Learning goals</h3><ul>${notes.goals.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")}</ul></div><div><h3>Target vocabulary</h3><div class="tag-list">${notes.vocabulary.map((item) => "<span>" + escapeHtml(item) + "</span>").join("")}</div></div><div><h3>Discussion</h3><ul>${notes.discussion.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")}</ul></div>${comprehension}${sceneList}${decisions}</div>${distinction}${continuity}${warning}<p class="source-note"><span>Adaptation note</span> ${escapeHtml(notes.adaptation)}</p>`;
+  const teacherText = (value) => String(value)
+    .replace(/portrait-destroyed/g, "the ending in which the portrait is destroyed")
+    .replace(/dead-canonical/g, "the death ending")
+    .replace(/alive-separated/g, "alive and estranged")
+    .replace(/alive-helping/g, "alive with limited help")
+    .replace(/Stage [456]/g, "portrait milestone")
+    .replace(/shared spine/g, "common story sequence")
+    .replace(/universal reveal/g, "shared reveal")
+    .replace(/resolver/g, "outcome rule")
+    .replace(/not implemented/g, "not included in this chapter");
+  const sceneList = notes.scenes?.length ? `<div><h3>Scene sequence</h3><ol>${notes.scenes.map((item) => `<li><strong>${escapeHtml(teacherText(item.title))}</strong><br /><span>${escapeHtml(teacherText(item.focus))}</span></li>`).join("")}</ol></div>` : "";
+  const decisions = notes.decisions?.length ? `<div><h3>Decision map</h3><ul>${notes.decisions.map((item) => "<li>" + escapeHtml(teacherText(item)) + "</li>").join("")}</ul></div>` : "";
+  const comprehension = notes.comprehension?.length ? `<div><h3>Comprehension</h3><ul>${notes.comprehension.map((item) => "<li>" + escapeHtml(teacherText(item)) + "</li>").join("")}</ul></div>` : "";
+  const distinction = notes.canonAndAlternatives ? `<p class="source-note"><span>Canon and alternatives</span> ${escapeHtml(teacherText(notes.canonAndAlternatives))}</p>` : "";
+  const continuity = notes.continuity ? `<p class="source-note"><span>Continuity</span> ${escapeHtml(teacherText(notes.continuity))}</p>` : "";
+  const warning = notes.contentWarning ? `<p class="source-note"><span>Content guidance</span> ${escapeHtml(teacherText(notes.contentWarning))}</p>` : "";
+  return `<p class="eyebrow">Teacher mode · Chapter ${escapeHtml(activeChapter.number)}</p><h2 id="teacher-title">${escapeHtml(activeChapter.title)}</h2><p class="modal-intro">${escapeHtml(teacherText(notes.literaryBasis))}</p><div class="teacher-grid"><div><h3>Learning goals</h3><ul>${notes.goals.map((item) => "<li>" + escapeHtml(teacherText(item)) + "</li>").join("")}</ul></div><div><h3>Target vocabulary</h3><div class="tag-list">${notes.vocabulary.map((item) => "<span>" + escapeHtml(teacherText(item)) + "</span>").join("")}</div></div><div><h3>Discussion</h3><ul>${notes.discussion.map((item) => "<li>" + escapeHtml(teacherText(item)) + "</li>").join("")}</ul></div>${comprehension}${sceneList}${decisions}</div>${distinction}${continuity}${warning}<p class="source-note"><span>Adaptation note</span> ${escapeHtml(teacherText(notes.adaptation))}</p>`;
 }
 
 function openDialog(dialog) {
@@ -306,7 +333,7 @@ function renderPortraitViewer() {
 }
 
 function openPortraitViewer() {
-  portraitViewerState.stage = portraitViewerModel(state).stage;
+  portraitViewerState.stage = portraitViewerModel(portraitDisplayState(getScene(state.sceneId))).stage;
   portraitViewerState.mode = "full";
   portraitViewerState.imageFailed = false;
   renderPortraitViewer();
@@ -363,6 +390,7 @@ document.addEventListener("click", (event) => {
   if (action === "examine-portrait") {
     openPortraitViewer();
   } else if (action === "new-game") {
+    if (state && !window.confirm("Start a new game? Your current progress will be erased.")) return;
     state = startNewGame();
     contentWarningState = null;
     window.location.hash = `#scene/${state.sceneId}`;

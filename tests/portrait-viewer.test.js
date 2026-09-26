@@ -28,7 +28,7 @@ test("logical Stage 3 uses the approved runtime artwork", () => {
     storyFacts: { portraitStageUnlock: "stage-3" }
   }), {
     stage: 3,
-    stageText: "The first visible change",
+    stageText: "A deeper visible change",
     asset: "assets/portraits/portrait-dorian-stage-3.webp"
   });
 });
