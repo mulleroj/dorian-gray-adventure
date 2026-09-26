@@ -189,7 +189,9 @@ test("all 81 Chapter V local paths reach the universal witness and completion", 
           assert.equal(state.completedChapters["chapter-6"], undefined);
           assert.equal(state.activeChapterId, "chapter-5");
           assert.equal(canEnterScene(state, "c5-after-the-door"), true);
-          assert.equal(STORY_DATA.chapters.some((chapter) => chapter.id === "chapter-6"), false);
+          const chapterSix = STORY_DATA.chapters.find((chapter) => chapter.id === "chapter-6");
+          assert.equal(chapterSix?.status, "in-preparation");
+          assert.equal(chapterSix?.available, false);
           distribution[state.storyFacts.basilOutcome] += 1;
           paths += 1;
         }

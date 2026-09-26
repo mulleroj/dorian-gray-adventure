@@ -8,9 +8,10 @@ export const STORY_FACT_KEYS = Object.freeze({
   c2FinalResponse: ["cruel", "listen", "delay"],
   portraitLocation: ["locked-schoolroom"],
   basilSuspicion: ["uneasy", "suspects", "clear"],
-  portraitStageUnlock: ["stage-3", "stage-4", "stage-5"],
+  portraitStageUnlock: ["stage-3", "stage-4", "stage-5", "stage-6"],
   yellowBookResponse: ["accepted", "questioned", "escape"],
-  basilOutcome: ["dead-canonical", "alive-separated", "alive-helping"]
+  basilOutcome: ["dead-canonical", "alive-separated", "alive-helping"],
+  chapterSixOutcome: ["portrait-destroyed", "truth-faced", "secret-kept"]
 });
 
 export const STORY_FACT_DEFAULTS = Object.freeze({
@@ -21,7 +22,8 @@ export const STORY_FACT_DEFAULTS = Object.freeze({
   basilSuspicion: null,
   portraitStageUnlock: null,
   yellowBookResponse: null,
-  basilOutcome: null
+  basilOutcome: null,
+  chapterSixOutcome: null
 });
 
 function isPlainObject(value) {

@@ -88,7 +88,8 @@ test("all eight Chapter I v1 saves migrate without losing state", () => {
       basilSuspicion: null,
       portraitStageUnlock: null,
       yellowBookResponse: null,
-      basilOutcome: null
+      basilOutcome: null,
+      chapterSixOutcome: null
     });
   }
 });
@@ -231,7 +232,8 @@ test("storyFacts use the approved allow-list and reject arbitrary values", () =>
     basilSuspicion: null,
     portraitStageUnlock: null,
     yellowBookResponse: null,
-    basilOutcome: null
+    basilOutcome: null,
+    chapterSixOutcome: null
   });
   assert.equal(globalThis.__storyFactProbe, undefined);
 });
@@ -255,7 +257,8 @@ test("Chapter III story facts accept only the approved finite values", () => {
     basilSuspicion: "clear",
     portraitStageUnlock: "stage-3",
     yellowBookResponse: "accepted",
-    basilOutcome: null
+    basilOutcome: null,
+    chapterSixOutcome: null
   });
 
   const invalid = normaliseState({
@@ -264,7 +267,7 @@ test("Chapter III story facts accept only the approved finite values", () => {
     storyFacts: {
       portraitLocation: "visible",
       basilSuspicion: "certain",
-      portraitStageUnlock: "stage-6",
+      portraitStageUnlock: "stage-7",
       yellowBookResponse: "ignored"
     }
   });
@@ -279,6 +282,13 @@ test("Chapter III story facts accept only the approved finite values", () => {
     storyFacts: { portraitStageUnlock: "stage-4" }
   });
   assert.equal(stageFour.storyFacts.portraitStageUnlock, "stage-4");
+
+  const stageSix = normaliseState({
+    version: 2,
+    sceneId: "c5-after-the-door",
+    storyFacts: { portraitStageUnlock: "stage-6" }
+  });
+  assert.equal(stageSix.storyFacts.portraitStageUnlock, "stage-6");
 });
 
 test("conditional narrative is declarative, state-aware and side-effect free", () => {

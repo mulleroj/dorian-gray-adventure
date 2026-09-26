@@ -78,7 +78,7 @@ Chapter III používá následující allow-listed facts:
 
 - portraitLocation: null nebo locked-schoolroom;
 - basilSuspicion: null, uneasy, suspects nebo clear;
-- portraitStageUnlock: null, stage-3, stage-4 nebo stage-5;
+- portraitStageUnlock: null, stage-3, stage-4, stage-5 nebo stage-6;
 - yellowBookResponse: null, accepted, questioned nebo escape.
 
 `portraitHidden` a `secretRoomEstablished` se odvozují z `portraitLocation`; nejsou to save keys. Sibyl contact se neukládá; odvozuje se z existujícího `sibylOutcome`. Locked-schoolroom choice nastavuje `portraitLocation` a `portraitStageUnlock` atomicky, ne z numeric Portrait threshold.
@@ -131,7 +131,7 @@ Chapter V je přesně desetiscénový shared-spine oblouk inspirovaný Wildeovou
 
 Čtyři rozhodnutí používají přesně contract z `js/chapter-five-outcome.js`: `ask-what-you-actually-saw`, `defend-the-public-name`, `attack-the-gossip`; `warn-before-the-door`, `challenge-him-to-look`, `admit-partial-truth`; `listen-and-answer`, `blame-the-portrait-and-basil`, `reject-his-judgement`; `accept-basil-help`, `end-the-conversation`, `silence-the-witness`. Všechny cesty zůstávají v jednom spine a končí scénou `c5-after-the-door`.
 
-Canonical je Basilova konfrontace, pohled na portrait, appeal for change a jeho smrt. `alive-separated` a `alive-helping` jsou interaktivní alternativy, nikoli Wildeův canon. Výsledek se zapisuje až po čtvrtém rozhodnutí a canonical warning používá existující continue/skip/pause mechanismus pouze pro `dead-canonical`. Chapter XIV procedural aftermath i Chapter VI zůstávají mimo implementaci.
+Canonical je Basilova konfrontace, pohled na portrait, appeal for change a jeho smrt. `alive-separated` a `alive-helping` jsou interaktivní alternativy, nikoli Wildeův canon. Výsledek se zapisuje až po čtvrtém rozhodnutí a canonical warning používá existující continue/skip/pause mechanismus pouze pro `dead-canonical`. Chapter XIV procedural aftermath i Chapter VI story scenes zůstávají mimo implementaci; Chapter VI má pouze technickou foundation s `chapterSixOutcome` a logickou podporou Stage 6.
 
 ## Budoucí výukové vrstvy
 

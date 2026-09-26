@@ -301,6 +301,24 @@ export const STORY_DATA = {
         canonAndAlternatives: "Canonical: Basil confronts Dorian, sees the portrait, urges change, and dies in Wilde's plot. Interactive alternatives: alive-separated, alive-helping, and the player's four decisions. The alternatives are not presented as Wilde's canon.",
         contentWarning: "Only the dead-canonical ending uses a warning. The transition is restrained and non-graphic; continue, skip the marked transition, or pause without changing the saved outcome."
       }
+    },
+    {
+      id: "chapter-6",
+      number: "VI",
+      title: "The Final Choice",
+      subtitle: "Change may begin now, but the past cannot be undone.",
+      status: "in-preparation",
+      available: false,
+      requiresCompletedChapters: ["chapter-5"],
+      requiresStoryFacts: [
+        "basilOutcome",
+        "portraitStageUnlock",
+        "sibylOutcome",
+        "sibylRelationship",
+        "c2FinalResponse",
+        "yellowBookResponse"
+      ],
+      requiresStoryFactValues: { portraitStageUnlock: "stage-5" }
     }
   ],
   glossary: {
