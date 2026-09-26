@@ -319,15 +319,25 @@ test("all three Chapter VI endings clearly close the story", () => {
 });
 
 test("Chapter VI destroy continuity does not address Dorian as living", () => {
-  const destroyed = playChapterSix([
-    "state-the-act-plainly",
-    "protect-her-dignity",
-    "face-what-it-shows",
-    "destroy-the-portrait"
-  ]);
-  const text = resolveSceneParagraphs(STORY_DATA.scenes[destroyed.sceneId], destroyed).join(" ");
-  assert.match(text, /Sibyl's life continues/);
-  assert.doesNotMatch(text, /Sibyl remains part of your life/);
+  for (const basilOutcome of ["dead-canonical", "alive-separated", "alive-helping"]) {
+    for (const sibylOutcome of ["dead-canonical", "alive-estranged", "alive-together"]) {
+      const destroyed = playChapterSix([
+        "state-the-act-plainly",
+        "protect-her-dignity",
+        "face-what-it-shows",
+        "destroy-the-portrait"
+      ], { storyFacts: { basilOutcome, sibylOutcome } });
+      const text = resolveSceneParagraphs(STORY_DATA.scenes[destroyed.sceneId], destroyed);
+      const deathIndex = text.indexOf("Dorian is dead.");
+
+      assert.notEqual(deathIndex, -1, `${basilOutcome}/${sibylOutcome}`);
+      assert.doesNotMatch(
+        text.slice(deathIndex + 1).join(" "),
+        /\b(?:you|your|yours)\b/i,
+        `${basilOutcome}/${sibylOutcome} addresses Dorian as living after his death`
+      );
+    }
+  }
 });
 
 test("Chapter VI ending survives save and reload without changing the Stage 6 fact", () => {

@@ -15,6 +15,9 @@ const forbiddenPlayerFacingTerms = [
   /sibylOutcome/i,
   /interactive ending/i,
   /not described/i,
+  /does not claim/i,
+  /does not transform because/i,
+  /This ending does not add/i,
   /canonical route/i,
   /choice id/i,
   /\bdecision[ \t]+[ivx]+\b/i,
@@ -108,9 +111,10 @@ test("Must-fix story wording contains no player-facing metatext", () => {
   const chapterSix = resolveSceneParagraphs(STORY_DATA.scenes["c6-what-remains"], stateForFacts({ chapterSixOutcome: "portrait-destroyed" })).join(" ");
 
   assert.doesNotMatch(chapterFour, /one click|trigger|milestone/i);
-  assert.doesNotMatch(chapterFive, /does not transform because he looked|trigger|milestone/i);
+  assert.doesNotMatch(chapterFive, /does not transform because he looked|does not claim|trigger|milestone/i);
   assert.doesNotMatch(chapterSix, /not described|irreversible consequence/i);
-  assert.match(chapterFive, /Basil's gaze only reveals what the portrait has been carrying/i);
+  assert.doesNotMatch(chapterSix, /This ending does not add/i);
+  assert.match(chapterFive, /The painted face changes before you both/i);
   assert.match(chapterSix, /Dorian is dead\./);
 });
 

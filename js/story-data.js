@@ -1723,8 +1723,8 @@ export const STORY_DATA = {
       paragraphs: [
         "You remove the cover. Basil sees the changed portrait. He recognises Dorian, and he recognises his own painting beneath the damage that the years have gathered.",
         "Disbelief gives way to horror, grief, fear, and concern. Basil does not become all-knowing. He sees the portrait and understands the truth it carries, but he does not know every hidden detail of your life.",
-        "You give him only a short account: a wish, a portrait, and years hidden behind a young face. You do not explain every supernatural rule. The damage was already there; Basil's gaze only reveals what the portrait has been carrying.",
-        "The damage marks what has been revealed to another person. It does not claim that Basil caused the change."
+        "You give him only a short account: a wish, a portrait, and years hidden behind a young face. You do not explain every supernatural rule.",
+        "The painted face changes before you both. Basil's horror comes after the change, when he sees the damage Dorian has tried to hide."
       ],
       terms: ["cover", "reveal", "portrait", "recognise", "witness", "damage", "grief", "fear", "concern", "truth", "hidden", "supernatural"],
       nextScene: "c5-basil-asks-for-change",
@@ -2129,10 +2129,10 @@ export const STORY_DATA = {
       ],
       conditionalText: [
         { when: { storyFact: { key: "basilOutcome", value: "alive-helping" } }, text: "Basil's limited support does not solve the past after the final image." },
-        { when: { storyFact: { key: "basilOutcome", value: "alive-separated" } }, text: "Basil's chosen distance remains real, whatever you have decided about the portrait." },
-        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "Basil's absence remains part of the consequence. This ending does not add a detailed aftermath." },
+        { when: { storyFact: { key: "basilOutcome", value: "alive-separated" } }, text: "Basil's chosen distance remains real. Dorian's decision about the portrait cannot change it." },
+        { when: { storyFact: { key: "basilOutcome", value: "dead-canonical" } }, text: "Basil's absence remains part of the consequence." },
         { when: { all: [{ storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, { storyFact: { key: "sibylOutcome", value: "alive-together" } }] }, text: "Sibyl's life continues, but closeness did not prevent this ending." },
-        { when: { all: [{ storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }] }, text: "Sibyl's life continues at a distance; this ending is not hers to repair." },
+        { when: { all: [{ storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } }, { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }] }, text: "Sibyl's life continues at a distance. The past remains beyond repair." },
         { when: { all: [{ not: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } } }, { storyFact: { key: "sibylOutcome", value: "alive-together" } }] }, text: "Sibyl remains part of your life, but closeness does not erase what the image remembers." },
         { when: { all: [{ not: { storyFact: { key: "chapterSixOutcome", value: "portrait-destroyed" } } }, { storyFact: { key: "sibylOutcome", value: "alive-estranged" } }] }, text: "Sibyl remains alive and independent; the ending does not promise that distance will disappear." },
         { when: { storyFact: { key: "sibylOutcome", value: "dead-canonical" } }, text: "Sibyl's loss remains memory and responsibility, not a new event in the room." },
