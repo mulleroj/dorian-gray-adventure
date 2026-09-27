@@ -58,17 +58,39 @@ export const STORY_DATA = {
       requiresCompletedChapters: [],
       teacherNotes: {
         literaryBasis: "The chapter is inspired by Dorian's first meeting with Basil Hallward and Lord Henry in Basil's studio.",
-        adaptation: "The player's responses and the hidden-canvas route are original interactive additions. They are not presented as Wilde's original wording.",
+        adaptation: "Basil's studio, Basil, Dorian, Lord Henry, and the central ideas about youth, beauty, and influence derive from Wilde's opening chapters. Player responses, the branching route, newly written dialogue, and the hidden-canvas portrait route are original interactive adaptations.",
         goals: [
           "Read a short gothic narrative in accessible B1 English.",
           "Notice how dialogue can influence a character's choices.",
-          "Discuss the difference between public reputation and private conscience."
+          "Discuss how other people's ideas can influence Dorian's view of youth and himself."
         ],
         vocabulary: ["portrait", "vanity", "fleeting", "influence", "conscience"],
         discussion: [
           "Why might a beautiful person fear the passing of time?",
           "Is Lord Henry offering advice, or trying to control Dorian?"
-        ]
+        ],
+        comprehension: [
+          "Where does Dorian meet Basil and Lord Henry?",
+          "What does Basil paint for Dorian?",
+          "What does Lord Henry say about youth?",
+          "How does the portrait make Dorian think differently about time?",
+          "Which parts of the chapter are interactive adaptations rather than events shown directly in Wilde's novel?"
+        ],
+        scenes: [
+          { title: "A Quiet Studio", focus: "Establish Basil's studio and the covered canvas." },
+          { title: "The Painter's Friend", focus: "See Basil's devotion to Dorian and the portrait before Lord Henry arrives." },
+          { title: "Lord Henry Wotton", focus: "Meet Lord Henry and choose whether to listen to him or stand beside Basil." },
+          { title: "The Price of Youth", focus: "Consider Lord Henry's ideas about youth and the passing of time." },
+          { title: "The Portrait", focus: "See Basil's portrait and choose how closely Dorian looks at it." },
+          { title: "Behind the Curtain", focus: "Follow the additional portrait-warning detail created for this adaptation." },
+          { title: "A Promise in the Evening", focus: "Close the chapter with Dorian carrying the question of youth, beauty, and time away from the studio." }
+        ],
+        decisions: [
+          "Decision I: listen to Lord Henry or stand beside Basil.",
+          "Decision II: ask Lord Henry to say more or question his certainty.",
+          "Decision III: study the portrait or step away from it."
+        ],
+        canonAndAlternatives: "Basil's studio, the first meeting with Lord Henry, the portrait, and the ideas about youth, beauty, and influence are drawn from Wilde's opening chapters. Player replies, interactive branching, newly written dialogue, and the additional warning detail around the portrait are adaptations created for this application, not Wilde's original wording or plot."
       }
     },
     {
@@ -81,8 +103,8 @@ export const STORY_DATA = {
       firstScene: "c2-theatre-lights",
       requiresCompletedChapters: ["chapter-1"],
       teacherNotes: {
-        literaryBasis: "This chapter adapts the movement from Dorian's theatre visits and engagement to Sibyl Vane's final performance, using Wilde's Chapter IV to VIII as the literary frame.",
-        adaptation: "The nine-scene route, the player's four decision points, and the living alternatives are original interactive additions. The canonical branch states the novel's consequence without reproducing Wilde's wording.",
+        literaryBasis: "This chapter condenses and re-stages material that Wilde partly reports through Dorian's account in Chapters IV–VI, then dramatises the direct Romeo and Juliet performance from Chapter VII. The route and living outcomes are original interactive adaptations.",
+        adaptation: "The nine-scene route, the player's four decision points, and the two living alternatives are original interactive additions. The canonical branch follows role-first choices—admire the roles, tell the beautiful story, and stay inside the dream—then judge the failed performance and state the novel's consequence without reproducing Wilde's wording.",
         goals: [
           "Follow a multi-scene relationship arc in accessible B1 English.",
           "Compare admiration for a performance with attention to a person.",
@@ -103,15 +125,15 @@ export const STORY_DATA = {
           "What different futures can follow the morning after the performance?"
         ],
         scenes: [
-          { title: "The Theatre in the Evening", focus: "Return from Basil's studio to the theatre and carry Chapter I continuity forward." },
-          { title: "Prince Charming", focus: "Meet Sibyl through the names and roles the theatre gives her." },
-          { title: "Many Heroines", focus: "Notice the difference between a collection of roles and one person's life." },
-          { title: "Two Stories About Sibyl", focus: "Choose whether to tell Basil and Henry a beautiful story or defend Sibyl as a person." },
-          { title: "When the Curtain Falls", focus: "Hear Sibyl's own voice before the engagement becomes public." },
-          { title: "A Promise in Public", focus: "Watch private devotion become a public promise." },
-          { title: "The Night of Romeo and Juliet", focus: "Read the final performance as the point where the ideal and the person separate." },
-          { title: "After the Curtain", focus: "Choose Dorian's immediate response to Sibyl's last performance." },
-          { title: "The Morning After", focus: "Read the consequence without reopening the arc." }
+          { title: "The Theatre in the Evening", focus: "Follow Dorian's growing fascination with the theatre and with Sibyl Vane." },
+          { title: "Prince Charming", focus: "Meet Sibyl through the theatre's description of her roles and the name Sibyl Vane; the scene then asks whether Dorian wants to know the actress or the person." },
+          { title: "Many Heroines", focus: "Explore how Dorian falls in love with Sibyl through the Shakespearean heroines she performs." },
+          { title: "Two Stories About Sibyl", focus: "A branching adaptation: decide whether Dorian continues to idealise Sibyl as an actress or begins to recognise her as a person." },
+          { title: "When the Curtain Falls", focus: "Dramatise the developing relationship between Dorian and Sibyl behind the theatre scenes." },
+          { title: "A Promise in Public", focus: "Show the engagement becoming public; Basil and Lord Henry receive different versions of the news." },
+          { title: "The Night of Romeo and Juliet", focus: "Watch Sibyl's failed performance expose the difference between Dorian's ideal and the real person he claims to love." },
+          { title: "After the Curtain", focus: "Respond to Sibyl after the performance. The canonical choice follows Dorian's rejection of her; other choices create alternative branches." },
+          { title: "The Morning After", focus: "See the consequences of Dorian's response. In the canonical branch, he learns of Sibyl's death; alternative branches preserve the game's other possible outcomes." }
         ],
         decisions: [
           "Decision I: admire Sibyl's roles or ask about Sibyl herself.",
@@ -119,8 +141,8 @@ export const STORY_DATA = {
           "Decision III: listen to Sibyl, stay inside the dream, or make a grand promise.",
           "Decision IV: judge the performance, stay and listen, or ask for time."
         ],
-        canonAndAlternatives: "Role-first admiration plus a cruel public response resolves to dead-canonical. The other routes resolve to alive-estranged or alive-together; neither alternative is presented as Wilde's original plot.",
-        contentWarning: "The death consequence is factual and non-graphic. The warning appears at the right moment and offers continue, skip sensitive description, or pause without changing your progress."
+        canonAndAlternatives: "Choosing to admire the roles, tell the beautiful story, stay inside the dream, and then judge the failed performance leads to the canonical death ending. Asking about Sibyl, listening to her life, and staying to listen can lead to Dorian and Sibyl remaining together; the other combinations lead to Dorian and Sibyl living apart. The two living outcomes are interactive alternatives, not Wilde's original plot.",
+        contentWarning: "For the canonical death outcome only, the consequence is factual and non-graphic. The branch-specific warning offers continue, skip sensitive description, or pause without changing progress."
       }
     },
     {
@@ -134,9 +156,9 @@ export const STORY_DATA = {
       requiresCompletedChapters: ["chapter-2"],
       requiresStoryFacts: ["sibylRelationship", "sibylOutcome", "c2FinalResponse"],
       teacherNotes: {
-        literaryBasis: "The approved Chapter III blueprint follows Wilde's 1891 Chapters IX to XI.",
+        literaryBasis: "This chapter draws on Wilde's 1891 Chapters IX–XI.",
         adaptation: "The nine-scene spine, player choices, and living Sibyl continuities are interactive B1 extensions. They are not presented as Wilde's original wording or plot.",
-        continuity: "dead-canonical carries grief and responsibility without repeating the death; alive-estranged carries distance; alive-together carries closeness under pressure. defendedBasil, Henry history, and the earlier portrait response alter short variants rather than creating separate routes.",
+        continuity: "The canonical death outcome carries grief and responsibility without repeating the death; Dorian and Sibyl living apart carries distance; Dorian and Sibyl remaining together carries closeness under pressure. Earlier choices—standing by Basil, listening to Henry, and responding to the portrait—alter short narrative variations only.",
         goals: [
           "Describe a secret and explain why it is being kept.",
           "Distinguish privacy from dishonesty.",
@@ -149,12 +171,12 @@ export const STORY_DATA = {
         discussion: [
           "Is hiding the portrait the same as hiding the truth?",
           "Does privacy become dishonesty when another person is harmed?",
-          "Why is Basil dangerous to Dorian even though he wants to help him?",
+          "Why does Basil's concern feel dangerous to Dorian's secret even though Basil wants to help?",
           "Can someone change if nobody can see the consequences?",
           "Can Dorian be responsible without being the sole cause of every consequence?",
           "Which is more powerful in this chapter: the key, the screen, or the book?",
           "Does Henry control Dorian, or does Dorian use Henry's ideas to control himself?",
-          "How do the alive-estranged and alive-together routes change the meaning of secrecy?"
+          "How do the routes where Dorian and Sibyl live apart or remain together change the meaning of secrecy?"
         ],
         comprehension: [
           "Why does Basil visit Dorian at the beginning of the chapter?",
@@ -172,7 +194,7 @@ export const STORY_DATA = {
           { title: "What Basil Wants to Know", focus: "Make trust and friendship the emotional problem before the screen is noticed." },
           { title: "The Portrait Behind the Screen", focus: "Choose whether to face the image, show the cover, or name danger without revealing the face." },
           { title: "The Face That Answers", focus: "Read the existing warning without opening the next change too early." },
-          { title: "The Room With a Key", focus: "Move the covered portrait into the old schoolroom and let its first clear change appear." },
+          { title: "The Room With a Key", focus: "Move the covered portrait into the old schoolroom; its first clear change appears in the following scene." },
           { title: "Rules Around the Secret", focus: "Establish the locked-room rules and the difference between privacy and deception." },
           { title: "The Book That Was Waiting", focus: "Receive Henry's note and yellow-bound book after the portrait is locked." },
           { title: "A Book for the Next Life", focus: "Close Chapter III on the contrast between the key and the book, ready for Chapter IV." }
@@ -183,7 +205,7 @@ export const STORY_DATA = {
           "Decision III: move the portrait alone, tell Basil there is a private reason, or delay while keeping the key.",
           "Decision IV: accept the book, question it, or use it as an escape."
         ],
-        canonAndAlternatives: "Basil's visit, the screened portrait, the old schoolroom, and the yellow-bound book follow the canonical Chapters IX to XI. Player replies, partial disclosure, and living Sibyl outcomes are clearly marked interactive extensions; alive-estranged and alive-together are not Wilde's original plot."
+        canonAndAlternatives: "Basil's visit, the screened portrait, the old schoolroom, and the yellow-bound book follow the canonical Chapters IX to XI. Player replies, partial disclosure, and the two living Sibyl continuities are clearly marked interactive extensions; they are not Wilde's original plot."
       }
     },
     {
@@ -198,8 +220,8 @@ export const STORY_DATA = {
       requiresStoryFacts: ["portraitLocation", "portraitStageUnlock", "yellowBookResponse", "basilSuspicion", "sibylOutcome"],
       teacherNotes: {
         literaryBasis: "The chapter is grounded in Wilde's 1891 Chapter XI, while Chapter XII remains the boundary for the future Basil confrontation in Chapter V.",
-        adaptation: "The long time compression, four player decisions, living Sibyl routes, derived behaviour profile, and universal Stage 4 event are interactive adaptations. They are not presented as Wilde's original wording or plot.",
-        continuity: "Yellow-book response, Sibyl outcome, Basil suspicion, and the derived behaviour profile change short conditional prose inside one shared spine. No new persistent facts or parallel routes are created.",
+        adaptation: "The long time compression, four player decisions, living Sibyl continuities, conditional prose based on the player's pattern of choices, and shared later portrait change are interactive adaptations. They are not presented as Wilde's original wording or plot.",
+        continuity: "Yellow-book response, Sibyl outcome, Basil suspicion, and the pattern of earlier choices change short conditional prose inside one shared spine. No new persistent facts or parallel routes are created.",
         goals: [
           "Describe habits and influence over a long period of time.",
           "Distinguish rumours and observations from evidence.",
@@ -220,7 +242,7 @@ export const STORY_DATA = {
           "Why does Dorian keep returning to the locked room?",
           "What do people observe, and what do they only guess?",
           "Why does his young face make some people doubt rumours?",
-          "Why is Stage 4 a result of a pattern rather than one choice?",
+          "Why does the portrait's deeper change result from a pattern rather than one choice?",
           "How does the yellow book change from an idea into a habit?",
           "How does Dorian's public life protect him and isolate him at the same time?",
           "What does Basil know, and what does he still not know?",
@@ -233,8 +255,8 @@ export const STORY_DATA = {
           { title: "Whispers at the Edge of the Room", focus: "Introduce uncertain rumours and social distance without turning reputation into proof." },
           { title: "A Pleasure for Forgetting", focus: "Reduce the aesthetic catalogue to one decision about how beauty is used." },
           { title: "The Locked Room, Again", focus: "Make the repeated return to the changed portrait a private ritual before the next turning point." },
-          { title: "The Face in the Mirror", focus: "Let years, choices, concealment, and repeated returns leave a deeper mark." },
-          { title: "An Invitation Withheld", focus: "Show accumulated social distance and interpret it through the derived behaviour profile." },
+          { title: "The Face in the Mirror", focus: "Let years, choices, concealment, and repeated returns leave the shared later mark on the portrait." },
+          { title: "An Invitation Withheld", focus: "Show accumulated social distance and interpret it through the pattern of earlier choices." },
           { title: "The Door Before the Next Chapter", focus: "End with Basil's announced concern and pressure before, but not during, the Chapter V confrontation." }
         ],
         decisions: [
@@ -243,7 +265,7 @@ export const STORY_DATA = {
           "Decision III: share the music, control the memory, or use beauty as a shield.",
           "Decision IV: name the change, control the comparison, or cover the portrait and return."
         ],
-        canonAndAlternatives: "Wilde's Chapter XI supplies the long-term yellow-book influence, unchanged appearance, aesthetic life, rumours, and social pressure. The compressed time span, four decisions, living Sibyl continuities, derived behaviour profile, and Stage 4 event are interactive additions; Chapter XII remains future Chapter V material."
+        canonAndAlternatives: "Wilde's Chapter XI supplies the long-term yellow-book influence, unchanged appearance, aesthetic life, rumours, and social pressure. The compressed time span, four decisions, living Sibyl continuities, choice-pattern variations, and shared later portrait change are interactive additions; Chapter XII remains future Chapter V material."
       }
     },
     {
@@ -259,8 +281,8 @@ export const STORY_DATA = {
       requiresStoryFactValues: { portraitLocation: "locked-schoolroom", portraitStageUnlock: "stage-4" },
       teacherNotes: {
         literaryBasis: "This chapter adapts Oscar Wilde's 1891 Chapters XII and XIII: Basil confronts Dorian, sees the portrait, urges him to change, and dies in the canonical plot. Chapter XIV remains outside this chapter.",
-        adaptation: "The ten-scene shared spine, four decisions, Basil's surviving alternatives, the finite outcome resolver, and the Stage 5 witness milestone are interactive adaptations. Alive-separated and alive-helping are not Wilde's canonical plot.",
-        continuity: "Sibyl's outcome, the yellow book, Basil's suspicion, and the derived Chapter IV behaviour profile alter short prose only. They never create alternate scene chains or change the Basil outcome rules.",
+        adaptation: "The ten-scene common story sequence, four decisions, two ways for Basil to survive, three possible endings, and the shared portrait change are interactive adaptations. The living Basil alternatives are not Wilde's canonical plot.",
+        continuity: "Sibyl's outcome, the yellow book, Basil's suspicion, and the pattern of choices in Chapter IV alter short prose only. They never create alternate scene chains or change the Basil outcome rules.",
         goals: [
           "Distinguish rumour from evidence.",
           "Describe accusation, denial, and responsibility.",
@@ -306,8 +328,8 @@ export const STORY_DATA = {
           "Decision III: listen and answer, blame the portrait and Basil, or reject his judgement.",
           "Decision IV: accept limited help, end the conversation, or silence the witness."
         ],
-        canonAndAlternatives: "Canonical: Basil confronts Dorian, sees the portrait, urges change, and dies in Wilde's plot. Interactive alternatives: alive-separated, alive-helping, and the player's four decisions. The alternatives are not presented as Wilde's canon.",
-        contentWarning: "The transition is restrained and non-graphic; continue, skip the marked transition, or pause without changing your progress."
+        canonAndAlternatives: "Canonical: Basil confronts Dorian, sees the portrait, urges change, and dies in Wilde's plot. Interactive alternatives: Basil survives and keeps his distance, Basil survives and offers limited help, and the player's four decisions. These alternatives are not presented as Wilde's canon.",
+        contentWarning: "For the canonical Basil-death outcome only, the transition is restrained and non-graphic; continue, skip the marked transition, or pause without changing your progress."
       }
     },
     {
@@ -330,14 +352,14 @@ export const STORY_DATA = {
       requiresStoryFactValues: { portraitStageUnlock: "stage-5" },
       teacherNotes: {
         literaryBasis: "This chapter adapts the final movement of Oscar Wilde's 1891 Chapters XIX and XX: Dorian claims that he has changed, Henry questions one good act, and the portrait becomes the last evidence against an easy explanation.",
-        adaptation: "The nine-scene shared spine, four decisions, continuity variants, universal Stage 6 milestone, and three endings are original B1 interactive adaptations. Chapters XIV–XVIII are compressed into consequences only; their procedural subplots are not implemented.",
-        continuity: "Sibyl's outcome, Basil's outcome, the yellow-book response, and the derived Chapter IV behaviour profile alter short prose only. They never create alternate chains, hidden morality scores, or different final-choice menus.",
+        adaptation: "The nine-scene shared spine, four decisions, continuity variations, shared portrait change, and three endings are original B1 interactive adaptations. Events from Chapters XIV–XVIII are summarised as consequences; those intervening events are not played in this chapter.",
+        continuity: "Sibyl's outcome, Basil's outcome, the yellow-book response, and the pattern of choices in Chapter IV alter short prose only. They never create alternate chains, hidden morality scores, or different final-choice menus.",
         goals: [
           "Distinguish an intention to change from proof of transformation.",
           "Discuss how motive can complicate an apparently good action.",
           "Use evidence, responsibility, consequence, and boundary in short literary discussion.",
           "Recognise the difference between Wilde's final movement and interactive alternatives.",
-          "Read a non-graphic ending without procedural or sensational detail."
+          "Read a non-graphic ending without graphic or sensational detail."
         ],
         vocabulary: ["change", "evidence", "motive", "dignity", "freedom", "responsibility", "consequence", "history", "interpretation", "secret", "irreversible", "survive", "body", "age"],
         comprehension: [
@@ -345,7 +367,7 @@ export const STORY_DATA = {
           "Why does Henry remain sceptical about the act?",
           "What is the difference between a kind result and a selfless motive?",
           "Why does Dorian return to the portrait?",
-          "What does Stage 6 show about the limits of his explanation?",
+          "What does the final damaged portrait show about the limits of his explanation?",
           "How do the three interpretation choices change the way Dorian reads the image?",
           "Why is the final decision irreversible even when Dorian does not attack the portrait?",
           "Which ending follows Wilde's final movement and which endings are interactive alternatives?"
@@ -359,14 +381,14 @@ export const STORY_DATA = {
           "How does an adaptation remain faithful without copying every subplot?"
         ],
         scenes: [
-          { title: "The Quiet House", focus: "Bridge from Basil's witnessed truth to the consequences Dorian carries without procedural aftermath." },
+          { title: "The Quiet House", focus: "Bridge from Basil's witnessed truth to the consequences Dorian carries without showing the intervening events." },
           { title: "A Consequence With a Witness", focus: "Show that private evidence has a social consequence without turning rumour into proof." },
           { title: "The Claim", focus: "Adapt Chapter XIX as Dorian presents one apparently good act to a sceptical Henry." },
           { title: "One Example", focus: "Describe a small considerate act without making the woman owe Dorian gratitude or forgiveness." },
           { title: "What Was the Act For?", focus: "Test the motive behind the claimed change without awarding a moral status." },
           { title: "The Portrait Does Not Agree", focus: "Let the final damaged image appear before any irreversible choice." },
           { title: "What Does It Show?", focus: "Interpret the image through three perspectives that do not alter the final action." },
-          { title: "The Final Choice", focus: "Make the direct choice between facing truth, keeping the secret, or destroying the bond." },
+          { title: "The Final Choice", focus: "Make the direct choice between facing the truth, keeping the secret, or destroying the portrait." },
           { title: "The Last Image", focus: "Close the arc with three clearly described consequences and a factual, non-graphic movement." }
         ],
         decisions: [
@@ -376,7 +398,7 @@ export const STORY_DATA = {
           "Decision IV: stop hiding the truth, cover the portrait again, or destroy the portrait."
         ],
         canonAndAlternatives: "Wilde's Chapters XIX and XX supply Dorian's claim of change, Henry's doubt, the worsening portrait, the attempt to destroy it, the death consequence, and the restored young image. The ending in which Dorian destroys the portrait follows that final movement in restrained B1 adaptation; the endings in which Dorian faces the truth or keeps the secret are interactive alternatives and are not presented as Wilde's original plot.",
-        contentWarning: "The death consequence is stated factually and without graphic detail; continue, skip the marked transition, or pause without changing your progress."
+        contentWarning: "For the portrait-destroyed ending only, the death consequence is stated factually and without graphic detail; continue, skip the marked transition, or pause without changing your progress."
       }
     }
   ],

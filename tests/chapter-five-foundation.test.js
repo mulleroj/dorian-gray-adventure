@@ -63,7 +63,7 @@ test("Chapter V exposes the exact playable ten-scene spine and four decisions", 
   assert.equal(chapterFive.teacherNotes.decisions.length, 4);
   assert.equal(chapterFive.teacherNotes.comprehension.length, 8);
   assert.match(chapterFive.teacherNotes.literaryBasis, /Chapters XII and XIII/);
-  assert.match(chapterFive.teacherNotes.canonAndAlternatives, /alive-separated/);
+  assert.match(chapterFive.teacherNotes.canonAndAlternatives, /Basil survives and keeps his distance/);
   assert.match(chapterFive.teacherNotes.canonAndAlternatives, /not presented as Wilde's canon/);
 
   const chapterFiveScenes = Object.values(STORY_DATA.scenes).filter((scene) => scene.chapterId === "chapter-5");
