@@ -1,9 +1,47 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
 import { STORY_DATA } from "../js/story-data.js";
 import { scrollToSceneStart } from "../js/scene-navigation.js";
 import { teacherFacingText } from "../js/teacher-copy.js";
+
+const uiSource = readFileSync(new URL("../js/ui.js", import.meta.url), "utf8");
+const indexSource = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+const styleSource = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
+
+test("root entry renders one isolated book cover before the existing story", () => {
+  assert.match(uiSource, /function bookCoverScreen\(\)/);
+  assert.match(uiSource, /window\.location\.hash === ""/);
+  assert.match(uiSource, /data-action="open-book"/);
+  assert.match(uiSource, /Open the book/);
+  assert.doesNotMatch(uiSource, /Chapter I\s*[—-]\s*A Quiet Studio/);
+  assert.match(styleSource, /\.book-cover-screen/);
+});
+
+test("book cover opens the existing Chapter I state without duplicating story content", () => {
+  assert.match(uiSource, /renderSceneTransition\(state \?\? startNewGame\(\)\)/);
+  assert.match(uiSource, /const targetHash = `#scene\/\$\{state\.sceneId\}`/);
+  assert.equal((uiSource.match(/data-action="open-book"/g) ?? []).length, 1);
+});
+
+test("book cover keeps Teacher Mode available and keeps its existing dialog route", () => {
+  assert.match(indexSource, /id="teacher-mode-button"/);
+  assert.match(uiSource, /document\.querySelector\("#teacher-mode-button"\)\.addEventListener/);
+  assert.match(uiSource, /openDialog\(teacherDialog\)/);
+});
+
+test("book cover progress controls reuse existing resume and new-game actions", () => {
+  assert.match(uiSource, /data-action="resume"/);
+  assert.match(uiSource, /data-action="new-game"/);
+  assert.doesNotMatch(uiSource, /localStorage\.(getItem|setItem|removeItem).*cover/i);
+});
+
+test("cover transition is short and respects reduced motion", () => {
+  assert.match(uiSource, /transition: true/);
+  assert.match(styleSource, /@keyframes view-fade-in/);
+  assert.match(styleSource, /prefers-reduced-motion/);
+});
 
 test("scene transition scroll helper brings the rendered scene heading into view", () => {
   const calls = [];

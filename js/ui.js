@@ -169,6 +169,37 @@ function homeScreen() {
   </section>`;
 }
 
+function bookCoverScreen() {
+  const progress = state
+    ? `<div class="book-cover-progress" aria-label="Saved story options">
+      <p class="eyebrow">A story is already in progress</p>
+      <div class="book-cover-progress-actions">
+        <button class="button button-secondary" type="button" data-action="resume">Continue the story <span aria-hidden="true">→</span></button>
+        <button class="subtle-button" type="button" data-action="new-game">Start a new story</button>
+      </div>
+    </div>`
+    : "";
+  return `<section class="book-cover-screen" aria-labelledby="book-cover-title">
+    <div class="book-cover-front">
+      <div class="book-cover-ornament" aria-hidden="true">✦</div>
+      <p class="eyebrow">A Dorian Gray adventure</p>
+      <h1 id="book-cover-title">The Portrait's<br /><em>Secret</em></h1>
+      <p class="book-cover-subtitle">Your beauty. Your choices. Your portrait.</p>
+      <p class="book-cover-lead">One portrait. One impossible wish. Your choices.</p>
+      <p class="book-cover-invitation">Step into Victorian London and become Dorian Gray.<br />What happens to the portrait — and to you — will depend<br class="book-cover-wide-break" /> on the decisions you make.</p>
+      <button class="button button-primary book-cover-open" type="button" data-action="open-book">Open the book <span aria-hidden="true">→</span></button>
+      ${progress}
+    </div>
+    <div class="book-cover-back">
+      <p class="eyebrow">London, 1890.</p>
+      <p>Young Dorian Gray has everything: beauty, youth and a promising future.<br />Then an artist paints his portrait, and Dorian makes a wish that will<br class="book-cover-wide-break" /> change his life.</p>
+      <p>In this interactive adaptation of Oscar Wilde's<br /><em>The Picture of Dorian Gray</em>, you make Dorian's choices.<br />Your decisions affect his behaviour, his relationships —<br />and the portrait itself.</p>
+      <p>How will your Dorian Gray story end?</p>
+      <p class="book-cover-supporting-line">Interactive English reading · Choices matter · Multiple endings</p>
+    </div>
+  </section>`;
+}
+
 function contentWarningBlock(warning) {
   const skipButton = warning.canSkip
     ? `<button class="button button-secondary" type="button" data-action="continue" data-warning-mode="skip">Skip sensitive description</button>`
@@ -223,10 +254,17 @@ function canStartChapterForUi(chapterId) {
   return Boolean(state && canStartChapter(state, chapterId));
 }
 
-let skipNextHashRender = false;
-
-function render({ focusApp = true, scrollToScene = false } = {}) {
+function render({ focusApp = true, scrollToScene = false, transition = false } = {}) {
   updateFooterChapter();
+  if (transition) {
+    app.classList.remove("view-fade");
+    void app.offsetWidth;
+    app.classList.add("view-fade");
+  }
+  if (window.location.hash === "") {
+    app.innerHTML = bookCoverScreen();
+    return;
+  }
   if (!state || window.location.hash === "#home") {
     app.innerHTML = homeScreen();
     return;
@@ -248,12 +286,19 @@ function renderSceneTransition(nextState) {
   state = nextState;
   contentWarningState = null;
   const targetHash = `#scene/${state.sceneId}`;
-  skipNextHashRender = window.location.hash !== targetHash;
-  window.location.hash = targetHash;
-  render({ focusApp: false, scrollToScene: true });
+  if (window.location.hash === "" || window.location.hash === "#home") {
+    window.history.pushState({}, "", targetHash);
+  } else if (window.location.hash !== targetHash) {
+    window.history.replaceState({}, "", targetHash);
+  }
+  render({ focusApp: false, scrollToScene: true, transition: true });
 }
 
 function updateFooterChapter() {
+  if (window.location.hash === "") {
+    footerChapter.textContent = "The Portrait's Secret · A Dorian Gray adventure";
+    return;
+  }
   const chapter = getChapter(state?.activeChapterId) ?? STORY_DATA.chapters[0];
   footerChapter.textContent = `Chapter ${chapter.number} · ${chapter.title}`;
 }
@@ -390,7 +435,9 @@ document.addEventListener("click", (event) => {
     return;
   }
   const action = button.dataset.action;
-  if (action === "examine-portrait") {
+  if (action === "open-book") {
+    renderSceneTransition(state ?? startNewGame());
+  } else if (action === "examine-portrait") {
     openPortraitViewer();
   } else if (action === "new-game") {
     if (state && !window.confirm("Start a new game? Your current progress will be erased.")) return;
@@ -456,10 +503,6 @@ document.querySelectorAll("dialog").forEach((dialog) => {
   });
 });
 window.addEventListener("hashchange", () => {
-  if (skipNextHashRender) {
-    skipNextHashRender = false;
-    return;
-  }
   render();
 });
 
